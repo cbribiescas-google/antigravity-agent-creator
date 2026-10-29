@@ -353,6 +353,57 @@ agents-cli install
 declare -a OP_RECORDS=()
 for SPEC in "${FLEET_SPECS[@]}"; do
   IFS='|' read -r AG_ID SVC_NAME DISP_NAME DESC ICON_KEY <<< "${SPEC}"
+  # Reuse an in-flight LRO if one is already running for SVC_NAME
+  EXISTING_OP="$(python3 -c '
+import json, subprocess, sys, urllib.request
+region, project_id, project_number, svc_name = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+tok = subprocess.check_output(["gcloud", "auth", "print-access-token", "--quiet"], text=True).strip()
+headers = {"Authorization": f"Bearer {tok}", "X-Goog-User-Project": project_id}
+url = f"https://{region}-aiplatform.googleapis.com/v1beta1/projects/{project_number}/locations/{region}/reasoningEngines"
+try:
+    with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=20) as r:
+        engines = json.loads(r.read().decode("utf-8")).get("reasoningEngines", [])
+    for eng in engines:
+        if eng.get("displayName") == svc_name:
+            re_name = eng["name"]
+            ops_url = f"https://{region}-aiplatform.googleapis.com/v1beta1/{re_name}/operations"
+            with urllib.request.urlopen(urllib.request.Request(ops_url, headers=headers), timeout=20) as r2:
+                ops = json.loads(r2.read().decode("utf-8")).get("operations", [])
+            for op in ops:
+                if not op.get("done", False):
+                    print(op["name"])
+                    sys.exit(0)
+except Exception:
+    pass
+' "${RUNTIME_REGION}" "${PROJECT_ID}" "${PROJECT_NUMBER}" "${SVC_NAME}")"
+
+  if [[ -n "${EXISTING_OP}" ]]; then
+    echo "  -> Adopting in-flight Agent Runtime LRO for ${DISP_NAME} (${SVC_NAME}): ${EXISTING_OP}"
+    OP_RECORDS+=("${AG_ID}|${SVC_NAME}|${EXISTING_OP}")
+    continue
+  fi
+
+  if [[ "${SKIP_RUNTIME_DEPLOY:-false}" == "true" ]]; then
+    EXISTING_RE="$(python3 -c '
+import json, subprocess, sys, urllib.request
+region, project_id, project_number, svc_name = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+tok = subprocess.check_output(["gcloud", "auth", "print-access-token", "--quiet"], text=True).strip()
+headers = {"Authorization": f"Bearer {tok}", "X-Goog-User-Project": project_id}
+url = f"https://{region}-aiplatform.googleapis.com/v1beta1/projects/{project_number}/locations/{region}/reasoningEngines"
+with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=20) as r:
+    engines = json.loads(r.read().decode("utf-8")).get("reasoningEngines", [])
+for eng in engines:
+    if eng.get("displayName") == svc_name:
+        print(eng["name"])
+        sys.exit(0)
+' "${RUNTIME_REGION}" "${PROJECT_ID}" "${PROJECT_NUMBER}" "${SVC_NAME}")"
+    if [[ -n "${EXISTING_RE}" ]]; then
+      echo "  -> Reusing ready ReasoningEngine for ${DISP_NAME}: ${EXISTING_RE}"
+      OP_RECORDS+=("${AG_ID}|${SVC_NAME}|READY:${EXISTING_RE}")
+      continue
+    fi
+  fi
+
   echo "  -> Starting async Agent Runtime deploy for ${DISP_NAME} (service=${SVC_NAME}, target=${AG_ID})..."
   python3 -c '
 import json, os, sys
@@ -411,8 +462,15 @@ def get_token():
 
 token = get_token()
 last_tok_refresh = time.monotonic()
-pending = {ag_id: (svc, op) for ag_id, svc, op in records}
+pending = {}
 completed = {}
+for ag_id, svc, op in records:
+    if op.startswith("READY:"):
+        re_name = re.sub(r"^projects/[^/]+/", f"projects/{project_number}/", op[len("READY:"):])
+        completed[ag_id] = re_name
+    else:
+        pending[ag_id] = (svc, op)
+
 deadline = time.monotonic() + 1200.0
 
 while pending and time.monotonic() < deadline:
@@ -429,7 +487,8 @@ while pending and time.monotonic() < deadline:
             data = json.loads(resp.read().decode("utf-8"))
         if data.get("done"):
             if "error" in data:
-                sys.stderr.write(f"ERROR deploying {svc} ({ag_id}): {json.dumps(data[\"error\"])}\n")
+                err_str = json.dumps(data["error"])
+                sys.stderr.write(f"ERROR deploying {svc} ({ag_id}): {err_str}\n")
                 sys.exit(1)
             re_name = data.get("response", {}).get("name") or op.split("/operations/")[0]
             re_name = re.sub(r"^projects/[^/]+/", f"projects/{project_number}/", re_name)
@@ -437,7 +496,8 @@ while pending and time.monotonic() < deadline:
             completed[ag_id] = re_name
             del pending[ag_id]
     if pending:
-        sys.stderr.write(f"     ... waiting on {len(pending)} operation(s): {\", \".join(pending.keys())}\n")
+        rem = ", ".join(pending.keys())
+        sys.stderr.write(f"     ... waiting on {len(pending)} operation(s): {rem}\n")
         time.sleep(12.0)
 
 if pending:
