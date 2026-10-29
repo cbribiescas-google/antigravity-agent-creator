@@ -42,6 +42,7 @@ SHARED_AGENT_BUCKET="${SHARED_AGENT_BUCKET:-${PROJECT_ID}-agents-shared}"
 BQ_DATASET="${BQ_DATASET:-antigravity_telemetry}"
 BQ_TABLE="${BQ_TABLE:-token_usage}"
 DEPLOY_SHOWCASE_AGENTS="${DEPLOY_SHOWCASE_AGENTS:-true}"
+PURGE_OTHER_AGENTS="${PURGE_OTHER_AGENTS:-false}"
 
 echo "=============================================================================="
 echo "Provisioning Antigravity Agent Creator Fleet"
@@ -273,16 +274,17 @@ names = [line.strip().split("|")[2] for line in sys.stdin if line.strip()]
 print(json.dumps(names))
 ')"
 
-# 6. Clean up stale custom agents in Gemini Enterprise not in FLEET_SPECS
+# 6. Optionally clean up stale custom agents in Gemini Enterprise if PURGE_OTHER_AGENTS=true
 GEMINI_ENTERPRISE_APP_ID="projects/${PROJECT_NUMBER}/locations/${DE_LOCATION}/collections/default_collection/engines/${ENGINE_ID}"
-echo "[5/8] Cleaning up stale registered agents in Gemini Enterprise (${ENGINE_ID})..."
-TOKEN="$(gcloud auth print-access-token --quiet)"
-EXISTING_AGENTS_JSON="$(curl -s \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "X-Goog-User-Project: ${PROJECT_ID}" \
-  "${DE_API_BASE}/${GEMINI_ENTERPRISE_APP_ID}/assistants/default_assistant/agents")"
+if [[ "${PURGE_OTHER_AGENTS}" == "true" ]]; then
+  echo "[5/8] Cleaning up stale registered agents in Gemini Enterprise (${ENGINE_ID})..."
+  TOKEN="$(gcloud auth print-access-token --quiet)"
+  EXISTING_AGENTS_JSON="$(curl -s \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "X-Goog-User-Project: ${PROJECT_ID}" \
+    "${DE_API_BASE}/${GEMINI_ENTERPRISE_APP_ID}/assistants/default_assistant/agents")"
 
-OTHER_AGENT_NAMES="$(python3 -c '
+  OTHER_AGENT_NAMES="$(python3 -c '
 import json, sys
 data = json.loads(sys.argv[1]) if sys.argv[1].strip() else {}
 allowed = set(json.loads(sys.argv[2]))
@@ -294,18 +296,21 @@ for ag in data.get("agents", []):
         print(f"{name}|{disp}")
 ' "${EXISTING_AGENTS_JSON}" "${ALLOWED_DISPLAY_NAMES_JSON}")"
 
-if [[ -n "${OTHER_AGENT_NAMES}" ]]; then
-  while IFS='|' read -r AG_NAME AG_DISP; do
-    [[ -z "${AG_NAME}" ]] && continue
-    echo "  -> Deleting stale registered agent: ${AG_DISP} (${AG_NAME})..."
-    DEL_HTTP="$(curl -s -o /dev/null -w "%{http_code}" -X DELETE \
-      -H "Authorization: Bearer ${TOKEN}" \
-      -H "X-Goog-User-Project: ${PROJECT_ID}" \
-      "${DE_API_BASE}/${AG_NAME}")"
-    echo "     HTTP ${DEL_HTTP}"
-  done <<< "${OTHER_AGENT_NAMES}"
+  if [[ -n "${OTHER_AGENT_NAMES}" ]]; then
+    while IFS='|' read -r AG_NAME AG_DISP; do
+      [[ -z "${AG_NAME}" ]] && continue
+      echo "  -> Deleting stale registered agent: ${AG_DISP} (${AG_NAME})..."
+      DEL_HTTP="$(curl -s -o /dev/null -w "%{http_code}" -X DELETE \
+        -H "Authorization: Bearer ${TOKEN}" \
+        -H "X-Goog-User-Project: ${PROJECT_ID}" \
+        "${DE_API_BASE}/${AG_NAME}")"
+      echo "     HTTP ${DEL_HTTP}"
+    done <<< "${OTHER_AGENT_NAMES}"
+  else
+    echo "  -> No stale registered agents found."
+  fi
 else
-  echo "  -> No stale registered agents found."
+  echo "[5/8] Preserving existing registered agents in ${ENGINE_ID} (PURGE_OTHER_AGENTS=false)..."
 fi
 
 # 7. Install dependencies & deploy ADK >2.0 Agent Fleet concurrently to Vertex AI Agent Runtime
@@ -349,7 +354,14 @@ declare -a OP_RECORDS=()
 for SPEC in "${FLEET_SPECS[@]}"; do
   IFS='|' read -r AG_ID SVC_NAME DISP_NAME DESC ICON_KEY <<< "${SPEC}"
   echo "  -> Starting async Agent Runtime deploy for ${DISP_NAME} (service=${SVC_NAME}, target=${AG_ID})..."
-  rm -f "${DEMO_DIR}/.google-agents-cli/operation.json"
+  python3 -c '
+import json, os, sys
+p = sys.argv[1]
+if os.path.isfile(p):
+    d = json.load(open(p))
+    d.pop("pending_operation", None)
+    json.dump(d, open(p, "w"), indent=2)
+' "${DEMO_DIR}/deployment_metadata.json"
   DEPLOY_OUT="$(run_agents_cli deploy \
     --project "${PROJECT_ID}" \
     --region "${RUNTIME_REGION}" \
@@ -361,20 +373,21 @@ for SPEC in "${FLEET_SPECS[@]}"; do
     --no-confirm-project 2>&1)"
   OP_NAME="$(python3 -c '
 import json, os, re, sys
-op_file = sys.argv[1]
+meta_file = sys.argv[1]
 out = sys.argv[2]
-if os.path.isfile(op_file):
+if os.path.isfile(meta_file):
     try:
-        data = json.load(open(op_file))
-        if data.get("operation_name"):
-            print(data["operation_name"])
+        data = json.load(open(meta_file))
+        op = (data.get("pending_operation") or {}).get("operation_name")
+        if op:
+            print(op)
             sys.exit(0)
     except Exception:
         pass
-m = re.search(r"(projects/[^/\s\"]+/locations/[^/\s\"]+/reasoningEngines/[0-9]+/operations/[0-9]+)", out)
+m = re.search(r"(projects/[^/\s\"]+/locations/[^/\s\"]+(?:/reasoningEngines/[0-9]+)?/operations/[0-9]+)", out)
 if m:
     print(m.group(1))
-' "${DEMO_DIR}/.google-agents-cli/operation.json" "${DEPLOY_OUT}")"
+' "${DEMO_DIR}/deployment_metadata.json" "${DEPLOY_OUT}")"
   if [[ -z "${OP_NAME}" ]]; then
     echo "ERROR: Failed to extract Agent Runtime LRO name for ${SVC_NAME}:" >&2
     echo "${DEPLOY_OUT}" >&2
@@ -386,11 +399,12 @@ done
 
 echo "  -> Polling ${#OP_RECORDS[@]} concurrent Vertex AI Agent Runtime build/deploy operations..."
 DEPLOYED_MAP_JSON="$(python3 -c '
-import json, subprocess, sys, time, urllib.request
+import json, re, subprocess, sys, time, urllib.request
 
 region = sys.argv[1]
 project_id = sys.argv[2]
-records = [r.split("|", 2) for r in sys.argv[3:]]
+project_number = sys.argv[3]
+records = [r.split("|", 2) for r in sys.argv[4:]]
 
 def get_token():
     return subprocess.check_output(["gcloud", "auth", "print-access-token", "--quiet"], text=True).strip()
@@ -418,6 +432,7 @@ while pending and time.monotonic() < deadline:
                 sys.stderr.write(f"ERROR deploying {svc} ({ag_id}): {json.dumps(data[\"error\"])}\n")
                 sys.exit(1)
             re_name = data.get("response", {}).get("name") or op.split("/operations/")[0]
+            re_name = re.sub(r"^projects/[^/]+/", f"projects/{project_number}/", re_name)
             sys.stderr.write(f"     [READY] {svc} -> {re_name}\n")
             completed[ag_id] = re_name
             del pending[ag_id]
@@ -430,7 +445,7 @@ if pending:
     sys.exit(1)
 
 print(json.dumps(completed))
-' "${RUNTIME_REGION}" "${PROJECT_ID}" "${OP_RECORDS[@]}")"
+' "${RUNTIME_REGION}" "${PROJECT_ID}" "${PROJECT_NUMBER}" "${OP_RECORDS[@]}")"
 
 # Persist root Antigravity reasoning engine ID back to deployment_metadata.json
 python3 -c '
