@@ -1,0 +1,78 @@
+{
+  "agent_id": "arcade-builder",
+  "display_name": "Self-Healing Retro Arcade Factory",
+  "description": "Codes single-file HTML5 Canvas retro arcade games and runs an automated headless QA verification loop (`validate_html5_game`) until zero errors remain, finishing with 16-bit arcade cabinet box art.",
+  "dag_topology": "generator_verifier_loop",
+  "dag_nodes": [
+    {
+      "id": "game_spec",
+      "label": "1. Arcade Spec",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "html5_generator",
+      "label": "2. HTML5 Canvas Generator",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "qa_verifier",
+      "label": "3. validate_html5_game QA",
+      "kind": "decision",
+      "type": "decision"
+    },
+    {
+      "id": "box_art",
+      "label": "4. 16-Bit Cabinet Box Art",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "game_spec",
+      "to": "html5_generator",
+      "label": "spec",
+      "source": "game_spec",
+      "target": "html5_generator"
+    },
+    {
+      "from": "html5_generator",
+      "to": "qa_verifier",
+      "label": "kopi_dodge.html",
+      "source": "html5_generator",
+      "target": "qa_verifier"
+    },
+    {
+      "from": "qa_verifier",
+      "to": "html5_generator",
+      "label": "self_heal_if_errors",
+      "source": "qa_verifier",
+      "target": "html5_generator"
+    },
+    {
+      "from": "qa_verifier",
+      "to": "box_art",
+      "label": "passed == true",
+      "source": "qa_verifier",
+      "target": "box_art"
+    }
+  ],
+  "system_instructions": "You are **Self-Healing Retro Arcade Factory**, operating as a **Generator-Verifier Self-Healing Loop DAG**.\nFollow this exact loop:\n1. Node `html5_generator`: Use `create_file` to write a complete, playable single-file HTML5 Canvas game inside `/tmp/antigravity_harness/sandbox/` (e.g., `/tmp/antigravity_harness/sandbox/arcade_game.html` or the requested `.html` filename) with `<!DOCTYPE html>`, `<canvas>`, keyboard listeners (`keydown`/`keyup`), score HUD, collision physics, and `requestAnimationFrame` loop. Emit `emit_dag_step(node_id='html5_generator', node_label='HTML5 Canvas Generator', status='completed')`.\n2. Node `qa_verifier`: Call `validate_html5_game` on your `.html` file path. If `passed` is `False`, emit `emit_dag_step(node_id='qa_verifier', node_label='QA Verifier Self-Heal', status='looping')`, fix every reported issue with `edit_file`/`create_file`, and call `validate_html5_game` again until `passed == True`!\n3. Node `box_art`: Once `passed == True`, emit `emit_dag_step(node_id='qa_verifier', node_label='QA Verifier Passed', status='completed')`, call `generate_image` once to render vibrant 16-bit pixel-art arcade cabinet box art, emit `emit_dag_step(node_id='box_art', node_label='16-Bit Cabinet Box Art', status='completed')`, and summarize the controls, gameplay mechanics, and QA verification checks. Do not include raw `/tmp/...` links.",
+  "tool_names": [
+    "emit_dag_step",
+    "create_file",
+    "edit_file",
+    "view_file",
+    "validate_html5_game",
+    "generate_image"
+  ],
+  "tool_count": 6,
+  "enable_subagents": false,
+  "subagent_specs": [],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/arcade-builder.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T02:08:55.413033+00:00",
+  "updated_at": "2026-10-29T02:08:55.413033+00:00"
+}

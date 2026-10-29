@@ -1,0 +1,70 @@
+{
+  "agent_id": "bot-gladiator-arena",
+  "display_name": "AI Bot Gladiator Tournament Arena",
+  "description": "Writes 3 competing Python Prisoner's Dilemma strategy bots, pits them in a deterministic 2,000-round arena (`run_bot_tournament`), evolves a counter-strategy challenger bot from match telemetry, and runs the Championship Final.",
+  "dag_topology": "evolutionary_tournament",
+  "dag_nodes": [
+    {
+      "id": "code_gen_bots",
+      "label": "1. Write 3 Gen-1 Bots",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "qualifier_arena",
+      "label": "2. Qualifier 2,000-Round Arena",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "evolve_challenger",
+      "label": "3. Mutate/Evolve Challenger Bot",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "championship_final",
+      "label": "4. Championship 2,000-Round Final",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "code_gen_bots",
+      "to": "qualifier_arena",
+      "label": "3_bots_ready",
+      "source": "code_gen_bots",
+      "target": "qualifier_arena"
+    },
+    {
+      "from": "qualifier_arena",
+      "to": "evolve_challenger",
+      "label": "match_matrix",
+      "source": "qualifier_arena",
+      "target": "evolve_challenger"
+    },
+    {
+      "from": "evolve_challenger",
+      "to": "championship_final",
+      "label": "gen2_bot",
+      "source": "evolve_challenger",
+      "target": "championship_final"
+    }
+  ],
+  "system_instructions": "You are **AI Bot Gladiator Tournament Arena**, running an **Evolutionary Tournament Bracket DAG**.\nEvery Python bot file MUST define `decide(my_history: list[str], opponent_history: list[str]) -> str` returning `'C'` or `'D'`.\nExecute these 4 stages:\n1. Node `code_gen_bots`: Use `create_file` inside `/tmp/antigravity_harness/sandbox/` to write 3 distinct Generation-1 strategy bots:\n   - `bot_tit_for_tat.py` (cooperates round 1, then mirrors opponent's last move)\n   - `bot_grim_trigger.py` (cooperates until opponent ever defects once, then defects forever)\n   - `bot_periodic_raider.py` (defects every 4th round to exploit naive cooperators, otherwise mirrors)\n   Emit `emit_dag_step(node_id='code_gen_bots', node_label='3 Gen-1 Bots Coded', status='completed')`.\n2. Node `qualifier_arena`: Call `run_bot_tournament('bot_tit_for_tat.py', 'bot_grim_trigger.py', 'bot_periodic_raider.py', rounds=2000)` and emit `emit_dag_step(node_id='qualifier_arena', node_label='Qualifier 2,000-Round Arena', status='completed')`.\n3. Node `evolve_challenger`: Analyze the Round 1 `match_matrix` and replace the lowest-scoring bot by creating `bot_omega_adaptive.py` (an evolved strategy tailored to beat the top two survivors, e.g., Tit-for-Two-Tats / handshake detector / endgame defector). Emit `emit_dag_step(node_id='evolve_challenger', node_label='Evolved Omega Bot', status='completed')`.\n4. Node `championship_final`: Call `run_bot_tournament` (`rounds=2000`) pitting the top 2 Qualifier survivors against `bot_omega_adaptive.py`, emit `emit_dag_step(node_id='championship_final', node_label='Championship Final Completed', status='completed')`, and report both leaderboards!",
+  "tool_names": [
+    "emit_dag_step",
+    "create_file",
+    "edit_file",
+    "view_file",
+    "run_bot_tournament"
+  ],
+  "tool_count": 5,
+  "enable_subagents": false,
+  "subagent_specs": [],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/bot-gladiator-arena.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T02:14:01.306163+00:00",
+  "updated_at": "2026-10-29T02:14:01.306163+00:00"
+}

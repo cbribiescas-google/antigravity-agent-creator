@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Antigravity Live Agent & DAG Studio — Build, orchestrate, visualize, and benchmark autonomous multi-agent DAG topologies and dynamic tools through a unified Single API Gateway."
+  />
+  <title>Antigravity Live Agent &amp; DAG Studio — Gemini Enterprise</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="studio-app" class="studio-app">
+    <!-- ================================================================== -->
+    <!-- TOP TELEMETRY & STUDIO HEADER                                      -->
+    <!-- ================================================================== -->
+    <header id="studio-header" class="studio-topbar" role="banner">
+      <div class="flex items-center gap-3 min-w-0">
+        <div
+          class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0"
+          style="background: var(--accent-cyan-soft); color: var(--accent-cyan); border: 1px solid hsla(199, 89%, 52%, 0.35);"
+          aria-hidden="true"
+        >
+          AG
+        </div>
+        <div class="min-w-0">
+          <h1 class="font-display text-base font-bold truncate m-0 leading-tight">
+            Antigravity Live Agent &amp; DAG Studio
+          </h1>
+          <div class="flex items-center gap-2 text-xs" style="color: var(--text-muted);">
+            <span>Single API Gateway (<code>/api/gateway/*</code>)</span>
+            <span>•</span>
+            <span id="header-model-name" class="font-mono-num">gemini-3.7-flash</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global Quick-KPI Strip -->
+      <div class="hidden xl:flex items-center gap-2">
+        <div id="gateway-health-pill" class="badge-chip font-mono-num" title="Single API Gateway Health">
+          <span id="gateway-status-dot" class="live-dot"></span>
+          <span id="gateway-status-text">GATEWAY ONLINE</span>
+        </div>
+        <div class="badge-chip font-mono-num" title="Registered Agents on Gateway">
+          <span>Agents:</span>
+          <strong id="header-kpi-agents" style="color: var(--text-primary);">1</strong>
+        </div>
+        <div class="badge-chip font-mono-num" title="Available Built-in, Scenario & Dynamic Tools">
+          <span>Tools:</span>
+          <strong id="header-kpi-tools" style="color: var(--text-primary);">—</strong>
+        </div>
+        <div class="badge-chip font-mono-num" title="Global Tokens Tracked Across All Users & Agents">
+          <span>Global Tokens:</span>
+          <strong id="header-kpi-global-tokens" style="color: var(--accent-cyan);">0</strong>
+        </div>
+      </div>
+
+      <!-- Studio Actions -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button
+          id="btn-open-tools-modal"
+          type="button"
+          class="btn-studio"
+          title="Inspect all Built-in, Scenario & Dynamically Synthesized Tools + Registered Agent Specs"
+        >
+          <span>🧰</span>
+          <span class="hidden sm:inline">Tools &amp; Specs</span>
+        </button>
+
+        <div class="seg-tabs hidden md:grid" style="grid-template-columns: repeat(3, auto);" role="group" aria-label="Workspace Layout Mode">
+          <button id="btn-focus-split" type="button" class="seg-tab active" data-focus-mode="split" title="Balanced DAG + Execution Feed">
+            Split
+          </button>
+          <button id="btn-focus-dag" type="button" class="seg-tab" data-focus-mode="dag" title="Expand SVG DAG Canvas">
+            DAG+
+          </button>
+          <button id="btn-focus-feed" type="button" class="seg-tab" data-focus-mode="feed" title="Expand Execution & Artifact Feed">
+            Feed+
+          </button>
+        </div>
+
+        <button
+          id="btn-refresh-all"
+          type="button"
+          class="btn-studio"
+          title="Refresh Agents, Conversations & Token Ledger"
+        >
+          <span>↻</span>
+          <span class="hidden sm:inline">Sync</span>
+        </button>
+
+        <button
+          id="btn-theme-toggle"
+          type="button"
+          class="btn-studio"
+          aria-label="Toggle Light or Dark Theme"
+          title="Switch Obsidian Dark / Studio Light Theme"
+        >
+          <span id="theme-toggle-icon">☀</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ================================================================== -->
+    <!-- MAIN 3-COLUMN STUDIO WORKSPACE                                     -->
+    <!-- ================================================================== -->
+    <div id="studio-workspace" class="studio-workspace" data-focus="split">
+
+      <!-- ================================================================ -->
+      <!-- LEFT SIDEBAR: USER IDENTITY, AGENT SWITCHER, PRESETS & THREADS   -->
+      <!-- ================================================================ -->
+      <aside id="left-sidebar" class="studio-sidebar-left" aria-label="Agent Switcher and Scenarios">
+        <!-- 1. Active User Identity & Live User Token Meter -->
+        <section class="panel-section space-y-2.5" aria-labelledby="label-user-identity">
+          <div class="flex items-center justify-between">
+            <span id="label-user-identity" class="panel-label">Active User Identity</span>
+            <span id="user-convs-pill" class="badge-chip font-mono-num">0 convs • 0 turns</span>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <select
+              id="user-id-select"
+              class="input-studio font-mono-num"
+              style="width: 48%;"
+              aria-label="Preset User ID"
+            >
+              <option value="cbribiescas">cbribiescas</option>
+              <option value="demo-exec">demo-exec</option>
+              <option value="builder-alice">builder-alice</option>
+              <option value="architect-kai">architect-kai</option>
+            </select>
+            <input
+              id="user-id-input"
+              type="text"
+              value="cbribiescas"
+              placeholder="Custom user_id..."
+              class="input-studio font-mono-num"
+              style="width: 52%;"
+              aria-label="Active user_id input"
+            />
+          </div>
+
+          <!-- Per-User Cumulative Token Strip -->
+          <div
+            class="p-2.5 rounded-lg space-y-1.5"
+            style="background: var(--bg-inset); border: 1px solid var(--border-subtle);"
+          >
+            <div class="flex items-center justify-between text-xs">
+              <span style="color: var(--text-secondary);">
+                User <code id="user-meter-name" class="font-mono-num" style="color: var(--accent-cyan);">cbribiescas</code> Total
+              </span>
+              <strong id="user-meter-total" class="font-mono-num text-sm" style="color: var(--text-primary);">0 tok</strong>
+            </div>
+            <div class="token-stack-bar" title="User token breakdown: Prompt / Cached / Thoughts / Output / Subagent">
+              <div id="user-bar-prompt" class="token-seg seg-prompt" style="width: 0%;"></div>
+              <div id="user-bar-thoughts" class="token-seg seg-thoughts" style="width: 0%;"></div>
+              <div id="user-bar-candidates" class="token-seg seg-candidates" style="width: 0%;"></div>
+              <div id="user-bar-subagent" class="token-seg seg-subagent" style="width: 0%;"></div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] font-mono-num" style="color: var(--text-muted);">
+              <span>In: <b id="user-meter-prompt" style="color: var(--text-secondary);">0</b></span>
+              <span>Think: <b id="user-meter-thoughts" style="color: var(--text-secondary);">0</b></span>
+              <span>Sub: <b id="user-meter-subagent" style="color: var(--text-secondary);">0</b></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Sidebar Section Switcher (Agents | 10 Presets | Threads) -->
+        <div class="px-3.5 pt-2.5 pb-2" style="border-bottom: 1px solid var(--border-subtle);">
+          <div class="seg-tabs" style="grid-template-columns: repeat(3, 1fr);" role="tablist" aria-label="Sidebar Panels">
+            <button
+              id="left-nav-tab-agents"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              class="seg-tab active"
+              data-sidebar-tab="agents"
+            >
+              🤖 Agents (<span id="tab-count-agents">1</span>)
+            </button>
+            <button
+              id="left-nav-tab-presets"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class="seg-tab"
+              data-sidebar-tab="presets"
+            >
+              ⚡ 10 DAGs
+            </button>
+            <button
+              id="left-nav-tab-threads"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              class="seg-tab"
+              data-sidebar-tab="threads"
+            >
+              💬 Threads (<span id="tab-count-threads">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- 3A. Panel: Registered Agents Selector -->
+        <div
+          id="sidebar-panel-agents"
+          class="flex-1 overflow-y-auto p-3 space-y-2.5"
+          role="tabpanel"
+          aria-labelledby="left-nav-tab-agents"
+        >
+          <div class="flex items-center justify-between px-0.5">
+            <span class="panel-label">Root Builder &amp; Custom DAGs</span>
+            <button
+              id="btn-jump-to-presets"
+              type="button"
+              class="text-xs font-semibold hover:underline"
+              style="color: var(--accent-cyan); background: none; border: none; cursor: pointer;"
+            >
+              + Quick-Build 10 →
+            </button>
+          </div>
+          <div id="agents-list-container" class="space-y-2">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </div>
+
+        <!-- 3B. Panel: 10 Quick-Build Fun DAG Scenarios -->
+        <div
+          id="sidebar-panel-presets"
+          class="hidden flex-1 overflow-y-auto p-3 space-y-2.5"
+          role="tabpanel"
+          aria-labelledby="left-nav-tab-presets"
+        >
+          <div class="space-y-1 px-0.5">
+            <div class="flex items-center justify-between">
+              <span class="panel-label">10 Canonical DAG Topologies</span>
+              <span id="presets-built-counter" class="badge-chip badge-emerald font-mono-num">0 / 10 Built</span>
+            </div>
+            <p class="text-xs m-0" style="color: var(--text-muted);">
+              1-click <strong>🛠️ Build</strong> sends the spec to <code>antigravity</code>; <strong>▶️ Run</strong> launches the starter mission on that custom agent!
+            </p>
+          </div>
+          <div id="presets-list-container" class="space-y-2.5">
+            <!-- Populated dynamically with all 10 scenarios -->
+          </div>
+        </div>
+
+        <!-- 3C. Panel: Persistent Conversation Threads -->
+        <div
+          id="sidebar-panel-threads"
+          class="hidden flex-1 overflow-y-auto p-3 space-y-2.5"
+          role="tabpanel"
+          aria-labelledby="left-nav-tab-threads"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <button id="btn-new-conversation" type="button" class="btn-studio btn-primary w-full">
+              <span>＋</span>
+              <span>New Conversation Thread</span>
+            </button>
+          </div>
+
+          <div class="flex items-center justify-between px-0.5 pt-1">
+            <span class="panel-label">Saved SQLite Trajectories</span>
+            <label class="inline-flex items-center gap-1.5 text-xs cursor-pointer" style="color: var(--text-secondary);">
+              <input id="chk-filter-agent-threads" type="checkbox" class="accent-sky-500" />
+              <span>Active agent only</span>
+            </label>
+          </div>
+
+          <div id="conversations-list-container" class="space-y-2">
+            <!-- Populated dynamically from GET /api/gateway/conversations -->
+          </div>
+        </div>
+      </aside>
+
+      <!-- ================================================================ -->
+      <!-- CENTER STAGE: LIVE INTERACTIVE SVG DAG + EXECUTION & CHAT FEED   -->
+      <!-- ================================================================ -->
+      <main id="center-stage" class="studio-center" role="main">
+
+        <!-- CENTER TOP: Live Interactive SVG DAG Visualizer -->
+        <section id="dag-visualizer-section" class="center-dag-pane" aria-label="Live Interactive Agent DAG Topology">
+          <div class="dag-toolbar">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <span id="dag-agent-badge" class="badge-chip badge-cyan font-mono-num">antigravity</span>
+              <h2 id="dag-topology-title" class="font-display text-sm font-bold m-0 truncate">
+                Autonomous Meta-Builder &amp; Dynamic Tool Synthesis Loop
+              </h2>
+              <span id="dag-live-status-pill" class="badge-chip font-mono-num">IDLE • READY</span>
+            </div>
+
+            <div class="flex items-center gap-1.5 shrink-0">
+              <div class="seg-tabs" style="grid-template-columns: repeat(2, auto);" role="group" aria-label="DAG Graph Source">
+                <button
+                  id="btn-dag-mode-blueprint"
+                  type="button"
+                  class="seg-tab active"
+                  data-dag-mode="blueprint"
+                  title="Rich Canonical Topology Blueprint with Loops, Branches & Subagents"
+                >
+                  Canonical DAG
+                </button>
+                <button
+                  id="btn-dag-mode-registry"
+                  type="button"
+                  class="seg-tab"
+                  data-dag-mode="registry"
+                  title="Raw dag_nodes & dag_edges from GET /api/gateway/agents"
+                >
+                  Registry Spec
+                </button>
+              </div>
+
+              <button
+                id="btn-dag-replay"
+                type="button"
+                class="btn-studio"
+                title="Replay DAG animation from latest turn trace"
+              >
+                <span>▶</span>
+                <span class="hidden sm:inline">Replay</span>
+              </button>
+              <button id="btn-dag-zoom-in" type="button" class="btn-studio px-2" title="Zoom In DAG" aria-label="Zoom In">+</button>
+              <button id="btn-dag-zoom-out" type="button" class="btn-studio px-2" title="Zoom Out DAG" aria-label="Zoom Out">−</button>
+              <button id="btn-dag-reset" type="button" class="btn-studio px-2" title="Fit DAG to Viewport">Fit</button>
+            </div>
+          </div>
+
+          <div id="dag-viewport" class="dag-viewport">
+            <svg
+              id="dag-svg-canvas"
+              class="dag-svg"
+              viewBox="0 0 1000 280"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              aria-label="Agent Directed Acyclic Graph Execution Diagram"
+            >
+              <defs>
+                <marker id="arrow-idle" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="hsl(215, 15%, 36%)" />
+                </marker>
+                <marker id="arrow-active" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="hsl(199, 89%, 52%)" />
+                </marker>
+                <marker id="arrow-completed" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="hsl(156, 68%, 45%)" />
+                </marker>
+                <marker id="arrow-retry" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="hsl(38, 92%, 54%)" />
+                </marker>
+                <marker id="arrow-pruned" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="hsl(8, 82%, 60%)" />
+                </marker>
+              </defs>
+              <g id="dag-pan-zoom-group">
+                <g id="dag-edges-layer"></g>
+                <g id="dag-nodes-layer"></g>
+              </g>
+            </svg>
+
+            <!-- Live DAG Legend -->
+            <div class="dag-legend-bar hidden sm:inline-flex">
+              <span><i class="legend-dot" style="background: var(--accent-cyan);"></i> Active</span>
+              <span><i class="legend-dot" style="background: var(--accent-amber);"></i> Think / Loop</span>
+              <span><i class="legend-dot" style="background: var(--accent-emerald);"></i> Done</span>
+              <span><i class="legend-dot" style="background: var(--accent-coral);"></i> Pruned / Err</span>
+              <span class="font-mono-num" id="dag-step-caption" style="color: var(--text-muted);">Click any node to inspect</span>
+            </div>
+
+            <!-- Interactive Selected Node Inspector -->
+            <div id="dag-node-inspector" class="dag-node-inspector hidden" role="dialog" aria-label="DAG Node Inspector">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span id="inspector-node-type" class="badge-chip badge-cyan">step</span>
+                  <h3 id="inspector-node-title" class="font-display text-xs font-bold mt-1 mb-0">Node Title</h3>
+                </div>
+                <button
+                  id="btn-close-node-inspector"
+                  type="button"
+                  class="text-xs px-1.5 py-0.5 rounded"
+                  style="background: var(--bg-interactive); color: var(--text-secondary); border: none; cursor: pointer;"
+                  aria-label="Close Node Inspector"
+                >
+                  ✕
+                </button>
+              </div>
+              <div class="mt-2 space-y-1.5 text-xs" style="color: var(--text-secondary);">
+                <div>ID: <code id="inspector-node-id" class="font-mono-num">node_id</code> • Status: <strong id="inspector-node-status">idle</strong></div>
+                <div id="inspector-node-tools" class="flex flex-wrap gap-1"></div>
+                <div id="inspector-node-summary" class="text-[11.5px] pt-1" style="color: var(--text-muted);"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CENTER BOTTOM: Live Execution Feed, Chat & Rich Artifact Viewer -->
+        <section id="execution-feed-section" class="center-feed-pane" aria-label="Live Execution Feed and Multimodal Artifacts">
+          <div id="execution-feed" class="feed-scroll">
+            <!-- Welcome / Empty State or Multi-Turn Stream rendered here -->
+          </div>
+
+          <!-- Composer & Multi-Turn Session Controls -->
+          <div class="composer-shell">
+            <div class="composer-box">
+              <!-- Context Bar -->
+              <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  <span class="badge-chip badge-cyan font-mono-num" title="Target Agent ID">
+                    🤖 <span id="composer-agent-label">antigravity</span>
+                  </span>
+                  <span class="badge-chip font-mono-num" title="Caller User ID">
+                    👤 <span id="composer-user-label">cbribiescas</span>
+                  </span>
+                  <span id="composer-conv-badge" class="badge-chip font-mono-num" title="Stateful Gateway Conversation ID">
+                    🆕 New Thread (Turn #1)
+                  </span>
+                </div>
+
+                <div class="flex items-center gap-1.5">
+                  <button
+                    id="btn-composer-new-thread"
+                    type="button"
+                    class="btn-studio py-1 px-2 text-[11px]"
+                    title="Start a brand-new conversation_id while keeping current agent"
+                  >
+                    ＋ Reset Thread
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Suggestion Chips for Active Agent -->
+              <div id="quick-chips-bar" class="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+                <!-- Populated dynamically based on selected agent -->
+              </div>
+
+              <!-- Input Box -->
+              <form id="chat-form" class="composer-input-row">
+                <textarea
+                  id="chat-input"
+                  rows="2"
+                  class="composer-textarea"
+                  placeholder="Ask Antigravity to synthesize a custom tool & DAG agent, or send a mission to the selected custom agent... (Enter to send, Shift+Enter for newline)"
+                  aria-label="Prompt message for selected agent"
+                ></textarea>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button
+                    id="btn-stop-stream"
+                    type="button"
+                    class="btn-studio btn-danger hidden"
+                    title="Abort current SSE stream"
+                  >
+                    ■ Stop
+                  </button>
+                  <button
+                    id="btn-send-message"
+                    type="submit"
+                    class="btn-studio btn-primary px-3.5 py-2"
+                  >
+                    <span>Send</span>
+                    <span>↵</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ================================================================ -->
+      <!-- RIGHT TELEMETRY RAIL: REQUEST, CONVERSATION & GLOBAL LEADERBOARD -->
+      <!-- ================================================================ -->
+      <aside id="right-telemetry-rail" class="studio-rail-right" aria-label="Live Gateway Token and Cost Telemetry">
+
+        <!-- CARD 1: Last Request Tokens & Latency -->
+        <section class="panel-section space-y-2.5" aria-labelledby="hud-heading-request">
+          <div class="flex items-center justify-between">
+            <span id="hud-heading-request" class="panel-label">1. Last Request Telemetry</span>
+            <span id="hud-req-latency" class="badge-chip badge-cyan font-mono-num">0 ms</span>
+          </div>
+
+          <div class="flex items-baseline justify-between">
+            <div>
+              <div id="hud-req-total" class="font-display font-mono-num text-2xl font-bold leading-none">
+                0
+              </div>
+              <div class="text-[11px] mt-1" style="color: var(--text-muted);">
+                Total Request Tokens (<span id="hud-req-cost" class="font-mono-num">$0.0000</span> est.)
+              </div>
+            </div>
+            <div class="text-right font-mono-num text-xs" style="color: var(--text-secondary);">
+              <div>Cache Hit: <strong id="hud-req-cache-pct" style="color: var(--accent-teal);">0%</strong></div>
+              <div>Subagent: <strong id="hud-req-sub-pct" style="color: var(--accent-coral);">0%</strong></div>
+            </div>
+          </div>
+
+          <!-- Stacked Token Distribution Bar -->
+          <div class="token-stack-bar" title="Prompt / Cached / Thoughts / Candidates / Subagent">
+            <div id="req-bar-prompt" class="token-seg seg-prompt" style="width: 0%;"></div>
+            <div id="req-bar-cached" class="token-seg seg-cached" style="width: 0%;"></div>
+            <div id="req-bar-thoughts" class="token-seg seg-thoughts" style="width: 0%;"></div>
+            <div id="req-bar-candidates" class="token-seg seg-candidates" style="width: 0%;"></div>
+            <div id="req-bar-subagent" class="token-seg seg-subagent" style="width: 0%;"></div>
+          </div>
+
+          <div class="telemetry-stat-grid font-mono-num">
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);"><i class="legend-dot seg-prompt mr-1"></i>Prompt</span>
+              <strong id="hud-req-prompt">0</strong>
+            </div>
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);"><i class="legend-dot seg-cached mr-1"></i>Cached</span>
+              <strong id="hud-req-cached">0</strong>
+            </div>
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);"><i class="legend-dot seg-thoughts mr-1"></i>Thoughts</span>
+              <strong id="hud-req-thoughts">0</strong>
+            </div>
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);"><i class="legend-dot seg-candidates mr-1"></i>Output</span>
+              <strong id="hud-req-candidates">0</strong>
+            </div>
+            <div class="telemetry-stat-cell" style="grid-column: span 2;">
+              <span style="color: var(--text-muted);"><i class="legend-dot seg-subagent mr-1"></i>Subagent Trajectories</span>
+              <strong id="hud-req-subagent" style="color: var(--accent-coral);">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- CARD 2: Current Conversation Cumulative Tokens -->
+        <section class="panel-section space-y-2.5" aria-labelledby="hud-heading-conv">
+          <div class="flex items-center justify-between">
+            <span id="hud-heading-conv" class="panel-label">2. Conversation Cumulative</span>
+            <span id="hud-conv-turns" class="badge-chip badge-emerald font-mono-num">0 turns</span>
+          </div>
+
+          <div class="flex items-baseline justify-between">
+            <div>
+              <div id="hud-conv-total" class="font-display font-mono-num text-xl font-bold leading-none">
+                0
+              </div>
+              <div class="text-[11px] mt-1 font-mono-num truncate max-w-[205px]" style="color: var(--text-muted);" id="hud-conv-id-display">
+                conv: (none yet)
+              </div>
+            </div>
+            <button
+              id="btn-copy-conv-ids"
+              type="button"
+              class="btn-studio py-1 px-2 text-[11px]"
+              title="Copy Gateway conversation_id & 32-char Antigravity SQLite trajectory ID"
+            >
+              Copy ID
+            </button>
+          </div>
+
+          <div class="token-stack-bar">
+            <div id="conv-bar-prompt" class="token-seg seg-prompt" style="width: 0%;"></div>
+            <div id="conv-bar-cached" class="token-seg seg-cached" style="width: 0%;"></div>
+            <div id="conv-bar-thoughts" class="token-seg seg-thoughts" style="width: 0%;"></div>
+            <div id="conv-bar-candidates" class="token-seg seg-candidates" style="width: 0%;"></div>
+            <div id="conv-bar-subagent" class="token-seg seg-subagent" style="width: 0%;"></div>
+          </div>
+
+          <div class="telemetry-stat-grid font-mono-num">
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);">Prompt</span>
+              <strong id="hud-conv-prompt">0</strong>
+            </div>
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);">Cached</span>
+              <strong id="hud-conv-cached">0</strong>
+            </div>
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);">Thoughts</span>
+              <strong id="hud-conv-thoughts">0</strong>
+            </div>
+            <div class="telemetry-stat-cell">
+              <span style="color: var(--text-muted);">Output</span>
+              <strong id="hud-conv-candidates">0</strong>
+            </div>
+            <div class="telemetry-stat-cell" style="grid-column: span 2;">
+              <span style="color: var(--text-muted);">Subagent Total</span>
+              <strong id="hud-conv-subagent" style="color: var(--accent-coral);">0</strong>
+            </div>
+          </div>
+
+          <!-- Turn-by-Turn Mini Bar History -->
+          <div id="hud-turn-sparkline-wrap" class="hidden pt-1 space-y-1">
+            <div class="text-[10.5px] font-semibold uppercase tracking-wider" style="color: var(--text-muted);">
+              Turn-by-Turn Token Delta
+            </div>
+            <div id="hud-turn-sparkline" class="flex items-end gap-1.5 h-10 pt-1"></div>
+          </div>
+        </section>
+
+        <!-- CARD 3: Global Gateway Leaderboard (/api/gateway/usage/summary) -->
+        <section class="panel-section flex-1 flex flex-col gap-2.5 border-b-0" aria-labelledby="hud-heading-leaderboard">
+          <div class="flex items-center justify-between">
+            <span id="hud-heading-leaderboard" class="panel-label">3. Gateway Leaderboard</span>
+            <span id="hud-global-avg-lat" class="badge-chip font-mono-num">avg 0 ms</span>
+          </div>
+
+          <!-- Global Rollup Mini Strip -->
+          <div class="grid grid-cols-3 gap-1.5 text-center font-mono-num">
+            <div class="p-1.5 rounded-lg" style="background: var(--bg-inset); border: 1px solid var(--border-subtle);">
+              <div class="text-[10px]" style="color: var(--text-muted);">USERS</div>
+              <strong id="hud-sum-users" class="text-xs">0</strong>
+            </div>
+            <div class="p-1.5 rounded-lg" style="background: var(--bg-inset); border: 1px solid var(--border-subtle);">
+              <div class="text-[10px]" style="color: var(--text-muted);">THREADS</div>
+              <strong id="hud-sum-convs" class="text-xs">0</strong>
+            </div>
+            <div class="p-1.5 rounded-lg" style="background: var(--bg-inset); border: 1px solid var(--border-subtle);">
+              <div class="text-[10px]" style="color: var(--text-muted);">TURNS</div>
+              <strong id="hud-sum-turns" class="text-xs">0</strong>
+            </div>
+          </div>
+
+          <!-- Leaderboard Switcher -->
+          <div class="seg-tabs" style="grid-template-columns: repeat(3, 1fr);" role="tablist" aria-label="Leaderboard Breakdown">
+            <button id="btn-lb-agents" type="button" class="seg-tab active" data-lb-tab="agents">
+              By Agent
+            </button>
+            <button id="btn-lb-users" type="button" class="seg-tab" data-lb-tab="users">
+              By User
+            </button>
+            <button id="btn-lb-convs" type="button" class="seg-tab" data-lb-tab="convs">
+              Threads
+            </button>
+          </div>
+
+          <div id="hud-leaderboard-list" class="space-y-1.5 overflow-y-auto max-h-[340px] pr-0.5">
+            <!-- Populated dynamically from GET /api/gateway/usage/summary -->
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL 1: TOOLS & AGENT REGISTRY INSPECTOR                            -->
+  <!-- ==================================================================== -->
+  <div id="tools-registry-modal" class="studio-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-tools-title">
+    <div class="studio-modal-card">
+      <div class="flex items-center justify-between px-5 py-3.5" style="border-bottom: 1px solid var(--border-subtle);">
+        <div>
+          <h2 id="modal-tools-title" class="font-display text-base font-bold m-0">
+            Antigravity Tool &amp; Custom Agent Registry
+          </h2>
+          <p class="text-xs m-0 mt-0.5" style="color: var(--text-muted);">
+            Live catalog from <code>GET /api/gateway/tools</code> &amp; <code>GET /api/gateway/agents</code>
+          </p>
+        </div>
+        <button id="btn-close-tools-modal" type="button" class="btn-studio">✕ Close</button>
+      </div>
+      <div id="tools-modal-body" class="p-5 overflow-y-auto space-y-5 text-xs">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL 2: ARTIFACT LIGHTBOX / FULLSCREEN SANDBOX PREVIEW              -->
+  <!-- ==================================================================== -->
+  <div id="artifact-lightbox-modal" class="studio-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+    <div class="studio-modal-card" style="max-width: 1080px; height: 86vh;">
+      <div class="flex items-center justify-between px-4 py-3" style="border-bottom: 1px solid var(--border-subtle);">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="lightbox-kind-badge" class="badge-chip badge-cyan">ARTIFACT</span>
+          <h2 id="lightbox-title" class="font-mono-num text-sm font-semibold m-0 truncate">artifact</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="lightbox-open-raw" href="#" target="_blank" rel="noopener noreferrer" class="btn-studio">
+            ↗ Open Raw URL
+          </a>
+          <button id="btn-close-lightbox" type="button" class="btn-studio">✕ Close</button>
+        </div>
+      </div>
+      <div id="lightbox-content" class="flex-1 min-h-0 flex items-center justify-center p-3 overflow-auto" style="background: var(--bg-inset);">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="studio-toast" class="toast-banner hidden" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

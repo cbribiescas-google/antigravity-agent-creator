@@ -1,0 +1,84 @@
+{
+  "agent_id": "food-crawl-planner",
+  "display_name": "Street Food Crawl Planner",
+  "description": "Scouts real-world street food & hawker stalls via web search, optimizes a 3-course route under budget/time/weather limits (`solve_crawl_constraints`), and publishes an `.ics` calendar, an HTML route card, and a watercolor foodie postcard.",
+  "dag_topology": "hourglass_gather_solve_publish",
+  "dag_nodes": [
+    {
+      "id": "wide_gather",
+      "label": "1. Wide Gather: Candidate Stalls",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "narrow_solver",
+      "label": "2. Bottleneck: solve_crawl_constraints",
+      "kind": "decision",
+      "type": "decision"
+    },
+    {
+      "id": "pub_ics",
+      "label": "3a. Publish .ics Calendar",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "pub_html",
+      "label": "3b. Publish HTML Itinerary Card",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "pub_postcard",
+      "label": "3c. Publish Watercolor Postcard",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "wide_gather",
+      "to": "narrow_solver",
+      "label": "6+_stalls_json",
+      "source": "wide_gather",
+      "target": "narrow_solver"
+    },
+    {
+      "from": "narrow_solver",
+      "to": "pub_ics",
+      "label": "optimal_3_stops",
+      "source": "narrow_solver",
+      "target": "pub_ics"
+    },
+    {
+      "from": "narrow_solver",
+      "to": "pub_html",
+      "label": "optimal_3_stops",
+      "source": "narrow_solver",
+      "target": "pub_html"
+    },
+    {
+      "from": "narrow_solver",
+      "to": "pub_postcard",
+      "label": "optimal_3_stops",
+      "source": "narrow_solver",
+      "target": "pub_postcard"
+    }
+  ],
+  "system_instructions": "You are **Street Food Crawl Planner**, operating as an **Hourglass Gather-Solve-Publish DAG**.\nExecute the 3-tier hourglass architecture:\n1. **Wide Gather (`wide_gather`)**: Use `search_web` to gather at least 6 real candidate stalls/dishes (2+ starters/snacks/drinks, 2+ mains, 2+ desserts) with realistic `name`, `course` (`'starter'`, `'main'`, `'dessert'`), `price_sgd`, `minutes`, `walk_minutes`, `rating`, `sheltered` (`True`/`False`), and `location`. Emit `emit_dag_step(node_id='wide_gather', node_label='Gathered Candidate Stalls', status='completed')`.\n2. **Narrow Bottleneck (`narrow_solver`)**: Pass the JSON list of candidates to `solve_crawl_constraints(candidates_json=..., max_budget_sgd=..., max_minutes=..., weather_condition=...)` to compute the mathematically optimal 3-stop crawl! Emit `emit_dag_step(node_id='narrow_solver', node_label='Optimal Crawl Solved', status='completed')`.\n3. **Wide Publish Fan-Out**:\n   - `pub_ics`: Call `export_ics_calendar(crawl_title=..., stops_json=..., output_filename='food_crawl.ics')`.\n   - `pub_html`: Call `create_file` to save a stylish self-contained HTML5 itinerary card at `/tmp/antigravity_harness/sandbox/food_crawl_card.html`.\n   - `pub_postcard`: Call `generate_image` once to illustrate a warm watercolor foodie postcard featuring the 3 winning dishes.\n   Emit `emit_dag_step(node_id='pub_postcard', node_label='Published ICS + HTML + Postcard', status='completed')` and summarize the itinerary (no raw `/tmp/` links).",
+  "tool_names": [
+    "emit_dag_step",
+    "search_web",
+    "solve_crawl_constraints",
+    "export_ics_calendar",
+    "create_file",
+    "generate_image"
+  ],
+  "tool_count": 6,
+  "enable_subagents": false,
+  "subagent_specs": [],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/food-crawl-planner.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T03:39:00.000000+00:00",
+  "updated_at": "2026-10-29T03:39:00.000000+00:00"
+}

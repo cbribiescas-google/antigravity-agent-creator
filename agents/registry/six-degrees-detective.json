@@ -1,0 +1,90 @@
+{
+  "agent_id": "six-degrees-detective",
+  "display_name": "Six-Degrees Tree Search & Prune Detective",
+  "description": "Connects two seemingly unrelated concepts in <=4 verified factual hops by expanding candidate web search branches in a beam tree and explicitly pruning dead/longer branches with `record_pruned_branch`.",
+  "dag_topology": "tree_search_prune",
+  "dag_nodes": [
+    {
+      "id": "seed_node",
+      "label": "1. Seed: Bubble Tea",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "branch_alpha",
+      "label": "2a. Candidate Branch A",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "branch_beta",
+      "label": "2b. Candidate Branch B (Pruned)",
+      "kind": "decision",
+      "type": "decision"
+    },
+    {
+      "id": "hop_verifier",
+      "label": "3. Verify <=4 Hops to Apollo 11",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "evidence_dossier",
+      "label": "4. Verified Six-Degrees Dossier",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "seed_node",
+      "to": "branch_alpha",
+      "label": "expand",
+      "source": "seed_node",
+      "target": "branch_alpha"
+    },
+    {
+      "from": "seed_node",
+      "to": "branch_beta",
+      "label": "expand",
+      "source": "seed_node",
+      "target": "branch_beta"
+    },
+    {
+      "from": "branch_beta",
+      "to": "hop_verifier",
+      "label": "pruned_dead_end",
+      "source": "branch_beta",
+      "target": "hop_verifier"
+    },
+    {
+      "from": "branch_alpha",
+      "to": "hop_verifier",
+      "label": "surviving_beam",
+      "source": "branch_alpha",
+      "target": "hop_verifier"
+    },
+    {
+      "from": "hop_verifier",
+      "to": "evidence_dossier",
+      "label": "verified_<=4_hops",
+      "source": "hop_verifier",
+      "target": "evidence_dossier"
+    }
+  ],
+  "system_instructions": "You are **Six-Degrees Tree Search & Prune Detective**, executing a **Dynamic Tree Search & Prune DAG**.\nTo connect Concept A to Concept B in `<= 4` factual hops:\n1. Node `seed_node`: Emit `emit_dag_step(node_id='seed_node', node_label='Seed Entity Initialized', status='completed')` and use `search_web` to explore at least 2 distinct candidate hop paths from the origin.\n2. Pruning Step (`branch_beta`): Whenever a candidate path requires >4 hops, relies on vague trivia, or is weaker than your best bridge, explicitly call `record_pruned_branch(branch_name=..., reason=...)` (prune at least 1 candidate branch!).\n3. Node `hop_verifier`: Verify every hop in your winning `<= 4`-hop chain via `search_web` so every link names a specific real person, company, institution, treaty, or mission with dates. Emit `emit_dag_step(node_id='hop_verifier', node_label='All Hops Fact-Checked', status='completed')`.\n4. Node `evidence_dossier`: Save the complete hop chain and pruned-branch log summary to `/tmp/antigravity_harness/sandbox/six_degrees_chain.md` via `create_file`, emit `emit_dag_step(node_id='evidence_dossier', node_label='Six-Degrees Dossier Saved', status='completed')`, and present the numbered hop chain!",
+  "tool_names": [
+    "emit_dag_step",
+    "search_web",
+    "read_url_content",
+    "record_pruned_branch",
+    "create_file"
+  ],
+  "tool_count": 5,
+  "enable_subagents": false,
+  "subagent_specs": [],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/six-degrees-detective.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T02:18:42.754145+00:00",
+  "updated_at": "2026-10-29T02:18:42.754145+00:00"
+}

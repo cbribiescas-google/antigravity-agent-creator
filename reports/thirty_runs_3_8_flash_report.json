@@ -1,0 +1,2389 @@
+{
+  "metadata": {
+    "title": "Gemini 3.8 Flash 30-Run End-to-End Fleet Benchmark Report",
+    "generated_at": "2026-10-29T03:32:03.595629+00:00",
+    "model": "gemini-3.8-flash",
+    "video_model": "veo-3.1-lite-generate-001",
+    "benchmark_scope": "10 Unique DAG Architectures x 3 Runs = 30 Runs",
+    "gateway_endpoint": "http://127.0.0.1:8090/api/gateway/chat",
+    "user_id": "cbribiescas-3x-flash",
+    "pricing_rates": {
+      "uncached_input_per_million": 0.75,
+      "cached_input_per_million": 0.075,
+      "output_and_thoughts_per_million": 3.75,
+      "image_generation_per_call": 0.04,
+      "video_generation_4s_per_call": 0.2
+    }
+  },
+  "fleet_totals": {
+    "total_runs": 30,
+    "agents_evaluated": 10,
+    "model": "gemini-3.8-flash",
+    "video_model": "veo-3.1-lite-generate-001",
+    "pricing_rates": {
+      "uncached_input_per_million": 0.75,
+      "cached_input_per_million": 0.075,
+      "output_and_thoughts_per_million": 3.75,
+      "image_generation_per_call": 0.04,
+      "video_generation_4s_per_call": 0.2
+    },
+    "totals": {
+      "prompt_tokens": 6153115,
+      "cached_tokens": 4369884,
+      "uncached_tokens": 1783231,
+      "candidates_tokens": 174540,
+      "thoughts_tokens": 122751,
+      "subagent_tokens": 448676,
+      "total_tokens": 6450406,
+      "cache_hit_rate_pct": 71.02,
+      "latency_s": 3294.92,
+      "generate_image_calls": 42,
+      "generate_video_clip_calls": 3,
+      "media_count": 274,
+      "token_cost_usd": 2.780006,
+      "media_cost_usd": 2.28,
+      "total_cost_usd": 5.060006
+    },
+    "means_per_run": {
+      "prompt_tokens": 205103.8,
+      "cached_tokens": 145662.8,
+      "uncached_tokens": 59441.0,
+      "candidates_tokens": 5818.0,
+      "thoughts_tokens": 4091.7,
+      "subagent_tokens": 14955.9,
+      "total_tokens": 215013.5,
+      "latency_s": 109.83,
+      "generate_image_calls": 1.4,
+      "generate_video_clip_calls": 0.1,
+      "media_count": 9.13,
+      "token_cost_usd": 0.092667,
+      "media_cost_usd": 0.076,
+      "total_cost_usd": 0.168667
+    }
+  },
+  "reconciliation": {
+    "gateway_user_id": "cbribiescas-3x-flash",
+    "gateway_total_conversations": 33,
+    "gateway_total_tokens": 6975179,
+    "benchmark_30_runs_tokens": 6450406,
+    "delta_tokens": 524773,
+    "notes": "9 out of 10 agents match 100% identically with the Gateway SQLite ledger. The 524,773-token delta corresponds precisely to 3 initial pre-run attempts for mythbuster-router on this user ledger (b903fe, 162474, 75997c) before the official 3-run benchmark was committed (264ab7, 249fbd, 940412 totaling 487,082 tokens).",
+    "agent_comparisons": [
+      {
+        "agent_id": "trailer-director",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 302782,
+        "gateway_conversations": 3,
+        "gateway_tokens": 302782,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "arcade-builder",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 361064,
+        "gateway_conversations": 3,
+        "gateway_tokens": 361064,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "shark-tank-panel",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 587305,
+        "gateway_conversations": 3,
+        "gateway_tokens": 587305,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "supreme-court-debate",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 1173989,
+        "gateway_conversations": 3,
+        "gateway_tokens": 1173989,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "bot-gladiator-arena",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 994247,
+        "gateway_conversations": 3,
+        "gateway_tokens": 994247,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "perfectionist-art-director",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 568993,
+        "gateway_conversations": 3,
+        "gateway_tokens": 568993,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "mythbuster-router",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 487082,
+        "gateway_conversations": 6,
+        "gateway_tokens": 1011855,
+        "match": false,
+        "delta": 524773
+      },
+      {
+        "agent_id": "six-degrees-detective",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 1168853,
+        "gateway_conversations": 3,
+        "gateway_tokens": 1168853,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "foodie-hourglass-solver",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 621504,
+        "gateway_conversations": 3,
+        "gateway_tokens": 621504,
+        "match": true,
+        "delta": 0
+      },
+      {
+        "agent_id": "corporate-dnd-master",
+        "benchmark_runs": 3,
+        "benchmark_tokens": 184587,
+        "gateway_conversations": 3,
+        "gateway_tokens": 184587,
+        "match": true,
+        "delta": 0
+      }
+    ]
+  },
+  "agents": [
+    {
+      "index": 1,
+      "agent_id": "trailer-director",
+      "category": "Creative Multi-Modal",
+      "dag_topology": "sequential_pipeline",
+      "dag_pattern_title": "Linear Sequential Pipeline DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 290136,
+        "cached_tokens": 182880,
+        "uncached_tokens": 107256,
+        "candidates_tokens": 8883,
+        "thoughts_tokens": 3763,
+        "subagent_tokens": 0,
+        "total_tokens": 302782,
+        "cache_hit_rate_pct": 63.03,
+        "latency_s": 229.48,
+        "generate_image_calls": 6,
+        "generate_video_clip_calls": 3,
+        "media_count": 27,
+        "token_cost_usd": 0.14158,
+        "media_cost_usd": 0.84,
+        "total_cost_usd": 0.98158
+      },
+      "means_per_run": {
+        "prompt_tokens": 96712.0,
+        "cached_tokens": 60960.0,
+        "uncached_tokens": 35752.0,
+        "candidates_tokens": 2961.0,
+        "thoughts_tokens": 1254.3,
+        "subagent_tokens": 0.0,
+        "total_tokens": 100927.3,
+        "latency_s": 76.49,
+        "generate_image_calls": 2.0,
+        "generate_video_clip_calls": 1.0,
+        "media_count": 9.0,
+        "token_cost_usd": 0.047193,
+        "media_cost_usd": 0.28,
+        "total_cost_usd": 0.327193
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "trailer-director",
+          "conversation_id": "3x-trailer-director-r1-41abe0",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 86638.19,
+          "latency_s": 86.64,
+          "tokens": {
+            "prompt_tokens": 103820,
+            "cached_tokens": 67352,
+            "uncached_tokens": 36468,
+            "candidates_tokens": 3393,
+            "thoughts_tokens": 1517,
+            "subagent_tokens": 0,
+            "total_tokens": 108730,
+            "cache_hit_rate_pct": 64.87
+          },
+          "tools": {
+            "count": 11,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "generate_video_clip"
+            ],
+            "tool_names": [
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "generate_video_clip",
+              "emit_dag_step",
+              "emit_dag_step",
+              "create_file",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 1,
+            "media_count": 12
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.027351,
+            "cached_input_cost": 0.005051,
+            "output_thoughts_cost": 0.018413,
+            "token_cost": 0.050815,
+            "image_cost": 0.08,
+            "video_cost": 0.2,
+            "media_cost": 0.28,
+            "total_cost": 0.330815
+          },
+          "response_preview": "# \ud83c\udfac TERMINAL STOP\n### *Every Floor Has a Price.*\n\n---\n\n### \ud83d\udccb Press Kit & Blockbuster Package Overview\n- **Script Asset**: *(also archived as )*\n- **Visual Assets**: Theatrical 1-Sheet Poster & 4-second Veo 3.1 Climax Render\n- **Pipeline Exe"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "trailer-director",
+          "conversation_id": "3x-trailer-director-r2-1a824f",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 77897.57,
+          "latency_s": 77.9,
+          "tokens": {
+            "prompt_tokens": 85742,
+            "cached_tokens": 52117,
+            "uncached_tokens": 33625,
+            "candidates_tokens": 2171,
+            "thoughts_tokens": 1302,
+            "subagent_tokens": 0,
+            "total_tokens": 89215,
+            "cache_hit_rate_pct": 60.78
+          },
+          "tools": {
+            "count": 9,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "generate_video_clip"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "generate_video_clip",
+              "emit_dag_step",
+              "emit_dag_step",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 1,
+            "media_count": 7
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.025219,
+            "cached_input_cost": 0.003909,
+            "output_thoughts_cost": 0.013024,
+            "token_cost": 0.042151,
+            "image_cost": 0.08,
+            "video_cost": 0.2,
+            "media_cost": 0.28,
+            "total_cost": 0.322151
+          },
+          "response_preview": "# \ud83c\udfac THE SILENT PROTOCOL: UNMUTE\n**An IMAX Theatrical Experience**\n\n---\n\n### \ud83c\udf99\ufe0f Theatrical Voiceover Script\n*Saved to *\n\n#### ACT I: THE SUMMONS (0:00 \u2013 0:45)\n**EXT. SUBURBAN BASTION - DUSK**  \nRain lashes against double-paned glass. An omin"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "trailer-director",
+          "conversation_id": "3x-trailer-director-r3-5e799f",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 64943.39,
+          "latency_s": 64.94,
+          "tokens": {
+            "prompt_tokens": 100574,
+            "cached_tokens": 63411,
+            "uncached_tokens": 37163,
+            "candidates_tokens": 3319,
+            "thoughts_tokens": 944,
+            "subagent_tokens": 0,
+            "total_tokens": 104837,
+            "cache_hit_rate_pct": 63.05
+          },
+          "tools": {
+            "count": 11,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "generate_video_clip"
+            ],
+            "tool_names": [
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "generate_video_clip",
+              "emit_dag_step",
+              "emit_dag_step",
+              "create_file",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 1,
+            "media_count": 8
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.027872,
+            "cached_input_cost": 0.004756,
+            "output_thoughts_cost": 0.015986,
+            "token_cost": 0.048614,
+            "image_cost": 0.08,
+            "video_cost": 0.2,
+            "media_cost": 0.28,
+            "total_cost": 0.328614
+          },
+          "response_preview": "# \ud83c\udfac THE TINE LINE\n\n> *\"In an office of plastic lies, only one truth remains sharp.\"*\n\nThe complete cinematic press kit has been produced and logged. The trailer voiceover script has been saved to and .\n\n---\n\n## \ud83d\udcfd\ufe0f 3-Act IMAX Voiceover Scrip"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "agent_id": "arcade-builder",
+      "category": "Code Synthesis & Validation",
+      "dag_topology": "generator_verifier_loop",
+      "dag_pattern_title": "Generator-Verifier Self-Healing Loop DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 334010,
+        "cached_tokens": 231469,
+        "uncached_tokens": 102541,
+        "candidates_tokens": 22913,
+        "thoughts_tokens": 4141,
+        "subagent_tokens": 0,
+        "total_tokens": 361064,
+        "cache_hit_rate_pct": 69.3,
+        "latency_s": 246.03,
+        "generate_image_calls": 6,
+        "generate_video_clip_calls": 0,
+        "media_count": 29,
+        "token_cost_usd": 0.195719,
+        "media_cost_usd": 0.24,
+        "total_cost_usd": 0.435719
+      },
+      "means_per_run": {
+        "prompt_tokens": 111336.7,
+        "cached_tokens": 77156.3,
+        "uncached_tokens": 34180.3,
+        "candidates_tokens": 7637.7,
+        "thoughts_tokens": 1380.3,
+        "subagent_tokens": 0.0,
+        "total_tokens": 120354.7,
+        "latency_s": 82.01,
+        "generate_image_calls": 2.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 9.67,
+        "token_cost_usd": 0.06524,
+        "media_cost_usd": 0.08,
+        "total_cost_usd": 0.14524
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "arcade-builder",
+          "conversation_id": "3x-arcade-builder-r1-a607e9",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 74696.93,
+          "latency_s": 74.7,
+          "tokens": {
+            "prompt_tokens": 113540,
+            "cached_tokens": 72792,
+            "uncached_tokens": 40748,
+            "candidates_tokens": 8029,
+            "thoughts_tokens": 1282,
+            "subagent_tokens": 0,
+            "total_tokens": 122851,
+            "cache_hit_rate_pct": 64.11
+          },
+          "tools": {
+            "count": 8,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "validate_html5_game"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "validate_html5_game",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 12
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.030561,
+            "cached_input_cost": 0.005459,
+            "output_thoughts_cost": 0.034916,
+            "token_cost": 0.070937,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.150937
+          },
+          "response_preview": "### \ud83d\udd79\ufe0f Elevator Dash: Coffee Rush (16-Bit Arcade)\n\nThe retro single-file HTML5 Canvas arcade game has been generated, tested, and validated: .\n\n---\n\n### \ud83c\udfae Controls & Input\n| Action | Key Binding |\n| :--- | :--- |\n| **Move Left / Right** | `"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "arcade-builder",
+          "conversation_id": "3x-arcade-builder-r2-443140",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 80830.24,
+          "latency_s": 80.83,
+          "tokens": {
+            "prompt_tokens": 104218,
+            "cached_tokens": 72341,
+            "uncached_tokens": 31877,
+            "candidates_tokens": 6458,
+            "thoughts_tokens": 1335,
+            "subagent_tokens": 0,
+            "total_tokens": 112011,
+            "cache_hit_rate_pct": 69.41
+          },
+          "tools": {
+            "count": 8,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "validate_html5_game"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "validate_html5_game",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 7
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.023908,
+            "cached_input_cost": 0.005426,
+            "output_thoughts_cost": 0.029224,
+            "token_cost": 0.058557,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.138557
+          },
+          "response_preview": "### Self-Healing Retro Arcade Factory: Pipeline Execution\n\nThe generator-verifier loop for **Bug Blaster R2** has finished with all verification checks passing.\n\n---\n\n### Verification Summary\n\nHeadless QA verification via `validate_html5_ga"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "arcade-builder",
+          "conversation_id": "3x-arcade-builder-r3-c0a6da",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 90501.41,
+          "latency_s": 90.5,
+          "tokens": {
+            "prompt_tokens": 116252,
+            "cached_tokens": 86336,
+            "uncached_tokens": 29916,
+            "candidates_tokens": 8426,
+            "thoughts_tokens": 1524,
+            "subagent_tokens": 0,
+            "total_tokens": 126202,
+            "cache_hit_rate_pct": 74.27
+          },
+          "tools": {
+            "count": 8,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "validate_html5_game"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "validate_html5_game",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 10
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.022437,
+            "cached_input_cost": 0.006475,
+            "output_thoughts_cost": 0.037312,
+            "token_cost": 0.066225,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.146225
+          },
+          "response_preview": "### \ud83d\udd79\ufe0f Durian Catcher (16-Bit Retro Arcade Edition)\n\nThe retro single-file arcade game has been generated and verified at .\n\n---\n\n### \ud83c\udfae Controls & Input\n| Action | Key Bindings |\n| :--- | :--- |\n| **Move Basket Left / Right** | `\u2190` / `\u2192` or"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "agent_id": "shark-tank-panel",
+      "category": "Parallel Multi-Agent Deliberation",
+      "dag_topology": "parallel_map_reduce",
+      "dag_pattern_title": "Parallel Map-Reduce Fan-Out DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 549132,
+        "cached_tokens": 330942,
+        "uncached_tokens": 218190,
+        "candidates_tokens": 24443,
+        "thoughts_tokens": 13730,
+        "subagent_tokens": 197686,
+        "total_tokens": 587305,
+        "cache_hit_rate_pct": 60.27,
+        "latency_s": 280.79,
+        "generate_image_calls": 0,
+        "generate_video_clip_calls": 0,
+        "media_count": 30,
+        "token_cost_usd": 0.331612,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.331612
+      },
+      "means_per_run": {
+        "prompt_tokens": 183044.0,
+        "cached_tokens": 110314.0,
+        "uncached_tokens": 72730.0,
+        "candidates_tokens": 8147.7,
+        "thoughts_tokens": 4576.7,
+        "subagent_tokens": 65895.3,
+        "total_tokens": 195768.3,
+        "latency_s": 93.6,
+        "generate_image_calls": 0.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 10.0,
+        "token_cost_usd": 0.110537,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.110537
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "shark-tank-panel",
+          "conversation_id": "3x-shark-tank-panel-r1-1fd989",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 67889.81,
+          "latency_s": 67.89,
+          "tokens": {
+            "prompt_tokens": 156616,
+            "cached_tokens": 87684,
+            "uncached_tokens": 68932,
+            "candidates_tokens": 4945,
+            "thoughts_tokens": 5041,
+            "subagent_tokens": 67851,
+            "total_tokens": 166602,
+            "cache_hit_rate_pct": 55.99
+          },
+          "tools": {
+            "count": 12,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 10
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.051699,
+            "cached_input_cost": 0.006576,
+            "output_thoughts_cost": 0.037448,
+            "token_cost": 0.095723,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.095723
+          },
+          "response_preview": "# \ud83e\udd88 Shark Tank Parallel Pitch Panel: Verdict & Term Sheet\n\n### Pitch: **SockMatch AI** \u2014 *\u201cSmart laundry clip that texts you when a sock goes missing.\u201d*\n**DAG Execution Topology:** `parallel_map_reduce` (Competitor Intake \u2794 Parallel Fan-Out"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "shark-tank-panel",
+          "conversation_id": "3x-shark-tank-panel-r2-1905d4",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 111486.75,
+          "latency_s": 111.49,
+          "tokens": {
+            "prompt_tokens": 180368,
+            "cached_tokens": 108120,
+            "uncached_tokens": 72248,
+            "candidates_tokens": 6324,
+            "thoughts_tokens": 3677,
+            "subagent_tokens": 63703,
+            "total_tokens": 190369,
+            "cache_hit_rate_pct": 59.94
+          },
+          "tools": {
+            "count": 11,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 11
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.054186,
+            "cached_input_cost": 0.008109,
+            "output_thoughts_cost": 0.037504,
+            "token_cost": 0.099799,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.099799
+          },
+          "response_preview": "### Shark Tank Evaluation: SnoozeTax\n\n**Pitch:** *\"SnoozeTax \u2014 an alarm clock that Venmos your rival $5 every time you hit snooze.\"*  \n**DAG Pipeline:** `pitch_intake` \u2794 `map (3 Shark subagents)` \u2794 `term_sheet_reducer`  \n**Generated File:**"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "shark-tank-panel",
+          "conversation_id": "3x-shark-tank-panel-r3-6441f6",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 101410.41,
+          "latency_s": 101.41,
+          "tokens": {
+            "prompt_tokens": 212148,
+            "cached_tokens": 135138,
+            "uncached_tokens": 77010,
+            "candidates_tokens": 13174,
+            "thoughts_tokens": 5012,
+            "subagent_tokens": 66132,
+            "total_tokens": 230334,
+            "cache_hit_rate_pct": 63.7
+          },
+          "tools": {
+            "count": 16,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent"
+            ],
+            "tool_names": [
+              "emit_dag_step",
+              "search_web",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "edit_file",
+              "search_web",
+              "start_subagent",
+              "create_file",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 9
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.057757,
+            "cached_input_cost": 0.010135,
+            "output_thoughts_cost": 0.068198,
+            "token_cost": 0.13609,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.13609
+          },
+          "response_preview": "# Shark Tank Pitch Evaluation: DeskPlant Sitter\n\n**Original Pitch:** *\"DeskPlant Sitter \u2014 Airbnb for leaving your office succulents with plant lovers during vacation.\"*  \n**DAG Topology:** `parallel_map_reduce` (Fan-Out: Numbers Hawk, Hype "
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "agent_id": "supreme-court-debate",
+      "category": "Adversarial Multi-Agent Debate",
+      "dag_topology": "adversarial_cross_exam",
+      "dag_pattern_title": "Multi-Round Adversarial Cross-Exam DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 1124128,
+        "cached_tokens": 754583,
+        "uncached_tokens": 369545,
+        "candidates_tokens": 23272,
+        "thoughts_tokens": 26589,
+        "subagent_tokens": 250990,
+        "total_tokens": 1173989,
+        "cache_hit_rate_pct": 67.13,
+        "latency_s": 406.33,
+        "generate_image_calls": 0,
+        "generate_video_clip_calls": 0,
+        "media_count": 34,
+        "token_cost_usd": 0.520731,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.520731
+      },
+      "means_per_run": {
+        "prompt_tokens": 374709.3,
+        "cached_tokens": 251527.7,
+        "uncached_tokens": 123181.7,
+        "candidates_tokens": 7757.3,
+        "thoughts_tokens": 8863.0,
+        "subagent_tokens": 83663.3,
+        "total_tokens": 391329.7,
+        "latency_s": 135.44,
+        "generate_image_calls": 0.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 11.33,
+        "token_cost_usd": 0.173577,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.173577
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "supreme-court-debate",
+          "conversation_id": "3x-supreme-court-debate-r1-657ac6",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 142856.31,
+          "latency_s": 142.86,
+          "tokens": {
+            "prompt_tokens": 395067,
+            "cached_tokens": 271791,
+            "uncached_tokens": 123276,
+            "candidates_tokens": 6800,
+            "thoughts_tokens": 7904,
+            "subagent_tokens": 78805,
+            "total_tokens": 409771,
+            "cache_hit_rate_pct": 68.8
+          },
+          "tools": {
+            "count": 19,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent",
+              "start_subagent",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 17
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.092457,
+            "cached_input_cost": 0.020384,
+            "output_thoughts_cost": 0.05514,
+            "token_cost": 0.167981,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.167981
+          },
+          "response_preview": "# CULINARY SUPREME COURT OF THE UNITED STATES\n**OCTOBER TERM, 2026** \u2022 **DOCKET NO. 26-BOWL-404**\n\n**Motion:** *\"Cereal with cold milk is legally a chilled soup (gazpacho).\"*\n\n---\n\n### Round 1: Counsel PRO Opening Brief\n> **Counsel PRO (Str"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "supreme-court-debate",
+          "conversation_id": "3x-supreme-court-debate-r2-0a79be",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 138998.78,
+          "latency_s": 139.0,
+          "tokens": {
+            "prompt_tokens": 367700,
+            "cached_tokens": 232679,
+            "uncached_tokens": 135021,
+            "candidates_tokens": 8372,
+            "thoughts_tokens": 10580,
+            "subagent_tokens": 92555,
+            "total_tokens": 386652,
+            "cache_hit_rate_pct": 63.28
+          },
+          "tools": {
+            "count": 19,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent",
+              "start_subagent",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 13
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.101266,
+            "cached_input_cost": 0.017451,
+            "output_thoughts_cost": 0.07107,
+            "token_cost": 0.189787,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.189787
+          },
+          "response_preview": "# IN THE SUPREME COURT OF CULINARY JURISPRUDENCE\n**Term of the Court \u2014 October 2026**\n\n---\n\n### **CASE NO. 26-PZA-1029**\n### **IN RE: MOTION TO AFFIRM PINEAPPLE AS AN ESSENTIAL SCIENTIFIC AGENT OF FLAVOR EQUILIBRIUM UPON SAVORY PIZZA**\n\n**F"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "supreme-court-debate",
+          "conversation_id": "3x-supreme-court-debate-r3-d4de05",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 124468.09,
+          "latency_s": 124.47,
+          "tokens": {
+            "prompt_tokens": 361361,
+            "cached_tokens": 250113,
+            "uncached_tokens": 111248,
+            "candidates_tokens": 8100,
+            "thoughts_tokens": 8105,
+            "subagent_tokens": 79630,
+            "total_tokens": 377566,
+            "cache_hit_rate_pct": 69.21
+          },
+          "tools": {
+            "count": 19,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "start_subagent",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "emit_dag_step",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "start_subagent",
+              "start_subagent",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 4
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.083436,
+            "cached_input_cost": 0.018758,
+            "output_thoughts_cost": 0.060769,
+            "token_cost": 0.162963,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.162963
+          },
+          "response_preview": "# SUPREME COURT OF COMMON CARRIAGE & CABIN JURISPRUDENCE\n### DOCKET NO. 26-1029: *IN RE ECONOMY SEAT RECLINE ON TWO-HOUR DAYTIME FLIGHTS*\n\n**Motion:** *\"Reclining your economy airline seat on a 2-hour daytime flight should be banned.\"*  \n**"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "agent_id": "bot-gladiator-arena",
+      "category": "Simulation & Evolutionary Algorithm",
+      "dag_topology": "evolutionary_tournament",
+      "dag_pattern_title": "Evolutionary Tournament Bracket DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 954647,
+        "cached_tokens": 736917,
+        "uncached_tokens": 217730,
+        "candidates_tokens": 16840,
+        "thoughts_tokens": 22760,
+        "subagent_tokens": 0,
+        "total_tokens": 994247,
+        "cache_hit_rate_pct": 77.19,
+        "latency_s": 471.3,
+        "generate_image_calls": 0,
+        "generate_video_clip_calls": 0,
+        "media_count": 35,
+        "token_cost_usd": 0.367067,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.367067
+      },
+      "means_per_run": {
+        "prompt_tokens": 318215.7,
+        "cached_tokens": 245639.0,
+        "uncached_tokens": 72576.7,
+        "candidates_tokens": 5613.3,
+        "thoughts_tokens": 7586.7,
+        "subagent_tokens": 0.0,
+        "total_tokens": 331415.7,
+        "latency_s": 157.1,
+        "generate_image_calls": 0.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 11.67,
+        "token_cost_usd": 0.122356,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.122356
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "bot-gladiator-arena",
+          "conversation_id": "3x-bot-gladiator-arena-r1-7509a7",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 71616.09,
+          "latency_s": 71.62,
+          "tokens": {
+            "prompt_tokens": 172397,
+            "cached_tokens": 120863,
+            "uncached_tokens": 51534,
+            "candidates_tokens": 4648,
+            "thoughts_tokens": 5197,
+            "subagent_tokens": 0,
+            "total_tokens": 182242,
+            "cache_hit_rate_pct": 70.11
+          },
+          "tools": {
+            "count": 16,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "list_directory",
+              "run_bot_tournament",
+              "view_file"
+            ],
+            "tool_names": [
+              "emit_dag_step",
+              "edit_file",
+              "list_directory",
+              "view_file",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "run_bot_tournament",
+              "emit_dag_step",
+              "edit_file",
+              "create_file",
+              "list_directory",
+              "view_file",
+              "create_file",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 11
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.038651,
+            "cached_input_cost": 0.009065,
+            "output_thoughts_cost": 0.036919,
+            "token_cost": 0.084634,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.084634
+          },
+          "response_preview": "The 3 Prisoner's Dilemma bots have been created, evaluated in a deterministic 2,000-round arena, and documented in [arena_r1.md](file:///usr/local/google/home/cbribiescas/.gemini/jetski/brain/d21770addb835490b6f3b72a9ffdedc9/arena_r1.md).\n\n"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "bot-gladiator-arena",
+          "conversation_id": "3x-bot-gladiator-arena-r2-cddd58",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 65901.71,
+          "latency_s": 65.9,
+          "tokens": {
+            "prompt_tokens": 185419,
+            "cached_tokens": 132197,
+            "uncached_tokens": 53222,
+            "candidates_tokens": 5105,
+            "thoughts_tokens": 4525,
+            "subagent_tokens": 0,
+            "total_tokens": 195049,
+            "cache_hit_rate_pct": 71.3
+          },
+          "tools": {
+            "count": 20,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "list_directory",
+              "run_bot_tournament",
+              "view_file"
+            ],
+            "tool_names": [
+              "list_directory",
+              "view_file",
+              "view_file",
+              "edit_file",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "run_bot_tournament",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "list_directory",
+              "view_file",
+              "view_file",
+              "create_file",
+              "create_file",
+              "create_file",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 6
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.039917,
+            "cached_input_cost": 0.009915,
+            "output_thoughts_cost": 0.036112,
+            "token_cost": 0.085944,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.085944
+          },
+          "response_preview": "The Round 2 Prisoner's Dilemma tournament has been executed across 2,000 rounds per pairing (6,000 total rounds).\n\n### Bots Implemented\n- (): **Generous Tit-For-Tat** (`GTFT`) \u2014 cooperates initially and mirrors cooperation; forgives defecti"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "bot-gladiator-arena",
+          "conversation_id": "3x-bot-gladiator-arena-r3-a96640",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 333779.21,
+          "latency_s": 333.78,
+          "tokens": {
+            "prompt_tokens": 596831,
+            "cached_tokens": 483857,
+            "uncached_tokens": 112974,
+            "candidates_tokens": 7087,
+            "thoughts_tokens": 13038,
+            "subagent_tokens": 0,
+            "total_tokens": 616956,
+            "cache_hit_rate_pct": 81.07
+          },
+          "tools": {
+            "count": 40,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "list_directory",
+              "run_bot_tournament",
+              "search_directory",
+              "view_file"
+            ],
+            "tool_names": [
+              "list_directory",
+              "view_file",
+              "view_file",
+              "view_file",
+              "view_file",
+              "search_directory",
+              "search_directory",
+              "view_file",
+              "search_directory",
+              "search_directory",
+              "search_directory",
+              "view_file",
+              "search_directory",
+              "edit_file",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "run_bot_tournament",
+              "emit_dag_step",
+              "edit_file",
+              "emit_dag_step",
+              "edit_file",
+              "list_directory",
+              "view_file",
+              "view_file",
+              "view_file",
+              "view_file",
+              "search_directory",
+              "search_directory",
+              "view_file",
+              "search_directory",
+              "search_directory",
+              "search_directory",
+              "view_file",
+              "search_directory",
+              "create_file",
+              "create_file",
+              "create_file",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 18
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.084731,
+            "cached_input_cost": 0.036289,
+            "output_thoughts_cost": 0.075469,
+            "token_cost": 0.196489,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.196489
+          },
+          "response_preview": "### Round 3 Iterated Prisoner's Dilemma Tournament Completed\n\nThe three Generation-3 gladiator bots have been authored, validated, and matched in a 2,000-round round-robin tournament (6,000 rounds and 12,000 decisions total). Full results a"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "agent_id": "perfectionist-art-director",
+      "category": "Multimodal Visual Self-Critique",
+      "dag_topology": "multimodal_vision_critic",
+      "dag_pattern_title": "Multimodal Producer-Vision Critic Reflection DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 545117,
+        "cached_tokens": 386490,
+        "uncached_tokens": 158627,
+        "candidates_tokens": 13196,
+        "thoughts_tokens": 10680,
+        "subagent_tokens": 0,
+        "total_tokens": 568993,
+        "cache_hit_rate_pct": 70.9,
+        "latency_s": 320.02,
+        "generate_image_calls": 14,
+        "generate_video_clip_calls": 0,
+        "media_count": 30,
+        "token_cost_usd": 0.237492,
+        "media_cost_usd": 0.56,
+        "total_cost_usd": 0.797492
+      },
+      "means_per_run": {
+        "prompt_tokens": 181705.7,
+        "cached_tokens": 128830.0,
+        "uncached_tokens": 52875.7,
+        "candidates_tokens": 4398.7,
+        "thoughts_tokens": 3560.0,
+        "subagent_tokens": 0.0,
+        "total_tokens": 189664.3,
+        "latency_s": 106.67,
+        "generate_image_calls": 4.67,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 10.0,
+        "token_cost_usd": 0.079164,
+        "media_cost_usd": 0.186667,
+        "total_cost_usd": 0.265831
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "perfectionist-art-director",
+          "conversation_id": "3x-perfectionist-art-director-r1-864167",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 138378.26,
+          "latency_s": 138.38,
+          "tokens": {
+            "prompt_tokens": 213762,
+            "cached_tokens": 155824,
+            "uncached_tokens": 57938,
+            "candidates_tokens": 4551,
+            "thoughts_tokens": 3809,
+            "subagent_tokens": 0,
+            "total_tokens": 222122,
+            "cache_hit_rate_pct": 72.9
+          },
+          "tools": {
+            "count": 21,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "log_vision_critique",
+              "view_file"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "view_file",
+              "log_vision_critique",
+              "emit_dag_step",
+              "generate_image",
+              "generate_image",
+              "view_file",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "create_file",
+              "generate_image",
+              "view_file",
+              "generate_image",
+              "generate_image",
+              "view_file",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 6,
+            "generate_video_clip_calls": 0,
+            "media_count": 17
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.043454,
+            "cached_input_cost": 0.011687,
+            "output_thoughts_cost": 0.03135,
+            "token_cost": 0.08649,
+            "image_cost": 0.24,
+            "video_cost": 0.0,
+            "media_cost": 0.24,
+            "total_cost": 0.32649
+          },
+          "response_preview": "# Creative Director Reflection: *\"You Are On Mute for 3 Minutes Straight\"*\n\nThe **Multimodal Producer-Vision Critic Reflection DAG** has completed execution across all four milestones.\n\n---\n\n### Production Milestones & Telemetry\n\n1. **`stor"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "perfectionist-art-director",
+          "conversation_id": "3x-perfectionist-art-director-r2-ffe4a7",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 70608.59,
+          "latency_s": 70.61,
+          "tokens": {
+            "prompt_tokens": 166122,
+            "cached_tokens": 117190,
+            "uncached_tokens": 48932,
+            "candidates_tokens": 4292,
+            "thoughts_tokens": 3346,
+            "subagent_tokens": 0,
+            "total_tokens": 173760,
+            "cache_hit_rate_pct": 70.54
+          },
+          "tools": {
+            "count": 15,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "log_vision_critique",
+              "view_file"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "view_file",
+              "log_vision_critique",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "edit_file",
+              "create_file",
+              "generate_image",
+              "view_file",
+              "generate_image",
+              "create_file"
+            ],
+            "generate_image_calls": 4,
+            "generate_video_clip_calls": 0,
+            "media_count": 7
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.036699,
+            "cached_input_cost": 0.008789,
+            "output_thoughts_cost": 0.028642,
+            "token_cost": 0.074131,
+            "image_cost": 0.16,
+            "video_cost": 0.0,
+            "media_cost": 0.16,
+            "total_cost": 0.234131
+          },
+          "response_preview": "# Creative Director Review: \"The 5:01 PM Quick Tweak\"\n\nThe **Multimodal Producer-Vision Critic Reflection DAG** has concluded successfully. Below is the production breakdown and reflection.\n\n---\n\n### Workflow Stages Executed\n\n1. **`storyboa"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "perfectionist-art-director",
+          "conversation_id": "3x-perfectionist-art-director-r3-bda14a",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 111028.17,
+          "latency_s": 111.03,
+          "tokens": {
+            "prompt_tokens": 165233,
+            "cached_tokens": 113476,
+            "uncached_tokens": 51757,
+            "candidates_tokens": 4353,
+            "thoughts_tokens": 3525,
+            "subagent_tokens": 0,
+            "total_tokens": 173111,
+            "cache_hit_rate_pct": 68.68
+          },
+          "tools": {
+            "count": 17,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "log_vision_critique",
+              "view_file"
+            ],
+            "tool_names": [
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "view_file",
+              "log_vision_critique",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "create_file",
+              "generate_image",
+              "view_file",
+              "generate_image",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 4,
+            "generate_video_clip_calls": 0,
+            "media_count": 6
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.038818,
+            "cached_input_cost": 0.008511,
+            "output_thoughts_cost": 0.029542,
+            "token_cost": 0.076871,
+            "image_cost": 0.16,
+            "video_cost": 0.0,
+            "media_cost": 0.16,
+            "total_cost": 0.236871
+          },
+          "response_preview": "The 3-panel workplace comic DAG workflow for **\"42 Browser Tabs During a Live Screen Share\"** has completed through all 4 stages of the Multimodal Producer-Vision Critic pipeline.\n\nThe full side-by-side Creative Director reflection, visual "
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "agent_id": "mythbuster-router",
+      "category": "Dynamic Tool & Conditional Routing",
+      "dag_topology": "conditional_router",
+      "dag_pattern_title": "Conditional Router Branching DAG (+ Dynamic Tool Synthesis)",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 464650,
+        "cached_tokens": 316704,
+        "uncached_tokens": 147946,
+        "candidates_tokens": 13347,
+        "thoughts_tokens": 9085,
+        "subagent_tokens": 0,
+        "total_tokens": 487082,
+        "cache_hit_rate_pct": 68.16,
+        "latency_s": 215.1,
+        "generate_image_calls": 4,
+        "generate_video_clip_calls": 0,
+        "media_count": 8,
+        "token_cost_usd": 0.218832,
+        "media_cost_usd": 0.16,
+        "total_cost_usd": 0.378832
+      },
+      "means_per_run": {
+        "prompt_tokens": 154883.3,
+        "cached_tokens": 105568.0,
+        "uncached_tokens": 49315.3,
+        "candidates_tokens": 4449.0,
+        "thoughts_tokens": 3028.3,
+        "subagent_tokens": 0.0,
+        "total_tokens": 162360.7,
+        "latency_s": 71.7,
+        "generate_image_calls": 1.33,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 2.67,
+        "token_cost_usd": 0.072944,
+        "media_cost_usd": 0.053333,
+        "total_cost_usd": 0.126277
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "mythbuster-router",
+          "conversation_id": "3x-mythbuster-router-r1-264ab7",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 61674.21,
+          "latency_s": 61.67,
+          "tokens": {
+            "prompt_tokens": 155701,
+            "cached_tokens": 109099,
+            "uncached_tokens": 46602,
+            "candidates_tokens": 3529,
+            "thoughts_tokens": 2969,
+            "subagent_tokens": 0,
+            "total_tokens": 162199,
+            "cache_hit_rate_pct": 70.07
+          },
+          "tools": {
+            "count": 14,
+            "unique_tools": [
+              "compute_loch_ness_displacement",
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "search_web",
+              "verify_claim_math"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "compute_loch_ness_displacement",
+              "verify_claim_math",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "generate_image",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 5
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.034951,
+            "cached_input_cost": 0.008182,
+            "output_thoughts_cost": 0.024368,
+            "token_cost": 0.067501,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.147501
+          },
+          "response_preview": "# MythBuster Verification Verdict: **CONFIRMED**\n\n### Claim\n> *\"Folding a 0.1 mm piece of paper 42 times exceeds the 384,400 km distance to the Moon.\"*\n\n---\n\n### Quantitative Evaluation\n\n| Parameter | Value |\n| :--- | :--- |\n| **Initial Pap"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "mythbuster-router",
+          "conversation_id": "3x-mythbuster-router-r2-249fbd",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 89269.36,
+          "latency_s": 89.27,
+          "tokens": {
+            "prompt_tokens": 173204,
+            "cached_tokens": 110103,
+            "uncached_tokens": 63101,
+            "candidates_tokens": 5284,
+            "thoughts_tokens": 2438,
+            "subagent_tokens": 0,
+            "total_tokens": 180926,
+            "cache_hit_rate_pct": 63.57
+          },
+          "tools": {
+            "count": 14,
+            "unique_tools": [
+              "compute_loch_ness_displacement",
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "verify_claim_math"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "compute_loch_ness_displacement",
+              "verify_claim_math",
+              "emit_dag_step",
+              "search_web",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 2
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.047326,
+            "cached_input_cost": 0.008258,
+            "output_thoughts_cost": 0.028957,
+            "token_cost": 0.084541,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.084541
+          },
+          "response_preview": "# Conditional Router MythBuster Lab: Verdict Report\n\n### Claim Tested\n> *\"A penny dropped from the Empire State Building reaches supersonic speed (>343 m/s) considering terminal velocity.\"*\n\n---\n\n## Verdict: **BUSTED** \u274c\n\nThe claim that a p"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "mythbuster-router",
+          "conversation_id": "3x-mythbuster-router-r3-940412",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 64161.39,
+          "latency_s": 64.16,
+          "tokens": {
+            "prompt_tokens": 135745,
+            "cached_tokens": 97502,
+            "uncached_tokens": 38243,
+            "candidates_tokens": 4534,
+            "thoughts_tokens": 3678,
+            "subagent_tokens": 0,
+            "total_tokens": 143957,
+            "cache_hit_rate_pct": 71.83
+          },
+          "tools": {
+            "count": 12,
+            "unique_tools": [
+              "compute_loch_ness_displacement",
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "verify_claim_math"
+            ],
+            "tool_names": [
+              "emit_dag_step",
+              "compute_loch_ness_displacement",
+              "verify_claim_math",
+              "emit_dag_step",
+              "generate_image",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "generate_image",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 1
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.028682,
+            "cached_input_cost": 0.007313,
+            "output_thoughts_cost": 0.030795,
+            "token_cost": 0.06679,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.14679
+          },
+          "response_preview": "# MythBuster Lab Official Verdict\n\n**Claim:** *\"1 million seconds is less than 12 days, whereas 1 billion seconds is over 31 years.\"*  \n**Official Verdict:** **CONFIRMED**  \n**Routing Branch:** `CONFIRMED_INFOGRAPHIC`\n\n---\n\n### Quantitative"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "agent_id": "six-degrees-detective",
+      "category": "Knowledge Graph Traversal & Heuristic Pruning",
+      "dag_topology": "tree_search_prune",
+      "dag_pattern_title": "Dynamic Tree Search & Prune DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 1128976,
+        "cached_tokens": 894499,
+        "uncached_tokens": 234477,
+        "candidates_tokens": 21545,
+        "thoughts_tokens": 18332,
+        "subagent_tokens": 0,
+        "total_tokens": 1168853,
+        "cache_hit_rate_pct": 79.23,
+        "latency_s": 664.59,
+        "generate_image_calls": 0,
+        "generate_video_clip_calls": 0,
+        "media_count": 35,
+        "token_cost_usd": 0.392484,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.392484
+      },
+      "means_per_run": {
+        "prompt_tokens": 376325.3,
+        "cached_tokens": 298166.3,
+        "uncached_tokens": 78159.0,
+        "candidates_tokens": 7181.7,
+        "thoughts_tokens": 6110.7,
+        "subagent_tokens": 0.0,
+        "total_tokens": 389617.7,
+        "latency_s": 221.53,
+        "generate_image_calls": 0.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 11.67,
+        "token_cost_usd": 0.130828,
+        "media_cost_usd": 0.0,
+        "total_cost_usd": 0.130828
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "six-degrees-detective",
+          "conversation_id": "3x-six-degrees-detective-r1-a71521",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 200686.02,
+          "latency_s": 200.69,
+          "tokens": {
+            "prompt_tokens": 336549,
+            "cached_tokens": 272006,
+            "uncached_tokens": 64543,
+            "candidates_tokens": 6258,
+            "thoughts_tokens": 4802,
+            "subagent_tokens": 0,
+            "total_tokens": 347609,
+            "cache_hit_rate_pct": 80.82
+          },
+          "tools": {
+            "count": 23,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "record_pruned_branch",
+              "search_web"
+            ],
+            "tool_names": [
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "record_pruned_branch",
+              "record_pruned_branch",
+              "search_web",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 23
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.048407,
+            "cached_input_cost": 0.0204,
+            "output_thoughts_cost": 0.041475,
+            "token_cost": 0.110283,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.110283
+          },
+          "response_preview": "### Six-Degrees Historical Connection: Instant Ramen $\\longrightarrow$ The Bluetooth Wireless Standard\n\nExecuted the **Dynamic Tree Search & Prune DAG** to connect **Instant Ramen** to **The Bluetooth Wireless Standard** in exactly **4 veri"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "six-degrees-detective",
+          "conversation_id": "3x-six-degrees-detective-r2-f13b8a",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 253501.12,
+          "latency_s": 253.5,
+          "tokens": {
+            "prompt_tokens": 376384,
+            "cached_tokens": 307852,
+            "uncached_tokens": 68532,
+            "candidates_tokens": 7319,
+            "thoughts_tokens": 6105,
+            "subagent_tokens": 0,
+            "total_tokens": 389808,
+            "cache_hit_rate_pct": 81.79
+          },
+          "tools": {
+            "count": 27,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "record_pruned_branch",
+              "search_web"
+            ],
+            "tool_names": [
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "record_pruned_branch",
+              "record_pruned_branch",
+              "search_web",
+              "search_web",
+              "search_web",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 12
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.051399,
+            "cached_input_cost": 0.023089,
+            "output_thoughts_cost": 0.05034,
+            "token_cost": 0.124828,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.124828
+          },
+          "response_preview": "### Six-Degrees Investigation Summary\n\n**Origin:** The Michelin Tire Company (*Michelin et Cie*, founded May 28, 1889)  \n**Target:** Nintendo Playing Cards (*Nintendo Koppai*, founded September 23, 1889)  \n**Result:** Connected in **3 verif"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "six-degrees-detective",
+          "conversation_id": "3x-six-degrees-detective-r3-03f22a",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 210399.17,
+          "latency_s": 210.4,
+          "tokens": {
+            "prompt_tokens": 416043,
+            "cached_tokens": 314641,
+            "uncached_tokens": 101402,
+            "candidates_tokens": 7968,
+            "thoughts_tokens": 7425,
+            "subagent_tokens": 0,
+            "total_tokens": 431436,
+            "cache_hit_rate_pct": 75.63
+          },
+          "tools": {
+            "count": 28,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "record_pruned_branch",
+              "search_web"
+            ],
+            "tool_names": [
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "record_pruned_branch",
+              "record_pruned_branch",
+              "record_pruned_branch",
+              "search_web",
+              "search_web",
+              "emit_dag_step",
+              "edit_file",
+              "edit_file",
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "search_web",
+              "create_file",
+              "create_file"
+            ],
+            "generate_image_calls": 0,
+            "generate_video_clip_calls": 0,
+            "media_count": 0
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.076052,
+            "cached_input_cost": 0.023598,
+            "output_thoughts_cost": 0.057724,
+            "token_cost": 0.157373,
+            "image_cost": 0.0,
+            "video_cost": 0.0,
+            "media_cost": 0.0,
+            "total_cost": 0.157373
+          },
+          "response_preview": "### Six-Degrees Tree Search & Prune Investigation\n\nConnected **`Play-Doh (wallpaper cleaner)`** to **`The Espresso Machine`** in **4 verified factual hops** (5 nodes).\n\n---\n\n### Numbered Hop Chain\n\n1. **Origin \u2014 Play-Doh (Wallpaper Cleaner)"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "agent_id": "foodie-hourglass-solver",
+      "category": "Constraint Solving & Artifact Export",
+      "dag_topology": "hourglass_gather_solve_publish",
+      "dag_pattern_title": "Hourglass Gather-Solve-Publish DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 584595,
+        "cached_tokens": 431978,
+        "uncached_tokens": 152617,
+        "candidates_tokens": 27144,
+        "thoughts_tokens": 9765,
+        "subagent_tokens": 0,
+        "total_tokens": 621504,
+        "cache_hit_rate_pct": 73.89,
+        "latency_s": 386.98,
+        "generate_image_calls": 6,
+        "generate_video_clip_calls": 0,
+        "media_count": 34,
+        "token_cost_usd": 0.28527,
+        "media_cost_usd": 0.24,
+        "total_cost_usd": 0.52527
+      },
+      "means_per_run": {
+        "prompt_tokens": 194865.0,
+        "cached_tokens": 143992.7,
+        "uncached_tokens": 50872.3,
+        "candidates_tokens": 9048.0,
+        "thoughts_tokens": 3255.0,
+        "subagent_tokens": 0.0,
+        "total_tokens": 207168.0,
+        "latency_s": 128.99,
+        "generate_image_calls": 2.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 11.33,
+        "token_cost_usd": 0.09509,
+        "media_cost_usd": 0.08,
+        "total_cost_usd": 0.17509
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "foodie-hourglass-solver",
+          "conversation_id": "3x-foodie-hourglass-solver-r1-fb592f",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 107693.27,
+          "latency_s": 107.69,
+          "tokens": {
+            "prompt_tokens": 181881,
+            "cached_tokens": 134651,
+            "uncached_tokens": 47230,
+            "candidates_tokens": 10632,
+            "thoughts_tokens": 2822,
+            "subagent_tokens": 0,
+            "total_tokens": 195335,
+            "cache_hit_rate_pct": 74.03
+          },
+          "tools": {
+            "count": 11,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "export_ics_calendar",
+              "generate_image",
+              "search_web",
+              "solve_crawl_constraints"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "solve_crawl_constraints",
+              "emit_dag_step",
+              "export_ics_calendar",
+              "edit_file",
+              "generate_image",
+              "emit_dag_step",
+              "search_web",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 14
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.035423,
+            "cached_input_cost": 0.010099,
+            "output_thoughts_cost": 0.050453,
+            "token_cost": 0.095974,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.175974
+          },
+          "response_preview": "### Tiong Bahru Foodie Crawl: Itinerary Summary\n\nA 3-stop culinary journey through **Tiong Bahru Market & Food Centre** was mathematically solved under your budget (**S$22.00 max**) and time limit (**75 minutes max**).\n\n---\n\n### Optimal 3-S"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "foodie-hourglass-solver",
+          "conversation_id": "3x-foodie-hourglass-solver-r2-4583ec",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 117079.96,
+          "latency_s": 117.08,
+          "tokens": {
+            "prompt_tokens": 173874,
+            "cached_tokens": 130483,
+            "uncached_tokens": 43391,
+            "candidates_tokens": 10523,
+            "thoughts_tokens": 2457,
+            "subagent_tokens": 0,
+            "total_tokens": 186854,
+            "cache_hit_rate_pct": 75.04
+          },
+          "tools": {
+            "count": 11,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "export_ics_calendar",
+              "generate_image",
+              "search_web",
+              "solve_crawl_constraints"
+            ],
+            "tool_names": [
+              "search_web",
+              "emit_dag_step",
+              "solve_crawl_constraints",
+              "emit_dag_step",
+              "export_ics_calendar",
+              "edit_file",
+              "generate_image",
+              "emit_dag_step",
+              "search_web",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 13
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.032543,
+            "cached_input_cost": 0.009786,
+            "output_thoughts_cost": 0.048675,
+            "token_cost": 0.091004,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.171004
+          },
+          "response_preview": "### Katong & Joo Chiat Food Crawl: Optimization Summary\n\nThe **Hourglass Gather-Solve-Publish** pipeline evaluated real-world stalls across East Coast Road and Joo Chiat, solving for the highest-rated 3-stop crawl under **S$25.00** and **80"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "foodie-hourglass-solver",
+          "conversation_id": "3x-foodie-hourglass-solver-r3-f89bf0",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 162214.02,
+          "latency_s": 162.21,
+          "tokens": {
+            "prompt_tokens": 228840,
+            "cached_tokens": 166844,
+            "uncached_tokens": 61996,
+            "candidates_tokens": 5989,
+            "thoughts_tokens": 4486,
+            "subagent_tokens": 0,
+            "total_tokens": 239315,
+            "cache_hit_rate_pct": 72.91
+          },
+          "tools": {
+            "count": 15,
+            "unique_tools": [
+              "create_file",
+              "edit_file",
+              "emit_dag_step",
+              "export_ics_calendar",
+              "generate_image",
+              "search_web",
+              "solve_crawl_constraints"
+            ],
+            "tool_names": [
+              "search_web",
+              "search_web",
+              "search_web",
+              "emit_dag_step",
+              "solve_crawl_constraints",
+              "emit_dag_step",
+              "export_ics_calendar",
+              "edit_file",
+              "generate_image",
+              "emit_dag_step",
+              "search_web",
+              "search_web",
+              "search_web",
+              "create_file",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 7
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.046497,
+            "cached_input_cost": 0.012513,
+            "output_thoughts_cost": 0.039281,
+            "token_cost": 0.098292,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.178292
+          },
+          "response_preview": "### Bugis & Kampong Glam 3-Stop Food Crawl Summary\n\nThe **Hourglass Gather-Solve-Publish DAG** has gathered candidates across Bugis and Kampong Glam, passed them through `solve_crawl_constraints`, and published the schedule, HTML card, and "
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "agent_id": "corporate-dnd-master",
+      "category": "Stateful Game Master & Verifiable RNG",
+      "dag_topology": "stateful_hitl_rng_machine",
+      "dag_pattern_title": "Stateful HITL / Crypto RNG State Machine DAG",
+      "runs_count": 3,
+      "totals": {
+        "prompt_tokens": 177724,
+        "cached_tokens": 103422,
+        "uncached_tokens": 74302,
+        "candidates_tokens": 2957,
+        "thoughts_tokens": 3906,
+        "subagent_tokens": 0,
+        "total_tokens": 184587,
+        "cache_hit_rate_pct": 58.19,
+        "latency_s": 74.3,
+        "generate_image_calls": 6,
+        "generate_video_clip_calls": 0,
+        "media_count": 12,
+        "token_cost_usd": 0.089219,
+        "media_cost_usd": 0.24,
+        "total_cost_usd": 0.329219
+      },
+      "means_per_run": {
+        "prompt_tokens": 59241.3,
+        "cached_tokens": 34474.0,
+        "uncached_tokens": 24767.3,
+        "candidates_tokens": 985.7,
+        "thoughts_tokens": 1302.0,
+        "subagent_tokens": 0.0,
+        "total_tokens": 61529.0,
+        "latency_s": 24.77,
+        "generate_image_calls": 2.0,
+        "generate_video_clip_calls": 0.0,
+        "media_count": 4.0,
+        "token_cost_usd": 0.02974,
+        "media_cost_usd": 0.08,
+        "total_cost_usd": 0.10974
+      },
+      "runs": [
+        {
+          "run_index": 1,
+          "agent_id": "corporate-dnd-master",
+          "conversation_id": "3x-corporate-dnd-master-r1-85edfe",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 25823.64,
+          "latency_s": 25.82,
+          "tokens": {
+            "prompt_tokens": 55502,
+            "cached_tokens": 29560,
+            "uncached_tokens": 25942,
+            "candidates_tokens": 1013,
+            "thoughts_tokens": 1084,
+            "subagent_tokens": 0,
+            "total_tokens": 57599,
+            "cache_hit_rate_pct": 53.26
+          },
+          "tools": {
+            "count": 8,
+            "unique_tools": [
+              "emit_dag_step",
+              "generate_image",
+              "manage_hero_state",
+              "roll_crypto_d20"
+            ],
+            "tool_names": [
+              "manage_hero_state",
+              "emit_dag_step",
+              "roll_crypto_d20",
+              "emit_dag_step",
+              "manage_hero_state",
+              "generate_image",
+              "emit_dag_step",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 2
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.019457,
+            "cached_input_cost": 0.002217,
+            "output_thoughts_cost": 0.007864,
+            "token_cost": 0.029537,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.109537
+          },
+          "response_preview": "### \u2694\ufe0f Encounter 1: **Cloud Wizard** vs. **The Latency Lich**\n\n---\n\n### \ud83c\udfb2 Cryptographic Roll Telemetry\n- **Skill Check / Action**: `Serverless Fireball vs Latency Lich`\n- **Natural Roll**: `12` (via OS CSPRNG `secrets.randbelow(20)+1`)\n- **"
+        },
+        {
+          "run_index": 2,
+          "agent_id": "corporate-dnd-master",
+          "conversation_id": "3x-corporate-dnd-master-r2-46e795",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 22200.04,
+          "latency_s": 22.2,
+          "tokens": {
+            "prompt_tokens": 65692,
+            "cached_tokens": 40548,
+            "uncached_tokens": 25144,
+            "candidates_tokens": 954,
+            "thoughts_tokens": 1181,
+            "subagent_tokens": 0,
+            "total_tokens": 67827,
+            "cache_hit_rate_pct": 61.72
+          },
+          "tools": {
+            "count": 8,
+            "unique_tools": [
+              "emit_dag_step",
+              "generate_image",
+              "manage_hero_state",
+              "roll_crypto_d20"
+            ],
+            "tool_names": [
+              "manage_hero_state",
+              "emit_dag_step",
+              "roll_crypto_d20",
+              "emit_dag_step",
+              "manage_hero_state",
+              "generate_image",
+              "emit_dag_step",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 4
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.018858,
+            "cached_input_cost": 0.003041,
+            "output_thoughts_cost": 0.008006,
+            "token_cost": 0.029905,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.109905
+          },
+          "response_preview": "### \ud83c\udfb2 Encounter 2: Rogue Product Manager vs. The Feature-Creep Mimic\n\n---\n\n#### \ud83d\udcca Cryptographic Dice Roll Telemetry\n- **Skill Check**: `Backlog Stealth`\n- **Natural Roll**: `15` (Operating System CSPRNG: `secrets.randbelow(20) + 1`)\n- **Mod"
+        },
+        {
+          "run_index": 3,
+          "agent_id": "corporate-dnd-master",
+          "conversation_id": "3x-corporate-dnd-master-r3-517246",
+          "model": "gemini-3.8-flash",
+          "latency_ms": 26277.21,
+          "latency_s": 26.28,
+          "tokens": {
+            "prompt_tokens": 56530,
+            "cached_tokens": 33314,
+            "uncached_tokens": 23216,
+            "candidates_tokens": 990,
+            "thoughts_tokens": 1641,
+            "subagent_tokens": 0,
+            "total_tokens": 59161,
+            "cache_hit_rate_pct": 58.93
+          },
+          "tools": {
+            "count": 8,
+            "unique_tools": [
+              "emit_dag_step",
+              "generate_image",
+              "manage_hero_state",
+              "roll_crypto_d20"
+            ],
+            "tool_names": [
+              "manage_hero_state",
+              "emit_dag_step",
+              "roll_crypto_d20",
+              "emit_dag_step",
+              "manage_hero_state",
+              "generate_image",
+              "emit_dag_step",
+              "generate_image"
+            ],
+            "generate_image_calls": 2,
+            "generate_video_clip_calls": 0,
+            "media_count": 6
+          },
+          "costs_usd": {
+            "uncached_input_cost": 0.017412,
+            "cached_input_cost": 0.002499,
+            "output_thoughts_cost": 0.009866,
+            "token_cost": 0.029777,
+            "image_cost": 0.08,
+            "video_cost": 0.0,
+            "media_cost": 0.08,
+            "total_cost": 0.109777
+          },
+          "response_preview": "### Encounter 3: QA Ranger vs. The Heisenbug Chimera\n\nThe flicker of cold fluorescent bulbs hums over row after row of deserted cubicles. As **QA Ranger** raises their diagnostic scanner to trace a ghost anomaly across the staging environme"
+        }
+      ]
+    }
+  ]
+}

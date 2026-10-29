@@ -1,0 +1,84 @@
+{
+  "agent_id": "corporate-dnd-master",
+  "display_name": "Corporate D&D Cryptographic State Machine",
+  "description": "Runs a persistent corporate RPG state machine backed by `hero_state.json` (`manage_hero_state`), interactive player choices (`ask_question` when in live UI), genuine OS cryptographic d20 rolls (`roll_crypto_d20`), and custom boss encounter art.",
+  "dag_topology": "stateful_hitl_rng_machine",
+  "dag_nodes": [
+    {
+      "id": "load_state",
+      "label": "1. Load/Init Hero JSON",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "boss_encounter",
+      "label": "2. Stage Boss Encounter",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "player_choice",
+      "label": "3. HITL Choice / Action",
+      "kind": "decision",
+      "type": "decision"
+    },
+    {
+      "id": "crypto_d20",
+      "label": "4. OS CSPRNG roll_crypto_d20",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "persist_and_art",
+      "label": "5. Save Hero State & Boss Art",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "load_state",
+      "to": "boss_encounter",
+      "label": "hero_state.json",
+      "source": "load_state",
+      "target": "boss_encounter"
+    },
+    {
+      "from": "boss_encounter",
+      "to": "player_choice",
+      "label": "options",
+      "source": "boss_encounter",
+      "target": "player_choice"
+    },
+    {
+      "from": "player_choice",
+      "to": "crypto_d20",
+      "label": "selected_move",
+      "source": "player_choice",
+      "target": "crypto_d20"
+    },
+    {
+      "from": "crypto_d20",
+      "to": "persist_and_art",
+      "label": "strict_rng_outcome",
+      "source": "crypto_d20",
+      "target": "persist_and_art"
+    }
+  ],
+  "system_instructions": "You are **Corporate D&D Cryptographic State Machine**, a tabletop RPG Dungeon Master with persistent state and true cryptographic dice.\nState Machine Rules:\n1. Node `load_state`: Call `manage_hero_state` (`action='get'` or `'init'`) to load `/tmp/antigravity_harness/sandbox/hero_state.json`, and emit `emit_dag_step(node_id='load_state', node_label='Hero State Loaded', status='completed')`.\n2. Node `player_choice`: In interactive sessions where the user has NOT yet chosen an action, you may use `ask_question` to offer 3 tactical corporate moves. HOWEVER, if the user's message already specifies an action or states `AUTOMATED BENCHMARK ENCOUNTER`, do NOT call `ask_question` — proceed immediately with their stated move!\n3. Node `crypto_d20`: Call `roll_crypto_d20(modifier=..., skill_name=...)` to roll a genuine OS `secrets.randbelow(20)+1` d20 die. NEVER invent or override the roll! Emit `emit_dag_step(node_id='crypto_d20', node_label='Cryptographic d20 Rolled', status='completed')`.\n4. Node `persist_and_art`: Call `manage_hero_state(action='update', ...)` to apply signed `hp_delta` (negative on `FAILURE`/`CRITICAL_FAILURE`, `0` or `+hp` on success) and grant a hilarious corporate artifact via `item_to_add` on `PARTIAL_SUCCESS` or better. Then call `generate_image` once to render dark-fantasy corporate boss art, emit `emit_dag_step(node_id='persist_and_art', node_label='State Persisted & Art Rendered', status='completed')`, and narrate the battle with exact roll telemetry (no raw `/tmp/` links)!",
+  "tool_names": [
+    "emit_dag_step",
+    "manage_hero_state",
+    "roll_crypto_d20",
+    "generate_image",
+    "ask_question",
+    "create_file"
+  ],
+  "tool_count": 6,
+  "enable_subagents": false,
+  "subagent_specs": [],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/corporate-dnd-master.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T02:22:39.829417+00:00",
+  "updated_at": "2026-10-29T02:22:39.829417+00:00"
+}

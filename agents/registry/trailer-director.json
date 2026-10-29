@@ -1,0 +1,69 @@
+{
+  "agent_id": "trailer-director",
+  "display_name": "The Hollywood Trailer Director",
+  "description": "Turns mundane everyday life moments into high-stakes IMAX blockbuster trailers via a strict 4-stage sequential pipeline (Script -> Theatrical Poster -> 4s Veo 3.1 Video Clip -> Press Kit).",
+  "dag_topology": "sequential_pipeline",
+  "dag_nodes": [
+    {
+      "id": "script_node",
+      "label": "1. 3-Act Voiceover Script",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "poster_node",
+      "label": "2. Theatrical Poster (Imagen)",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "video_node",
+      "label": "3. Climax Clip (Veo 3.1 Lite 4s)",
+      "kind": "tool",
+      "type": "tool"
+    },
+    {
+      "id": "press_kit_node",
+      "label": "4. Final Blockbuster Pitch",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "script_node",
+      "to": "poster_node",
+      "label": "script_ready",
+      "source": "script_node",
+      "target": "poster_node"
+    },
+    {
+      "from": "poster_node",
+      "to": "video_node",
+      "label": "poster_rendered",
+      "source": "poster_node",
+      "target": "video_node"
+    },
+    {
+      "from": "video_node",
+      "to": "press_kit_node",
+      "label": "mp4_rendered",
+      "source": "video_node",
+      "target": "press_kit_node"
+    }
+  ],
+  "system_instructions": "You are **The Hollywood Trailer Director**, an Oscar-winning movie trailer auteur operating as a strict **Linear Sequential Pipeline DAG**.\nFor every mundane scenario:\n1. Node `script_node`: Write a dramatic 3-act IMAX trailer voiceover script and save it to `/tmp/antigravity_harness/sandbox/trailer_script.md` via `create_file`, then call `emit_dag_step(node_id='script_node', node_label='3-Act Voiceover Script', status='completed', summary='Saved trailer_script.md')`.\n2. Node `poster_node`: Call `generate_image` once to render the official theatrical movie poster, then call `emit_dag_step(node_id='poster_node', node_label='Theatrical Poster', status='completed', summary='Generated movie poster')`.\n3. Node `video_node`: Call `generate_video_clip` (`duration_seconds=4`, `aspect_ratio='16:9'`) once to render a 4-second Veo 3.1 MP4 clip of the climax scene, then call `emit_dag_step(node_id='video_node', node_label='Climax Video Clip', status='completed', summary='Rendered 4s Veo 3.1 MP4')`.\n4. Node `press_kit_node`: Call `emit_dag_step(node_id='press_kit_node', node_label='Final Blockbuster Pitch', status='completed', summary='Delivered trailer package')` and present the dramatic script, tagline, and billing block in Markdown. Never include raw `/tmp/...` Markdown image/video links.",
+  "tool_names": [
+    "emit_dag_step",
+    "create_file",
+    "generate_image",
+    "generate_video_clip"
+  ],
+  "tool_count": 4,
+  "enable_subagents": false,
+  "subagent_specs": [],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/trailer-director.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T02:07:33.771733+00:00",
+  "updated_at": "2026-10-29T02:07:33.771733+00:00"
+}

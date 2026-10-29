@@ -1,0 +1,2755 @@
+{
+  "generated_at": "2026-10-29T02:23:10.614758+00:00",
+  "user_id": "cbribiescas",
+  "environment": {
+    "project": "gemini-enterprise-demo-cb",
+    "detected_project": "gemini-enterprise-demo-cb",
+    "credentials_path": "/usr/local/google/home/cbribiescas/.config/gcloud/gemini-enterprise-admin-key.json",
+    "credentials_type": "Credentials",
+    "service_account_email": "gemini-enterprise-admin@gemini-enterprise-demo-cb.iam.gserviceaccount.com",
+    "synced_rapt_from_gcloud": false,
+    "token_valid": true
+  },
+  "preflight": {
+    "health": {
+      "status_code": 200,
+      "body": {
+        "status": "ok",
+        "service": "antigravity-single-gateway",
+        "model": "gemini-3.7-flash",
+        "base_dir": "/tmp/antigravity_harness",
+        "gateway_db": "/tmp/antigravity_harness/gateway_usage.db",
+        "timestamp": "2026-10-29T02:07:24.983906+00:00"
+      }
+    },
+    "ui": {
+      "ui_index_status": 200,
+      "ui_index_bytes": 34472,
+      "studio_redirect_status": 200,
+      "contains_gateway_binding": true
+    },
+    "agents_initial": {
+      "status_code": 200,
+      "agent_ids": [
+        "antigravity"
+      ],
+      "has_antigravity": true
+    },
+    "tools_initial": {
+      "status_code": 200,
+      "keys": [
+        "builtin_tools",
+        "core_custom_tools",
+        "scenario_tools",
+        "dynamic_tools",
+        "all_tool_names",
+        "tools",
+        "registered_agents",
+        "counts"
+      ]
+    },
+    "usage_endpoints": {
+      "summary_status": 200,
+      "user_status": 200
+    }
+  },
+  "totals": {
+    "scenarios_count": 10,
+    "multi_turn_count": 1,
+    "creation_total": {
+      "prompt_tokens": 597798,
+      "cached_tokens": 356462,
+      "thoughts_tokens": 6245,
+      "candidates_tokens": 12975,
+      "subagent_tokens": 0,
+      "main_tokens": 617018,
+      "total_tokens": 617018
+    },
+    "execution_total": {
+      "prompt_tokens": 1404234,
+      "cached_tokens": 926125,
+      "thoughts_tokens": 23389,
+      "candidates_tokens": 48884,
+      "subagent_tokens": 134441,
+      "main_tokens": 1342066,
+      "total_tokens": 1476507
+    },
+    "multi_turn_followup_total": {
+      "prompt_tokens": 144019,
+      "cached_tokens": 117750,
+      "thoughts_tokens": 579,
+      "candidates_tokens": 2263,
+      "subagent_tokens": 0,
+      "main_tokens": 146861,
+      "total_tokens": 146861
+    },
+    "grand_total_all_turns": {
+      "prompt_tokens": 2146051,
+      "cached_tokens": 1400337,
+      "thoughts_tokens": 30213,
+      "candidates_tokens": 64122,
+      "subagent_tokens": 134441,
+      "main_tokens": 2105945,
+      "total_tokens": 2240386
+    },
+    "creation_latency_ms": 148854.41,
+    "execution_latency_ms": 736354.23,
+    "multi_turn_latency_ms": 49337.85,
+    "total_latency_ms": 934546.49
+  },
+  "scenarios": [
+    {
+      "index": 1,
+      "agent_id": "trailer-director",
+      "display_name": "The Hollywood Trailer Director",
+      "dag_topology": "sequential_pipeline",
+      "dag_pattern_title": "Linear Sequential Pipeline DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/trailer-director.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2286,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/trailer-director.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "trailer_script.md": true
+        },
+        "media": [
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "echoes_of_crunch_poster_1793239682041.jpg",
+            "url": "/api/gateway/media/app_data/media/echoes_of_crunch_poster_1793239682041.jpg",
+            "size_bytes": 303079,
+            "served_200_ok": true
+          },
+          {
+            "kind": "video",
+            "mime_type": "video/mp4",
+            "filename": "echoes_of_crunch_1793239715775.mp4",
+            "url": "/api/gateway/media/app_data/media/echoes_of_crunch_1793239715775.mp4",
+            "size_bytes": 2053621,
+            "served_200_ok": true
+          }
+        ]
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "afb1b334-5c26-41a9-bd2a-095df8f70cc7",
+        "antigravity_conversation_id": "f9eb5818a04253f481117008ea4ac7a0",
+        "latency_ms": 10861.43,
+        "tokens": {
+          "prompt_tokens": 29546,
+          "cached_tokens": 10924,
+          "thoughts_tokens": 818,
+          "candidates_tokens": 924,
+          "subagent_tokens": 0,
+          "main_tokens": 31288,
+          "total_tokens": 31288
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "### Custom DAG Agent Registered Successfully\n\n- **Agent ID**: `trailer-director`\n- **Display Name**: The Hollywood Trailer Director\n- **DAG Topology**: `sequential_pipeline`\n- **Bound Tools**: `emit_dag_step`, `create_file`, `generate_image`, `generate_video_clip`\n- **Agent Spec**: [`trailer-director.md`](file:///usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity"
+      },
+      "execution": {
+        "agent_id": "trailer-director",
+        "conversation_id": "2c460c99-e7ec-4c9f-96de-ed45327c5bec",
+        "antigravity_conversation_id": "8c9af2ccc77e53a6b2d0293b3c21e64e",
+        "latency_ms": 69346.2,
+        "tokens": {
+          "prompt_tokens": 100967,
+          "cached_tokens": 63391,
+          "thoughts_tokens": 924,
+          "candidates_tokens": 2860,
+          "subagent_tokens": 0,
+          "main_tokens": 104751,
+          "total_tokens": 104751
+        },
+        "tool_calls": [
+          "edit_file",
+          "emit_dag_step",
+          "generate_image",
+          "emit_dag_step",
+          "generate_video_clip",
+          "emit_dag_step",
+          "emit_dag_step",
+          "create_file",
+          "generate_image"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 6,
+          "tool_call": 9,
+          "tool_result": 9,
+          "dag_step": 7,
+          "media": 2,
+          "text_delta": 25,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "# \ud83c\udfac ECHOES OF CRUNCH \u2014 THEATRICAL PREMIERE PACKAGE\n\n> **\"In the digital void of Monday morning, no one can hear you scream... but everyone can hear you chew.\"**\n\n---\n\n### \ud83d\udccb Production Summary & Deliverables\n\n| Stage | Node ID | Status | Output Artifact |\n| :--- | :--- | :--- | :--- |\n| **1. Voiceover Script** | `script_node` | **Completed** | |\n| **2. Theatrical Poster** | `poster_node` | **Completed** | 2:3 Key Art Poster Render |\n| **3. Climax Teaser** | `video_node` | **Completed** | 4s Veo 3"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 130513,
+        "cached_tokens": 74315,
+        "thoughts_tokens": 1742,
+        "candidates_tokens": 3784,
+        "subagent_tokens": 0,
+        "main_tokens": 136039,
+        "total_tokens": 136039
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 2,
+      "agent_id": "arcade-builder",
+      "display_name": "Self-Healing Retro Arcade Factory",
+      "dag_topology": "generator_verifier_loop",
+      "dag_pattern_title": "Generator-Verifier Self-Healing Loop DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/arcade-builder.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2381,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/arcade-builder.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "kopi_dodge.html": true
+        },
+        "media": [
+          {
+            "kind": "html",
+            "mime_type": "text/html",
+            "filename": "kopi_dodge.html",
+            "url": "/api/gateway/media/sandbox/kopi_dodge.html",
+            "size_bytes": 15065,
+            "served_200_ok": true
+          },
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "kopi_dodge_cabinet_1793239783306.jpg",
+            "url": "/api/gateway/media/app_data/media/kopi_dodge_cabinet_1793239783306.jpg",
+            "size_bytes": 301392,
+            "served_200_ok": true
+          }
+        ]
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "5eed396a-de9c-429b-b111-303c371f088c",
+        "antigravity_conversation_id": "25bc22100552596ba2970c1dd983f9fb",
+        "latency_ms": 10793.73,
+        "tokens": {
+          "prompt_tokens": 29730,
+          "cached_tokens": 10931,
+          "thoughts_tokens": 866,
+          "candidates_tokens": 1009,
+          "subagent_tokens": 0,
+          "main_tokens": 31605,
+          "total_tokens": 31605
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "Custom DAG Agent **Self-Healing Retro Arcade Factory** has been successfully registered and compiled.\n\n### Agent Summary\n- **Agent ID**: `arcade-builder`\n- **Display Name**: Self-Healing Retro Arcade Factory\n- **DAG Topology**: `generator_verifier_loop`\n- **Bound Tools**: `emit_dag_step`, `create_file`, `edit_file`, `view_file`, `validate_html5_game`, `generate_image`\n- **Artifacts Created**:\n  - "
+      },
+      "execution": {
+        "agent_id": "arcade-builder",
+        "conversation_id": "35e627ad-9c57-4b4e-8100-420e75f4f283",
+        "antigravity_conversation_id": "19d75601210556b6ba47b696f106f131",
+        "latency_ms": 52643.55,
+        "tokens": {
+          "prompt_tokens": 102615,
+          "cached_tokens": 68438,
+          "thoughts_tokens": 931,
+          "candidates_tokens": 6367,
+          "subagent_tokens": 0,
+          "main_tokens": 109913,
+          "total_tokens": 109913
+        },
+        "tool_calls": [
+          "edit_file",
+          "emit_dag_step",
+          "validate_html5_game",
+          "emit_dag_step",
+          "generate_image",
+          "emit_dag_step",
+          "create_file",
+          "generate_image"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 5,
+          "tool_call": 8,
+          "tool_result": 8,
+          "media": 2,
+          "dag_step": 6,
+          "text_delta": 17,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "### \ud83c\udfae **Kopi Dodge: Retro Arcade Factory Report**\n\nThe single-file HTML5 Canvas game has been generated and verified at .\n\n---\n\n### \ud83d\udd79\ufe0f **Controls & Gameplay Mechanics**\n\n| Control | Action | Effect |\n| :--- | :--- | :--- |\n| **`ArrowLeft` / `A`** | Move Left | Slides developer with laptop |\n| **`ArrowRight` / `D`** | Move Right | Slides developer with laptop |\n| **`Space`** | Pause Game | Toggles pause screen overlay |\n| **`R`** | Restart | Refactor & restart after Burnout |\n\n- **\u2615 Iced Kopi Cat"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 132345,
+        "cached_tokens": 79369,
+        "thoughts_tokens": 1797,
+        "candidates_tokens": 7376,
+        "subagent_tokens": 0,
+        "main_tokens": 141518,
+        "total_tokens": 141518
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 3,
+      "agent_id": "shark-tank-panel",
+      "display_name": "Shark Tank Parallel Pitch Panel",
+      "dag_topology": "parallel_map_reduce",
+      "dag_pattern_title": "Parallel Map-Reduce Fan-Out DAG",
+      "enable_subagents": true,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/shark-tank-panel.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2850,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/shark-tank-panel.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "rent_a_retriever_term_sheet.md": true
+        },
+        "media": []
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "8682fde4-62db-4b2f-bf6d-bc78c102e2a5",
+        "antigravity_conversation_id": "b02bc74cc6a357bc9e876a545042879e",
+        "latency_ms": 8823.91,
+        "tokens": {
+          "prompt_tokens": 29255,
+          "cached_tokens": 10887,
+          "thoughts_tokens": 0,
+          "candidates_tokens": 1183,
+          "subagent_tokens": 0,
+          "main_tokens": 30438,
+          "total_tokens": 30438
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "### Custom DAG Agent #3 Registered Successfully\n\n- **Agent ID**: `shark-tank-panel`\n- **Display Name**: Shark Tank Parallel Pitch Panel\n- **DAG Topology**: `parallel_map_reduce`\n- **Bound Tools**: `emit_dag_step`, `search_web`, `create_file`, `start_subagent`\n- **Subagents Configured**:\n  - `numbers_hawk` (Unit economics, CAC/LTV, margins & liability Shark)\n  - `hype_visionary` (Viral growth, bran"
+      },
+      "execution": {
+        "agent_id": "shark-tank-panel",
+        "conversation_id": "ace8ec2a-9e59-4c71-8535-54e909369285",
+        "antigravity_conversation_id": "bdd0287f20f85643bfed4ea2040aa132",
+        "latency_ms": 119941.14,
+        "tokens": {
+          "prompt_tokens": 209211,
+          "cached_tokens": 137018,
+          "thoughts_tokens": 2665,
+          "candidates_tokens": 8557,
+          "subagent_tokens": 63107,
+          "main_tokens": 157326,
+          "total_tokens": 220433
+        },
+        "tool_calls": [
+          "search_web",
+          "emit_dag_step",
+          "start_subagent",
+          "emit_dag_step",
+          "emit_dag_step",
+          "emit_dag_step",
+          "edit_file",
+          "emit_dag_step",
+          "search_web",
+          "start_subagent",
+          "create_file"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 11,
+          "tool_call": 11,
+          "tool_result": 11,
+          "dag_step": 8,
+          "text_delta": 58,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "# \ud83e\udd88 Shark Tank Parallel Pitch Panel: Final Reducer & Term Sheet\n\nThe pitch for **'Rent-a-Retriever'** ($299/session spot dispatch, asking **$500k for 10% equity**) has completed evaluation across our parallel Shark Tank investor DAG. The synthesized dossier has been written to .\n\n---\n\n## \ud83d\udcca 1. Shark Scorecard & Verdict Summary\n\n| Shark Persona | Score (/10) | Final Verdict | Key Roast & Core Rationale |\n| :--- | :---: | :---: | :--- |\n| **Numbers Hawk** *(CFO / Unit Economics)* | **2.1 / 10** | *"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 238466,
+        "cached_tokens": 147905,
+        "thoughts_tokens": 2665,
+        "candidates_tokens": 9740,
+        "subagent_tokens": 63107,
+        "main_tokens": 187764,
+        "total_tokens": 250871
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 4,
+      "agent_id": "supreme-court-debate",
+      "display_name": "Culinary Supreme Court Cross-Exam",
+      "dag_topology": "adversarial_cross_exam",
+      "dag_pattern_title": "Multi-Round Adversarial Cross-Exam DAG",
+      "enable_subagents": true,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/supreme-court-debate.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2881,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/supreme-court-debate.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "hotdog_v_taco_opinion.md": true
+        },
+        "media": []
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "e10b888b-2793-4858-a925-258b75136524",
+        "antigravity_conversation_id": "ad7d560a4b735f86afb0458b7577be85",
+        "latency_ms": 8258.76,
+        "tokens": {
+          "prompt_tokens": 29397,
+          "cached_tokens": 10896,
+          "thoughts_tokens": 57,
+          "candidates_tokens": 1188,
+          "subagent_tokens": 0,
+          "main_tokens": 30642,
+          "total_tokens": 30642
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "Custom DAG Agent **Culinary Supreme Court Cross-Exam** (`supreme-court-debate`) has been successfully built and registered.\n\n### Registration Details\n- **Agent ID**: `supreme-court-debate`\n- **Display Name**: Culinary Supreme Court Cross-Exam\n- **DAG Topology**: `adversarial_cross_exam`\n- **Subagents Enabled**: `True` (`counsel_pro`, `counsel_con`)\n- **Bound Tools**: `emit_dag_step`, `search_web`,"
+      },
+      "execution": {
+        "agent_id": "supreme-court-debate",
+        "conversation_id": "aec6c175-a078-4bf7-b33f-86f4da0c2951",
+        "antigravity_conversation_id": "29f1f928202e5f72916b7addf6012212",
+        "latency_ms": 103545.97,
+        "tokens": {
+          "prompt_tokens": 301472,
+          "cached_tokens": 191620,
+          "thoughts_tokens": 6887,
+          "candidates_tokens": 5726,
+          "subagent_tokens": 71334,
+          "main_tokens": 242751,
+          "total_tokens": 314085
+        },
+        "tool_calls": [
+          "search_web",
+          "emit_dag_step",
+          "start_subagent",
+          "emit_dag_step",
+          "emit_dag_step",
+          "start_subagent",
+          "emit_dag_step",
+          "emit_dag_step",
+          "start_subagent",
+          "emit_dag_step",
+          "emit_dag_step",
+          "edit_file",
+          "emit_dag_step",
+          "search_web",
+          "start_subagent",
+          "start_subagent",
+          "start_subagent",
+          "create_file"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 24,
+          "tool_call": 18,
+          "tool_result": 18,
+          "dag_step": 17,
+          "text_delta": 49,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "# SUPREME COURT OF THE CULINARY ARTS\n**OCTOBER TERM, 2026 \u2014 DOCKET NO. 26-808**\n\n---\n\n### Oral Argument Transcripts & Cross-Exam\n\n#### 1. Petitioner\u2019s Opening Brief (`counsel_pro`)\n> *\"May it please the Court: The inquiry before this tribunal is not governed by colloquial nomenclature, but by rigorous structural taxonomy. Under the Cube Rule of Food\u2014a foundational canon of edible geometry\u2014the classification of any composite assembly is dictated strictly by starch topology. A hotdog securely nest"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 330869,
+        "cached_tokens": 202516,
+        "thoughts_tokens": 6944,
+        "candidates_tokens": 6914,
+        "subagent_tokens": 71334,
+        "main_tokens": 273393,
+        "total_tokens": 344727
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 5,
+      "agent_id": "bot-gladiator-arena",
+      "display_name": "AI Bot Gladiator Tournament Arena",
+      "dag_topology": "evolutionary_tournament",
+      "dag_pattern_title": "Evolutionary Tournament Bracket DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/bot-gladiator-arena.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2761,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/bot-gladiator-arena.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "bot_tit_for_tat.py": true,
+          "bot_grim_trigger.py": true,
+          "bot_omega_adaptive.py": true,
+          "tournament_results.json": true
+        },
+        "media": []
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "2602f718-bc3d-4ea4-81b8-344a5fb649ac",
+        "antigravity_conversation_id": "1da30983ea085ed9a713f5f52155f391",
+        "latency_ms": 9478.48,
+        "tokens": {
+          "prompt_tokens": 29767,
+          "cached_tokens": 10925,
+          "thoughts_tokens": 495,
+          "candidates_tokens": 1018,
+          "subagent_tokens": 0,
+          "main_tokens": 31280,
+          "total_tokens": 31280
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "### Custom DAG Agent Registered Successfully\n\n- **Agent ID**: `bot-gladiator-arena`\n- **Display Name**: AI Bot Gladiator Tournament Arena\n- **DAG Topology**: `evolutionary_tournament`\n- **Bound Tools**: `emit_dag_step`, `create_file`, `edit_file`, `view_file`, `run_bot_tournament`\n- **Status**: Ready for execution via the Single API Gateway."
+      },
+      "execution": {
+        "agent_id": "bot-gladiator-arena",
+        "conversation_id": "a5cf88b3-e3b6-40f9-a4a1-83097ca6f233",
+        "antigravity_conversation_id": "943e5e5b83735adfb299665e8b8662aa",
+        "latency_ms": 33152.51,
+        "tokens": {
+          "prompt_tokens": 74530,
+          "cached_tokens": 37351,
+          "thoughts_tokens": 1349,
+          "candidates_tokens": 2580,
+          "subagent_tokens": 0,
+          "main_tokens": 78459,
+          "total_tokens": 78459
+        },
+        "tool_calls": [
+          "edit_file",
+          "edit_file",
+          "edit_file",
+          "emit_dag_step",
+          "run_bot_tournament",
+          "emit_dag_step",
+          "edit_file",
+          "emit_dag_step",
+          "run_bot_tournament",
+          "emit_dag_step",
+          "create_file",
+          "create_file",
+          "create_file",
+          "create_file"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 4,
+          "tool_call": 14,
+          "tool_result": 14,
+          "dag_step": 6,
+          "text_delta": 48,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "# \u2694\ufe0f AI Bot Gladiator Prisoner's Dilemma Championship\n\nThe 4-stage evolutionary tournament bracket has concluded.\n\n---\n\n## \ud83c\udfdb\ufe0f Stage 1 & 2: Generation-1 Qualifier Tournament\n\n### Gladiators Coded\n1. : Cooperates on round 1, then mirrors the opponent's previous move.\n2. : Cooperates until the opponent defects once, then triggers permanent defection.\n3. : Exploits cooperators every 4th round, otherwise mirrors.\n\n### Qualifier Standings (2,000 Rounds / Pairing)\n| Rank | Gladiator Bot | Total Score |"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 104297,
+        "cached_tokens": 48276,
+        "thoughts_tokens": 1844,
+        "candidates_tokens": 3598,
+        "subagent_tokens": 0,
+        "main_tokens": 109739,
+        "total_tokens": 109739
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 6,
+      "agent_id": "perfectionist-art-director",
+      "display_name": "Perfectionist Multimodal Art Director",
+      "dag_topology": "multimodal_vision_critic",
+      "dag_pattern_title": "Multimodal Producer-Vision Critic Reflection DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/perfectionist-art-director.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2476,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/perfectionist-art-director.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "comic_storyboard.md": true,
+          "vision_critiques.json": true
+        },
+        "media": [
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "comic_draft_v1_1793240099721.jpg",
+            "url": "/api/gateway/media/app_data/media/comic_draft_v1_1793240099721.jpg",
+            "size_bytes": 326055,
+            "served_200_ok": true
+          },
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "comic_masterpiece_v2_1793240120229.jpg",
+            "url": "/api/gateway/media/app_data/media/comic_masterpiece_v2_1793240120229.jpg",
+            "size_bytes": 296985,
+            "served_200_ok": true
+          }
+        ]
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "471eeaed-9c53-4c00-9a58-e544a863b98c",
+        "antigravity_conversation_id": "cc7f6a1ba6225b8ab763443e83e6af3d",
+        "latency_ms": 7262.48,
+        "tokens": {
+          "prompt_tokens": 28948,
+          "cached_tokens": 10869,
+          "thoughts_tokens": 0,
+          "candidates_tokens": 1019,
+          "subagent_tokens": 0,
+          "main_tokens": 29967,
+          "total_tokens": 29967
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "### Custom DAG Agent #6 Registered Successfully\n\n- **Agent ID**: `perfectionist-art-director`\n- **Display Name**: Perfectionist Multimodal Art Director\n- **DAG Topology**: `multimodal_vision_critic`\n- **Bound Tools**: `[\"emit_dag_step\", \"create_file\", \"view_file\", \"generate_image\", \"log_vision_critique\"]`\n- **Registry Spec**: [`perfectionist-art-director.json`](file:///usr/local/google/home/cbribi"
+      },
+      "execution": {
+        "agent_id": "perfectionist-art-director",
+        "conversation_id": "925f8ec5-10c5-48bd-9a2a-bec613e5236e",
+        "antigravity_conversation_id": "fe242f2bfa275141b7e8d1045fb9163d",
+        "latency_ms": 58628.74,
+        "tokens": {
+          "prompt_tokens": 108028,
+          "cached_tokens": 75606,
+          "thoughts_tokens": 2112,
+          "candidates_tokens": 3176,
+          "subagent_tokens": 0,
+          "main_tokens": 113316,
+          "total_tokens": 113316
+        },
+        "tool_calls": [
+          "edit_file",
+          "emit_dag_step",
+          "generate_image",
+          "emit_dag_step",
+          "view_file",
+          "log_vision_critique",
+          "emit_dag_step",
+          "generate_image",
+          "view_file",
+          "emit_dag_step",
+          "edit_file",
+          "create_file",
+          "generate_image",
+          "view_file",
+          "generate_image",
+          "view_file",
+          "create_file"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 10,
+          "tool_call": 17,
+          "tool_result": 17,
+          "dag_step": 9,
+          "media": 2,
+          "text_delta": 16,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "### Multimodal Vision Critic Pipeline Complete\n\nThe **Multimodal Producer-Vision Critic Reflection DAG** has completed execution across all four pipeline nodes:\n\n```mermaid\ngraph LR\n    A[\"1. Storyboard Script\"] --> B[\"2. Render Draft V1\"]\n    B --> C[\"3. Multimodal Vision Critique\"]\n    C --> D[\"4. Masterpiece V2 Rendered\"]\n```\n\n---\n\n### Key Deliverables\n\n1. **Storyboard Script:** Saved to 2. **Structured Vision Critique:** Logged in (Score: 7.0/10 &rarr; Triggered iteration)\n3. **Artifact Repo"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 136976,
+        "cached_tokens": 86475,
+        "thoughts_tokens": 2112,
+        "candidates_tokens": 4195,
+        "subagent_tokens": 0,
+        "main_tokens": 143283,
+        "total_tokens": 143283
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 7,
+      "agent_id": "mythbuster-router",
+      "display_name": "Conditional Router MythBuster Lab",
+      "dag_topology": "conditional_router",
+      "dag_pattern_title": "Conditional Router Branching DAG (+ Dynamic Tool Synthesis)",
+      "enable_subagents": false,
+      "dynamic_tool_created": "compute_loch_ness_displacement",
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/mythbuster-router.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 3052,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/mythbuster-router.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/app/dynamic_tools/compute_loch_ness_displacement.py",
+        "dynamic_tool_exists": true,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "mythbuster_receipt.md": true
+        },
+        "media": [
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "loch_ness_infographic_1793240237342.jpg",
+            "url": "/api/gateway/media/app_data/media/loch_ness_infographic_1793240237342.jpg",
+            "size_bytes": 229311,
+            "served_200_ok": true
+          }
+        ]
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "2027bd5f-4f42-4907-8403-09b9c9f18053",
+        "antigravity_conversation_id": "b1a359c0cd075fd48861dec33489c934",
+        "latency_ms": 60013.61,
+        "tokens": {
+          "prompt_tokens": 329953,
+          "cached_tokens": 267412,
+          "thoughts_tokens": 2356,
+          "candidates_tokens": 3418,
+          "subagent_tokens": 0,
+          "main_tokens": 335727,
+          "total_tokens": 335727
+        },
+        "tool_calls": [
+          "create_custom_tool",
+          "list_registered_agents_and_tools",
+          "run_command",
+          "run_command",
+          "run_command",
+          "run_command",
+          "run_command",
+          "run_command",
+          "list_registered_agents_and_tools",
+          "build_custom_agent",
+          "run_command",
+          "run_command",
+          "run_command",
+          "run_command",
+          "run_command",
+          "run_command"
+        ],
+        "response_preview": "Custom DAG Agent #7 **Conditional Router MythBuster Lab** (`mythbuster-router`) has been created and registered.\n\n### Summary of Registered Deliverables\n\n- **Agent ID**: `mythbuster-router`\n- **Display Name**: Conditional Router MythBuster Lab\n- **DAG Topology**: `conditional_router` (Branching Decision DAG)\n- **Dynamically Synthesized Tool**: `compute_loch_ness_displacement` (live-registered in d"
+      },
+      "execution": {
+        "agent_id": "mythbuster-router",
+        "conversation_id": "bc929838-733b-43cf-bb8c-6a6973f6d8d5",
+        "antigravity_conversation_id": "62ab2e8a426c5982acf0af64e3a524b9",
+        "latency_ms": 58706.41,
+        "tokens": {
+          "prompt_tokens": 141265,
+          "cached_tokens": 93306,
+          "thoughts_tokens": 2022,
+          "candidates_tokens": 3781,
+          "subagent_tokens": 0,
+          "main_tokens": 147068,
+          "total_tokens": 147068
+        },
+        "tool_calls": [
+          "search_web",
+          "emit_dag_step",
+          "compute_loch_ness_displacement",
+          "verify_claim_math",
+          "emit_dag_step",
+          "generate_image",
+          "emit_dag_step",
+          "edit_file",
+          "emit_dag_step",
+          "search_web",
+          "generate_image",
+          "create_file"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 8,
+          "tool_call": 12,
+          "tool_result": 12,
+          "dag_step": 7,
+          "media": 1,
+          "text_delta": 33,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "# MythBuster Lab: Loch Ness Volumetric Verification\n\n### **Claim Under Investigation**\n> *\"All 8.1 billion humans on Earth could be submerged inside Scotland's Loch Ness at the exact same time and take up LESS than 10% of Loch Ness's water volume (`total_human_volume_m3 <= 745000000.0`).\"*\n\n---\n\n## 1. Verified Physical Parameters\n\n- **Loch Ness Total Water Volume:** $\\approx 7.45 \\times 10^9 \\text{ m}^3$ ($7.45\\text{ km}^3$)\n- **Loch Ness Surface Area:** $\\approx 5.64 \\times 10^7 \\text{ m}^2$ ($"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 471218,
+        "cached_tokens": 360718,
+        "thoughts_tokens": 4378,
+        "candidates_tokens": 7199,
+        "subagent_tokens": 0,
+        "main_tokens": 482795,
+        "total_tokens": 482795
+      },
+      "multi_turn_continuity": {
+        "conversation_id": "bc929838-733b-43cf-bb8c-6a6973f6d8d5",
+        "antigravity_conversation_id": "62ab2e8a426c5982acf0af64e3a524b9",
+        "same_antigravity_trajectory": true,
+        "turn_number": 2,
+        "turns_recorded_in_gateway_db": 2,
+        "turn_1_request_tokens": {
+          "prompt_tokens": 141265,
+          "cached_tokens": 93306,
+          "thoughts_tokens": 2022,
+          "candidates_tokens": 3781,
+          "subagent_tokens": 0,
+          "main_tokens": 147068,
+          "total_tokens": 147068
+        },
+        "turn_2_request_tokens": {
+          "prompt_tokens": 144019,
+          "cached_tokens": 117750,
+          "thoughts_tokens": 579,
+          "candidates_tokens": 2263,
+          "subagent_tokens": 0,
+          "main_tokens": 146861,
+          "total_tokens": 146861
+        },
+        "turn_2_cumulative_conversation_tokens": {
+          "prompt_tokens": 285284,
+          "cached_tokens": 211056,
+          "thoughts_tokens": 2601,
+          "candidates_tokens": 6044,
+          "subagent_tokens": 0,
+          "main_tokens": 293929,
+          "total_tokens": 293929
+        },
+        "cumulative_exceeds_turn_1": true,
+        "latency_ms": 49337.85,
+        "tool_calls": [
+          "verify_claim_math",
+          "emit_dag_step",
+          "search_web",
+          "emit_dag_step",
+          "edit_file",
+          "emit_dag_step",
+          "search_web",
+          "create_file"
+        ],
+        "response_preview": "# MythBuster Lab: Water Level Rise Claim Verification\n\n### **Claim Under Investigation**\n> *\"Submerging all 8.1 billion humans inside Scotland's Loch Ness would raise Loch Ness's water level by at least 50 meters (`water_level_rise_m >= 50.0`).\"*\n\n---\n\n## 1. Mathematical Evaluation\n\nUsing our verified physical constants:\n* **Total Human Displaced Volume ($V_{\\text{total}}$):** $509,847,715.74\\text"
+      }
+    },
+    {
+      "index": 8,
+      "agent_id": "six-degrees-detective",
+      "display_name": "Six-Degrees Tree Search & Prune Detective",
+      "dag_topology": "tree_search_prune",
+      "dag_pattern_title": "Dynamic Tree Search & Prune DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/six-degrees-detective.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2398,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/six-degrees-detective.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "six_degrees_chain.md": true,
+          "pruned_branches.jsonl": true
+        },
+        "media": []
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "7dc68065-127d-4317-9c95-eb2e319efe45",
+        "antigravity_conversation_id": "9d2716a820c557ed8cc901bf0d58a5d1",
+        "latency_ms": 12650.55,
+        "tokens": {
+          "prompt_tokens": 30207,
+          "cached_tokens": 12710,
+          "thoughts_tokens": 565,
+          "candidates_tokens": 1049,
+          "subagent_tokens": 0,
+          "main_tokens": 31821,
+          "total_tokens": 31821
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "### Custom DAG Agent #8 Registered Successfully\n\n- **Agent ID**: `six-degrees-detective`\n- **Display Name**: Six-Degrees Tree Search & Prune Detective\n- **DAG Topology**: `tree_search_prune`\n- **Tools Bound**:\n  - `emit_dag_step`\n  - `search_web`\n  - `read_url_content`\n  - `record_pruned_branch`\n  - `create_file`\n- **Specifications**:\n  - **Markdown Spec**: [`agents/six-degrees-detective.md`](file"
+      },
+      "execution": {
+        "agent_id": "six-degrees-detective",
+        "conversation_id": "126dd701-d7fe-4ef7-babc-377747e5d2c5",
+        "antigravity_conversation_id": "bae77711e6f5580fb79a55405972ce54",
+        "latency_ms": 97453.74,
+        "tokens": {
+          "prompt_tokens": 147904,
+          "cached_tokens": 102958,
+          "thoughts_tokens": 3214,
+          "candidates_tokens": 5014,
+          "subagent_tokens": 0,
+          "main_tokens": 156132,
+          "total_tokens": 156132
+        },
+        "tool_calls": [
+          "emit_dag_step",
+          "search_web",
+          "search_web",
+          "search_web",
+          "search_web",
+          "record_pruned_branch",
+          "record_pruned_branch",
+          "emit_dag_step",
+          "edit_file",
+          "emit_dag_step",
+          "search_web",
+          "search_web",
+          "search_web",
+          "search_web",
+          "create_file"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 14,
+          "tool_call": 15,
+          "tool_result": 15,
+          "dag_step": 5,
+          "text_delta": 47,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "# \ud83d\udd0d Six-Degrees Investigation: Bubble Tea \u2794 Apollo 11 Moon Landing\n\nWe have connected **Bubble Tea (Taiwan, 1980s)** to the **Apollo 11 Moon Landing (July 1969)** in **3 verified factual hops** (surpassing the $\\le 4$ hop requirement).\n\n---\n\n### \ud83d\udd17 The Winning Hop Chain (3 Hops)\n\n```mermaid\ngraph TD\n    A[\"<b>Origin:</b> Bubble Tea (1987)<br><i>Invented at Chun Shui Tang</i>\"] -->|Hop 1: Birthplace & Founding City| B[\"<b>Taichung, Taiwan</b><br><i>Home of Chun Shui Tang & NMNS</i>\"]\n    B -->|Hop"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 178111,
+        "cached_tokens": 115668,
+        "thoughts_tokens": 3779,
+        "candidates_tokens": 6063,
+        "subagent_tokens": 0,
+        "main_tokens": 187953,
+        "total_tokens": 187953
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 9,
+      "agent_id": "foodie-hourglass-solver",
+      "display_name": "Hourglass Hawker Foodie Optimizer",
+      "dag_topology": "hourglass_gather_solve_publish",
+      "dag_pattern_title": "Hourglass Gather-Solve-Publish DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/foodie-hourglass-solver.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2786,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/foodie-hourglass-solver.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "maxwell_crawl.ics": true,
+          "maxwell_crawl_card.html": true
+        },
+        "media": [
+          {
+            "kind": "calendar",
+            "mime_type": "text/calendar",
+            "filename": "maxwell_crawl.ics",
+            "url": "/api/gateway/media/sandbox/maxwell_crawl.ics",
+            "size_bytes": 1440,
+            "served_200_ok": true
+          },
+          {
+            "kind": "html",
+            "mime_type": "text/html",
+            "filename": "maxwell_crawl_card.html",
+            "url": "/api/gateway/media/sandbox/maxwell_crawl_card.html",
+            "size_bytes": 9891,
+            "served_200_ok": true
+          },
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "maxwell_hawker_postcard_1793240542768.jpg",
+            "url": "/api/gateway/media/app_data/media/maxwell_hawker_postcard_1793240542768.jpg",
+            "size_bytes": 381760,
+            "served_200_ok": true
+          }
+        ]
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "4bef69d2-6f77-4c5f-8271-5d1c3f5cf600",
+        "antigravity_conversation_id": "8c6d06e48ae05f3b84e6cc3f0e1d74d7",
+        "latency_ms": 10600.04,
+        "tokens": {
+          "prompt_tokens": 30488,
+          "cached_tokens": 0,
+          "thoughts_tokens": 540,
+          "candidates_tokens": 1027,
+          "subagent_tokens": 0,
+          "main_tokens": 32055,
+          "total_tokens": 32055
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "Custom DAG Agent #9 **Hourglass Hawker Foodie Optimizer** has been registered successfully.\n\n### Summary\n- **Agent ID**: `foodie-hourglass-solver`\n- **Display Name**: Hourglass Hawker Foodie Optimizer\n- **DAG Topology**: `hourglass_gather_solve_publish`\n- **Bound Tools**: `emit_dag_step`, `search_web`, `solve_crawl_constraints`, `export_ics_calendar`, `create_file`, `generate_image`\n- **Status**: "
+      },
+      "execution": {
+        "agent_id": "foodie-hourglass-solver",
+        "conversation_id": "ff2db7ef-1665-4f1e-9501-49ac6f809fa9",
+        "antigravity_conversation_id": "6f357a26b35a5b0891b62dae5be15ca4",
+        "latency_ms": 115979.27,
+        "tokens": {
+          "prompt_tokens": 176083,
+          "cached_tokens": 134376,
+          "thoughts_tokens": 2466,
+          "candidates_tokens": 9936,
+          "subagent_tokens": 0,
+          "main_tokens": 188485,
+          "total_tokens": 188485
+        },
+        "tool_calls": [
+          "search_web",
+          "emit_dag_step",
+          "solve_crawl_constraints",
+          "emit_dag_step",
+          "export_ics_calendar",
+          "edit_file",
+          "generate_image",
+          "emit_dag_step",
+          "search_web",
+          "create_file",
+          "generate_image"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 11,
+          "tool_call": 11,
+          "tool_result": 11,
+          "dag_step": 7,
+          "media": 3,
+          "text_delta": 25,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "### \ud83c\udf27\ufe0f Maxwell Food Centre Rain-Safe Hawker Crawl Itinerary\n\nThe **Hourglass Hawker Foodie Optimizer** gathered real candidate stalls across starter, main, and dessert categories, ran the knapsack constraint solver under tropical rainstorm conditions, and published the complete itinerary artifacts.\n\n---\n\n### \ud83d\udcca Optimal Crawl Solution Summary\n\n| Metric | Target / Constraint | Solved Result | Status |\n| :--- | :--- | :--- | :--- |\n| **Total Spend** | Max S$20.00 | **S$11.80** (S$8.20 remaining) | \u2705"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 206571,
+        "cached_tokens": 134376,
+        "thoughts_tokens": 3006,
+        "candidates_tokens": 10963,
+        "subagent_tokens": 0,
+        "main_tokens": 220540,
+        "total_tokens": 220540
+      },
+      "multi_turn_continuity": null
+    },
+    {
+      "index": 10,
+      "agent_id": "corporate-dnd-master",
+      "display_name": "Corporate D&D Cryptographic State Machine",
+      "dag_topology": "stateful_hitl_rng_machine",
+      "dag_pattern_title": "Stateful HITL / Crypto RNG State Machine DAG",
+      "enable_subagents": false,
+      "dynamic_tool_created": null,
+      "artifacts": {
+        "agent_md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/corporate-dnd-master.md",
+        "agent_md_exists": true,
+        "agent_md_bytes": 2734,
+        "agent_json_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/registry/corporate-dnd-master.json",
+        "agent_json_exists": true,
+        "dynamic_tool_path": null,
+        "dynamic_tool_exists": null,
+        "registered_in_gateway_catalog": true,
+        "sandbox_files": {
+          "hero_state.json": true
+        },
+        "media": [
+          {
+            "kind": "image",
+            "mime_type": "image/jpeg",
+            "filename": "scope_creep_hydra_battle_1793240582488.jpg",
+            "url": "/api/gateway/media/app_data/media/scope_creep_hydra_battle_1793240582488.jpg",
+            "size_bytes": 250411,
+            "served_200_ok": true
+          }
+        ]
+      },
+      "creation": {
+        "agent_id": "antigravity",
+        "conversation_id": "b430a577-5612-48a2-a28e-83f276c2d191",
+        "antigravity_conversation_id": "7d0bc580b8b45ce8a166276c6fe81db3",
+        "latency_ms": 10111.42,
+        "tokens": {
+          "prompt_tokens": 30507,
+          "cached_tokens": 10908,
+          "thoughts_tokens": 548,
+          "candidates_tokens": 1140,
+          "subagent_tokens": 0,
+          "main_tokens": 32195,
+          "total_tokens": 32195
+        },
+        "tool_calls": [
+          "build_custom_agent"
+        ],
+        "response_preview": "### Agent Built & Registered Successfully\n\n- **Agent ID**: `corporate-dnd-master`\n- **Display Name**: Corporate D&D Cryptographic State Machine\n- **DAG Topology**: `stateful_hitl_rng_machine`\n- **Bound Tools**: `emit_dag_step`, `manage_hero_state`, `roll_crypto_d20`, `generate_image`, `ask_question`, `create_file`\n- **Artifacts Created**:\n  - Spec: [agents/corporate-dnd-master.md](file:///usr/loca"
+      },
+      "execution": {
+        "agent_id": "corporate-dnd-master",
+        "conversation_id": "b6055d35-c77f-4e76-9231-9e2db9c1367c",
+        "antigravity_conversation_id": "71d428fb9f6c57e692dc1b578ee71c1a",
+        "latency_ms": 26956.7,
+        "tokens": {
+          "prompt_tokens": 42159,
+          "cached_tokens": 22061,
+          "thoughts_tokens": 819,
+          "candidates_tokens": 887,
+          "subagent_tokens": 0,
+          "main_tokens": 43865,
+          "total_tokens": 43865
+        },
+        "tool_calls": [
+          "manage_hero_state",
+          "emit_dag_step",
+          "roll_crypto_d20",
+          "emit_dag_step",
+          "manage_hero_state",
+          "generate_image",
+          "emit_dag_step",
+          "generate_image"
+        ],
+        "sse_event_counts": {
+          "turn_start": 1,
+          "thought": 3,
+          "tool_call": 8,
+          "tool_result": 8,
+          "dag_step": 8,
+          "media": 1,
+          "text_delta": 15,
+          "usage": 1,
+          "turn_complete": 1
+        },
+        "response_preview": "### \u2694\ufe0f Corporate D&D Encounter: The Q4 War Room\n\nThe heavy frosted-glass doors of the Executive Boardroom slam shut behind you. From the center conference table emerges the writhing, nightmarish form of the **3-Headed Hydra of Scope Creep**\u2014its heads shrieking conflicting stakeholder feedback, feature bloat demands, and arbitrary milestone shifts!\n\n---\n\n### \ud83c\udfb2 Cryptographic d20 Telemetry\n* **Action**: `Cast VLOOKUP Smite & Freeze Scope`\n* **Skill**: `VLOOKUP Smite`\n* **CSPRNG Source**: `secrets.r"
+      },
+      "combined_scenario_tokens": {
+        "prompt_tokens": 72666,
+        "cached_tokens": 32969,
+        "thoughts_tokens": 1367,
+        "candidates_tokens": 2027,
+        "subagent_tokens": 0,
+        "main_tokens": 76060,
+        "total_tokens": 76060
+      },
+      "multi_turn_continuity": null
+    }
+  ],
+  "gateway_user_ledger": {
+    "user_id": "cbribiescas",
+    "conversation_count": 20,
+    "turn_count": 21,
+    "last_active_at": "2026-10-29T02:23:09.923071+00:00",
+    "tokens": {
+      "prompt_tokens": 2146051,
+      "cached_tokens": 1400337,
+      "candidates_tokens": 64122,
+      "thoughts_tokens": 30213,
+      "subagent_tokens": 134441,
+      "main_tokens": 2105945,
+      "total_tokens": 2240386
+    },
+    "prompt_tokens": 2146051,
+    "cached_tokens": 1400337,
+    "candidates_tokens": 64122,
+    "thoughts_tokens": 30213,
+    "subagent_tokens": 134441,
+    "main_tokens": 2105945,
+    "total_tokens": 2240386,
+    "by_agent": [
+      {
+        "agent_id": "antigravity",
+        "conversation_count": 10,
+        "turn_count": 10,
+        "last_active_at": "2026-10-29T02:22:42.497928+00:00",
+        "tokens": {
+          "prompt_tokens": 597798,
+          "cached_tokens": 356462,
+          "candidates_tokens": 12975,
+          "thoughts_tokens": 6245,
+          "subagent_tokens": 0,
+          "main_tokens": 617018,
+          "total_tokens": 617018
+        },
+        "prompt_tokens": 597798,
+        "cached_tokens": 356462,
+        "candidates_tokens": 12975,
+        "thoughts_tokens": 6245,
+        "subagent_tokens": 0,
+        "main_tokens": 617018,
+        "total_tokens": 617018
+      },
+      {
+        "agent_id": "supreme-court-debate",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:13:53.366955+00:00",
+        "tokens": {
+          "prompt_tokens": 301472,
+          "cached_tokens": 191620,
+          "candidates_tokens": 5726,
+          "thoughts_tokens": 6887,
+          "subagent_tokens": 71334,
+          "main_tokens": 242751,
+          "total_tokens": 314085
+        },
+        "prompt_tokens": 301472,
+        "cached_tokens": 191620,
+        "candidates_tokens": 5726,
+        "thoughts_tokens": 6887,
+        "subagent_tokens": 71334,
+        "main_tokens": 242751,
+        "total_tokens": 314085
+      },
+      {
+        "agent_id": "mythbuster-router",
+        "conversation_count": 1,
+        "turn_count": 2,
+        "last_active_at": "2026-10-29T02:18:33.236805+00:00",
+        "tokens": {
+          "prompt_tokens": 285284,
+          "cached_tokens": 211056,
+          "candidates_tokens": 6044,
+          "thoughts_tokens": 2601,
+          "subagent_tokens": 0,
+          "main_tokens": 293929,
+          "total_tokens": 293929
+        },
+        "prompt_tokens": 285284,
+        "cached_tokens": 211056,
+        "candidates_tokens": 6044,
+        "thoughts_tokens": 2601,
+        "subagent_tokens": 0,
+        "main_tokens": 293929,
+        "total_tokens": 293929
+      },
+      {
+        "agent_id": "shark-tank-panel",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:12:00.618474+00:00",
+        "tokens": {
+          "prompt_tokens": 209211,
+          "cached_tokens": 137018,
+          "candidates_tokens": 8557,
+          "thoughts_tokens": 2665,
+          "subagent_tokens": 63107,
+          "main_tokens": 157326,
+          "total_tokens": 220433
+        },
+        "prompt_tokens": 209211,
+        "cached_tokens": 137018,
+        "candidates_tokens": 8557,
+        "thoughts_tokens": 2665,
+        "subagent_tokens": 63107,
+        "main_tokens": 157326,
+        "total_tokens": 220433
+      },
+      {
+        "agent_id": "foodie-hourglass-solver",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:22:31.810680+00:00",
+        "tokens": {
+          "prompt_tokens": 176083,
+          "cached_tokens": 134376,
+          "candidates_tokens": 9936,
+          "thoughts_tokens": 2466,
+          "subagent_tokens": 0,
+          "main_tokens": 188485,
+          "total_tokens": 188485
+        },
+        "prompt_tokens": 176083,
+        "cached_tokens": 134376,
+        "candidates_tokens": 9936,
+        "thoughts_tokens": 2466,
+        "subagent_tokens": 0,
+        "main_tokens": 188485,
+        "total_tokens": 188485
+      },
+      {
+        "agent_id": "six-degrees-detective",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:20:24.307923+00:00",
+        "tokens": {
+          "prompt_tokens": 147904,
+          "cached_tokens": 102958,
+          "candidates_tokens": 5014,
+          "thoughts_tokens": 3214,
+          "subagent_tokens": 0,
+          "main_tokens": 156132,
+          "total_tokens": 156132
+        },
+        "prompt_tokens": 147904,
+        "cached_tokens": 102958,
+        "candidates_tokens": 5014,
+        "thoughts_tokens": 3214,
+        "subagent_tokens": 0,
+        "main_tokens": 156132,
+        "total_tokens": 156132
+      },
+      {
+        "agent_id": "perfectionist-art-director",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:15:43.770524+00:00",
+        "tokens": {
+          "prompt_tokens": 108028,
+          "cached_tokens": 75606,
+          "candidates_tokens": 3176,
+          "thoughts_tokens": 2112,
+          "subagent_tokens": 0,
+          "main_tokens": 113316,
+          "total_tokens": 113316
+        },
+        "prompt_tokens": 108028,
+        "cached_tokens": 75606,
+        "candidates_tokens": 3176,
+        "thoughts_tokens": 2112,
+        "subagent_tokens": 0,
+        "main_tokens": 113316,
+        "total_tokens": 113316
+      },
+      {
+        "agent_id": "arcade-builder",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:09:50.832913+00:00",
+        "tokens": {
+          "prompt_tokens": 102615,
+          "cached_tokens": 68438,
+          "candidates_tokens": 6367,
+          "thoughts_tokens": 931,
+          "subagent_tokens": 0,
+          "main_tokens": 109913,
+          "total_tokens": 109913
+        },
+        "prompt_tokens": 102615,
+        "cached_tokens": 68438,
+        "candidates_tokens": 6367,
+        "thoughts_tokens": 931,
+        "subagent_tokens": 0,
+        "main_tokens": 109913,
+        "total_tokens": 109913
+      },
+      {
+        "agent_id": "trailer-director",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:08:46.416873+00:00",
+        "tokens": {
+          "prompt_tokens": 100967,
+          "cached_tokens": 63391,
+          "candidates_tokens": 2860,
+          "thoughts_tokens": 924,
+          "subagent_tokens": 0,
+          "main_tokens": 104751,
+          "total_tokens": 104751
+        },
+        "prompt_tokens": 100967,
+        "cached_tokens": 63391,
+        "candidates_tokens": 2860,
+        "thoughts_tokens": 924,
+        "subagent_tokens": 0,
+        "main_tokens": 104751,
+        "total_tokens": 104751
+      },
+      {
+        "agent_id": "bot-gladiator-arena",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:14:37.021539+00:00",
+        "tokens": {
+          "prompt_tokens": 74530,
+          "cached_tokens": 37351,
+          "candidates_tokens": 2580,
+          "thoughts_tokens": 1349,
+          "subagent_tokens": 0,
+          "main_tokens": 78459,
+          "total_tokens": 78459
+        },
+        "prompt_tokens": 74530,
+        "cached_tokens": 37351,
+        "candidates_tokens": 2580,
+        "thoughts_tokens": 1349,
+        "subagent_tokens": 0,
+        "main_tokens": 78459,
+        "total_tokens": 78459
+      },
+      {
+        "agent_id": "corporate-dnd-master",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:23:09.923071+00:00",
+        "tokens": {
+          "prompt_tokens": 42159,
+          "cached_tokens": 22061,
+          "candidates_tokens": 887,
+          "thoughts_tokens": 819,
+          "subagent_tokens": 0,
+          "main_tokens": 43865,
+          "total_tokens": 43865
+        },
+        "prompt_tokens": 42159,
+        "cached_tokens": 22061,
+        "candidates_tokens": 887,
+        "thoughts_tokens": 819,
+        "subagent_tokens": 0,
+        "main_tokens": 43865,
+        "total_tokens": 43865
+      }
+    ],
+    "recent_conversations": [
+      {
+        "conversation_id": "b6055d35-c77f-4e76-9231-9e2db9c1367c",
+        "antigravity_conversation_id": "71d428fb9f6c57e692dc1b578ee71c1a",
+        "user_id": "cbribiescas",
+        "agent_id": "corporate-dnd-master",
+        "title": "AUTOMATED BENCHMARK ENCOUNTER (do NOT call `ask_question` \u2014 execute my move dire",
+        "turn_count": 1,
+        "prompt_tokens": 42159,
+        "cached_tokens": 22061,
+        "candidates_tokens": 887,
+        "thoughts_tokens": 819,
+        "subagent_tokens": 0,
+        "total_tokens": 43865,
+        "created_at": "2026-10-29T02:23:09.923071+00:00",
+        "updated_at": "2026-10-29T02:23:09.923071+00:00",
+        "tokens": {
+          "prompt_tokens": 42159,
+          "cached_tokens": 22061,
+          "candidates_tokens": 887,
+          "thoughts_tokens": 819,
+          "subagent_tokens": 0,
+          "main_tokens": 43865,
+          "total_tokens": 43865
+        }
+      },
+      {
+        "conversation_id": "b430a577-5612-48a2-a28e-83f276c2d191",
+        "antigravity_conversation_id": "7d0bc580b8b45ce8a166276c6fe81db3",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #10: **Corporate D&D Cryptographic State Machine** (`corp",
+        "turn_count": 1,
+        "prompt_tokens": 30507,
+        "cached_tokens": 10908,
+        "candidates_tokens": 1140,
+        "thoughts_tokens": 548,
+        "subagent_tokens": 0,
+        "total_tokens": 32195,
+        "created_at": "2026-10-29T02:22:42.497928+00:00",
+        "updated_at": "2026-10-29T02:22:42.497928+00:00",
+        "tokens": {
+          "prompt_tokens": 30507,
+          "cached_tokens": 10908,
+          "candidates_tokens": 1140,
+          "thoughts_tokens": 548,
+          "subagent_tokens": 0,
+          "main_tokens": 32195,
+          "total_tokens": 32195
+        }
+      },
+      {
+        "conversation_id": "ff2db7ef-1665-4f1e-9501-49ac6f809fa9",
+        "antigravity_conversation_id": "6f357a26b35a5b0891b62dae5be15ca4",
+        "user_id": "cbribiescas",
+        "agent_id": "foodie-hourglass-solver",
+        "title": "Plan an optimal 3-stop Singapore hawker crawl (**Starter + Main + Dessert**) aro",
+        "turn_count": 1,
+        "prompt_tokens": 176083,
+        "cached_tokens": 134376,
+        "candidates_tokens": 9936,
+        "thoughts_tokens": 2466,
+        "subagent_tokens": 0,
+        "total_tokens": 188485,
+        "created_at": "2026-10-29T02:22:31.810680+00:00",
+        "updated_at": "2026-10-29T02:22:31.810680+00:00",
+        "tokens": {
+          "prompt_tokens": 176083,
+          "cached_tokens": 134376,
+          "candidates_tokens": 9936,
+          "thoughts_tokens": 2466,
+          "subagent_tokens": 0,
+          "main_tokens": 188485,
+          "total_tokens": 188485
+        }
+      },
+      {
+        "conversation_id": "4bef69d2-6f77-4c5f-8271-5d1c3f5cf600",
+        "antigravity_conversation_id": "8c6d06e48ae05f3b84e6cc3f0e1d74d7",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #9: **Hourglass Hawker Foodie Optimizer** (`foodie-hourgl",
+        "turn_count": 1,
+        "prompt_tokens": 30488,
+        "cached_tokens": 0,
+        "candidates_tokens": 1027,
+        "thoughts_tokens": 540,
+        "subagent_tokens": 0,
+        "total_tokens": 32055,
+        "created_at": "2026-10-29T02:20:35.400770+00:00",
+        "updated_at": "2026-10-29T02:20:35.400770+00:00",
+        "tokens": {
+          "prompt_tokens": 30488,
+          "cached_tokens": 0,
+          "candidates_tokens": 1027,
+          "thoughts_tokens": 540,
+          "subagent_tokens": 0,
+          "main_tokens": 32055,
+          "total_tokens": 32055
+        }
+      },
+      {
+        "conversation_id": "126dd701-d7fe-4ef7-babc-377747e5d2c5",
+        "antigravity_conversation_id": "bae77711e6f5580fb79a55405972ce54",
+        "user_id": "cbribiescas",
+        "agent_id": "six-degrees-detective",
+        "title": "Connect **'Bubble Tea (invented in Taiwan in the 1980s)'** to the **'Apollo 11 M",
+        "turn_count": 1,
+        "prompt_tokens": 147904,
+        "cached_tokens": 102958,
+        "candidates_tokens": 5014,
+        "thoughts_tokens": 3214,
+        "subagent_tokens": 0,
+        "total_tokens": 156132,
+        "created_at": "2026-10-29T02:20:24.307923+00:00",
+        "updated_at": "2026-10-29T02:20:24.307923+00:00",
+        "tokens": {
+          "prompt_tokens": 147904,
+          "cached_tokens": 102958,
+          "candidates_tokens": 5014,
+          "thoughts_tokens": 3214,
+          "subagent_tokens": 0,
+          "main_tokens": 156132,
+          "total_tokens": 156132
+        }
+      },
+      {
+        "conversation_id": "7dc68065-127d-4317-9c95-eb2e319efe45",
+        "antigravity_conversation_id": "9d2716a820c557ed8cc901bf0d58a5d1",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #8: **Six-Degrees Tree Search & Prune Detective** (`six-d",
+        "turn_count": 1,
+        "prompt_tokens": 30207,
+        "cached_tokens": 12710,
+        "candidates_tokens": 1049,
+        "thoughts_tokens": 565,
+        "subagent_tokens": 0,
+        "total_tokens": 31821,
+        "created_at": "2026-10-29T02:18:46.373870+00:00",
+        "updated_at": "2026-10-29T02:18:46.373870+00:00",
+        "tokens": {
+          "prompt_tokens": 30207,
+          "cached_tokens": 12710,
+          "candidates_tokens": 1049,
+          "thoughts_tokens": 565,
+          "subagent_tokens": 0,
+          "main_tokens": 31821,
+          "total_tokens": 31821
+        }
+      },
+      {
+        "conversation_id": "bc929838-733b-43cf-bb8c-6a6973f6d8d5",
+        "antigravity_conversation_id": "62ab2e8a426c5982acf0af64e3a524b9",
+        "user_id": "cbribiescas",
+        "agent_id": "mythbuster-router",
+        "title": "Bar-bet claim: **'All 8.1 billion humans on Earth could be submerged inside Scot",
+        "turn_count": 2,
+        "prompt_tokens": 285284,
+        "cached_tokens": 211056,
+        "candidates_tokens": 6044,
+        "thoughts_tokens": 2601,
+        "subagent_tokens": 0,
+        "total_tokens": 293929,
+        "created_at": "2026-10-29T02:17:43.426732+00:00",
+        "updated_at": "2026-10-29T02:18:33.236805+00:00",
+        "tokens": {
+          "prompt_tokens": 285284,
+          "cached_tokens": 211056,
+          "candidates_tokens": 6044,
+          "thoughts_tokens": 2601,
+          "subagent_tokens": 0,
+          "main_tokens": 293929,
+          "total_tokens": 293929
+        }
+      },
+      {
+        "conversation_id": "2027bd5f-4f42-4907-8403-09b9c9f18053",
+        "antigravity_conversation_id": "b1a359c0cd075fd48861dec33489c934",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #7: **Conditional Router MythBuster Lab** (`mythbuster-ro",
+        "turn_count": 1,
+        "prompt_tokens": 329953,
+        "cached_tokens": 267412,
+        "candidates_tokens": 3418,
+        "thoughts_tokens": 2356,
+        "subagent_tokens": 0,
+        "total_tokens": 335727,
+        "created_at": "2026-10-29T02:16:44.240646+00:00",
+        "updated_at": "2026-10-29T02:16:44.240646+00:00",
+        "tokens": {
+          "prompt_tokens": 329953,
+          "cached_tokens": 267412,
+          "candidates_tokens": 3418,
+          "thoughts_tokens": 2356,
+          "subagent_tokens": 0,
+          "main_tokens": 335727,
+          "total_tokens": 335727
+        }
+      },
+      {
+        "conversation_id": "925f8ec5-10c5-48bd-9a2a-bec613e5236e",
+        "antigravity_conversation_id": "fe242f2bfa275141b7e8d1045fb9163d",
+        "user_id": "cbribiescas",
+        "agent_id": "perfectionist-art-director",
+        "title": "Create a 3-panel workplace comic strip about an engineer accidentally sharing th",
+        "turn_count": 1,
+        "prompt_tokens": 108028,
+        "cached_tokens": 75606,
+        "candidates_tokens": 3176,
+        "thoughts_tokens": 2112,
+        "subagent_tokens": 0,
+        "total_tokens": 113316,
+        "created_at": "2026-10-29T02:15:43.770524+00:00",
+        "updated_at": "2026-10-29T02:15:43.770524+00:00",
+        "tokens": {
+          "prompt_tokens": 108028,
+          "cached_tokens": 75606,
+          "candidates_tokens": 3176,
+          "thoughts_tokens": 2112,
+          "subagent_tokens": 0,
+          "main_tokens": 113316,
+          "total_tokens": 113316
+        }
+      },
+      {
+        "conversation_id": "471eeaed-9c53-4c00-9a58-e544a863b98c",
+        "antigravity_conversation_id": "cc7f6a1ba6225b8ab763443e83e6af3d",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #6: **Perfectionist Multimodal Art Director** (`perfectio",
+        "turn_count": 1,
+        "prompt_tokens": 28948,
+        "cached_tokens": 10869,
+        "candidates_tokens": 1019,
+        "thoughts_tokens": 0,
+        "subagent_tokens": 0,
+        "total_tokens": 29967,
+        "created_at": "2026-10-29T02:14:44.703889+00:00",
+        "updated_at": "2026-10-29T02:14:44.703889+00:00",
+        "tokens": {
+          "prompt_tokens": 28948,
+          "cached_tokens": 10869,
+          "candidates_tokens": 1019,
+          "thoughts_tokens": 0,
+          "subagent_tokens": 0,
+          "main_tokens": 29967,
+          "total_tokens": 29967
+        }
+      },
+      {
+        "conversation_id": "a5cf88b3-e3b6-40f9-a4a1-83097ca6f233",
+        "antigravity_conversation_id": "943e5e5b83735adfb299665e8b8662aa",
+        "user_id": "cbribiescas",
+        "agent_id": "bot-gladiator-arena",
+        "title": "Run the **AI Bot Gladiator Prisoner's Dilemma Championship**! Code the 3 Generat",
+        "turn_count": 1,
+        "prompt_tokens": 74530,
+        "cached_tokens": 37351,
+        "candidates_tokens": 2580,
+        "thoughts_tokens": 1349,
+        "subagent_tokens": 0,
+        "total_tokens": 78459,
+        "created_at": "2026-10-29T02:14:37.021539+00:00",
+        "updated_at": "2026-10-29T02:14:37.021539+00:00",
+        "tokens": {
+          "prompt_tokens": 74530,
+          "cached_tokens": 37351,
+          "candidates_tokens": 2580,
+          "thoughts_tokens": 1349,
+          "subagent_tokens": 0,
+          "main_tokens": 78459,
+          "total_tokens": 78459
+        }
+      },
+      {
+        "conversation_id": "2602f718-bc3d-4ea4-81b8-344a5fb649ac",
+        "antigravity_conversation_id": "1da30983ea085ed9a713f5f52155f391",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #5: **AI Bot Gladiator Tournament Arena** (`bot-gladiator",
+        "turn_count": 1,
+        "prompt_tokens": 29767,
+        "cached_tokens": 10925,
+        "candidates_tokens": 1018,
+        "thoughts_tokens": 495,
+        "subagent_tokens": 0,
+        "total_tokens": 31280,
+        "created_at": "2026-10-29T02:14:03.360864+00:00",
+        "updated_at": "2026-10-29T02:14:03.360864+00:00",
+        "tokens": {
+          "prompt_tokens": 29767,
+          "cached_tokens": 10925,
+          "candidates_tokens": 1018,
+          "thoughts_tokens": 495,
+          "subagent_tokens": 0,
+          "main_tokens": 31280,
+          "total_tokens": 31280
+        }
+      },
+      {
+        "conversation_id": "aec6c175-a078-4bf7-b33f-86f4da0c2951",
+        "antigravity_conversation_id": "29f1f928202e5f72916b7addf6012212",
+        "user_id": "cbribiescas",
+        "agent_id": "supreme-court-debate",
+        "title": "Docket No. 26-808: **'Is a hotdog legally and structurally a taco?'** Search rea",
+        "turn_count": 1,
+        "prompt_tokens": 301472,
+        "cached_tokens": 191620,
+        "candidates_tokens": 5726,
+        "thoughts_tokens": 6887,
+        "subagent_tokens": 71334,
+        "total_tokens": 314085,
+        "created_at": "2026-10-29T02:13:53.366955+00:00",
+        "updated_at": "2026-10-29T02:13:53.366955+00:00",
+        "tokens": {
+          "prompt_tokens": 301472,
+          "cached_tokens": 191620,
+          "candidates_tokens": 5726,
+          "thoughts_tokens": 6887,
+          "subagent_tokens": 71334,
+          "main_tokens": 242751,
+          "total_tokens": 314085
+        }
+      },
+      {
+        "conversation_id": "e10b888b-2793-4858-a925-258b75136524",
+        "antigravity_conversation_id": "ad7d560a4b735f86afb0458b7577be85",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #4: **Culinary Supreme Court Cross-Exam** (`supreme-court",
+        "turn_count": 1,
+        "prompt_tokens": 29397,
+        "cached_tokens": 10896,
+        "candidates_tokens": 1188,
+        "thoughts_tokens": 57,
+        "subagent_tokens": 0,
+        "total_tokens": 30642,
+        "created_at": "2026-10-29T02:12:09.392998+00:00",
+        "updated_at": "2026-10-29T02:12:09.392998+00:00",
+        "tokens": {
+          "prompt_tokens": 29397,
+          "cached_tokens": 10896,
+          "candidates_tokens": 1188,
+          "thoughts_tokens": 57,
+          "subagent_tokens": 0,
+          "main_tokens": 30642,
+          "total_tokens": 30642
+        }
+      },
+      {
+        "conversation_id": "ace8ec2a-9e59-4c71-8535-54e909369285",
+        "antigravity_conversation_id": "bdd0287f20f85643bfed4ea2040aa132",
+        "user_id": "cbribiescas",
+        "agent_id": "shark-tank-panel",
+        "title": "Pitch: **'Rent-a-Retriever'** \u2014 an on-demand B2B SaaS marketplace dispatching ce",
+        "turn_count": 1,
+        "prompt_tokens": 209211,
+        "cached_tokens": 137018,
+        "candidates_tokens": 8557,
+        "thoughts_tokens": 2665,
+        "subagent_tokens": 63107,
+        "total_tokens": 220433,
+        "created_at": "2026-10-29T02:12:00.618474+00:00",
+        "updated_at": "2026-10-29T02:12:00.618474+00:00",
+        "tokens": {
+          "prompt_tokens": 209211,
+          "cached_tokens": 137018,
+          "candidates_tokens": 8557,
+          "thoughts_tokens": 2665,
+          "subagent_tokens": 63107,
+          "main_tokens": 157326,
+          "total_tokens": 220433
+        }
+      },
+      {
+        "conversation_id": "8682fde4-62db-4b2f-bf6d-bc78c102e2a5",
+        "antigravity_conversation_id": "b02bc74cc6a357bc9e876a545042879e",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #3: **Shark Tank Parallel Pitch Panel** (`shark-tank-pane",
+        "turn_count": 1,
+        "prompt_tokens": 29255,
+        "cached_tokens": 10887,
+        "candidates_tokens": 1183,
+        "thoughts_tokens": 0,
+        "subagent_tokens": 0,
+        "total_tokens": 30438,
+        "created_at": "2026-10-29T02:10:00.171721+00:00",
+        "updated_at": "2026-10-29T02:10:00.171721+00:00",
+        "tokens": {
+          "prompt_tokens": 29255,
+          "cached_tokens": 10887,
+          "candidates_tokens": 1183,
+          "thoughts_tokens": 0,
+          "subagent_tokens": 0,
+          "main_tokens": 30438,
+          "total_tokens": 30438
+        }
+      },
+      {
+        "conversation_id": "35e627ad-9c57-4b4e-8100-420e75f4f283",
+        "antigravity_conversation_id": "19d75601210556b6ba47b696f106f131",
+        "user_id": "cbribiescas",
+        "agent_id": "arcade-builder",
+        "title": "Build a playable single-file retro HTML5 Canvas game at `/tmp/antigravity_harnes",
+        "turn_count": 1,
+        "prompt_tokens": 102615,
+        "cached_tokens": 68438,
+        "candidates_tokens": 6367,
+        "thoughts_tokens": 931,
+        "subagent_tokens": 0,
+        "total_tokens": 109913,
+        "created_at": "2026-10-29T02:09:50.832913+00:00",
+        "updated_at": "2026-10-29T02:09:50.832913+00:00",
+        "tokens": {
+          "prompt_tokens": 102615,
+          "cached_tokens": 68438,
+          "candidates_tokens": 6367,
+          "thoughts_tokens": 931,
+          "subagent_tokens": 0,
+          "main_tokens": 109913,
+          "total_tokens": 109913
+        }
+      },
+      {
+        "conversation_id": "5eed396a-de9c-429b-b111-303c371f088c",
+        "antigravity_conversation_id": "25bc22100552596ba2970c1dd983f9fb",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #2: **Self-Healing Retro Arcade Factory** (`arcade-builde",
+        "turn_count": 1,
+        "prompt_tokens": 29730,
+        "cached_tokens": 10931,
+        "candidates_tokens": 1009,
+        "thoughts_tokens": 866,
+        "subagent_tokens": 0,
+        "total_tokens": 31605,
+        "created_at": "2026-10-29T02:08:57.741627+00:00",
+        "updated_at": "2026-10-29T02:08:57.741627+00:00",
+        "tokens": {
+          "prompt_tokens": 29730,
+          "cached_tokens": 10931,
+          "candidates_tokens": 1009,
+          "thoughts_tokens": 866,
+          "subagent_tokens": 0,
+          "main_tokens": 31605,
+          "total_tokens": 31605
+        }
+      },
+      {
+        "conversation_id": "2c460c99-e7ec-4c9f-96de-ed45327c5bec",
+        "antigravity_conversation_id": "8c9af2ccc77e53a6b2d0293b3c21e64e",
+        "user_id": "cbribiescas",
+        "agent_id": "trailer-director",
+        "title": "Turn 'Searching for the unmuted person eating crunchy kettle chips during a tens",
+        "turn_count": 1,
+        "prompt_tokens": 100967,
+        "cached_tokens": 63391,
+        "candidates_tokens": 2860,
+        "thoughts_tokens": 924,
+        "subagent_tokens": 0,
+        "total_tokens": 104751,
+        "created_at": "2026-10-29T02:08:46.416873+00:00",
+        "updated_at": "2026-10-29T02:08:46.416873+00:00",
+        "tokens": {
+          "prompt_tokens": 100967,
+          "cached_tokens": 63391,
+          "candidates_tokens": 2860,
+          "thoughts_tokens": 924,
+          "subagent_tokens": 0,
+          "main_tokens": 104751,
+          "total_tokens": 104751
+        }
+      },
+      {
+        "conversation_id": "afb1b334-5c26-41a9-bd2a-095df8f70cc7",
+        "antigravity_conversation_id": "f9eb5818a04253f481117008ea4ac7a0",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #1: **The Hollywood Trailer Director** (`trailer-director",
+        "turn_count": 1,
+        "prompt_tokens": 29546,
+        "cached_tokens": 10924,
+        "candidates_tokens": 924,
+        "thoughts_tokens": 818,
+        "subagent_tokens": 0,
+        "total_tokens": 31288,
+        "created_at": "2026-10-29T02:07:35.912797+00:00",
+        "updated_at": "2026-10-29T02:07:35.912797+00:00",
+        "tokens": {
+          "prompt_tokens": 29546,
+          "cached_tokens": 10924,
+          "candidates_tokens": 924,
+          "thoughts_tokens": 818,
+          "subagent_tokens": 0,
+          "main_tokens": 31288,
+          "total_tokens": 31288
+        }
+      }
+    ]
+  },
+  "gateway_ledger_summary": {
+    "global": {
+      "conversation_count": 20,
+      "turn_count": 21,
+      "user_count": 1,
+      "agent_count": 11,
+      "avg_latency_ms": 44502.21,
+      "tokens": {
+        "prompt_tokens": 2146051,
+        "cached_tokens": 1400337,
+        "candidates_tokens": 64122,
+        "thoughts_tokens": 30213,
+        "subagent_tokens": 134441,
+        "main_tokens": 2105945,
+        "total_tokens": 2240386
+      },
+      "prompt_tokens": 2146051,
+      "cached_tokens": 1400337,
+      "candidates_tokens": 64122,
+      "thoughts_tokens": 30213,
+      "subagent_tokens": 134441,
+      "main_tokens": 2105945,
+      "total_tokens": 2240386
+    },
+    "by_agent": [
+      {
+        "agent_id": "antigravity",
+        "conversation_count": 10,
+        "turn_count": 10,
+        "last_active_at": "2026-10-29T02:22:42.497928+00:00",
+        "tokens": {
+          "prompt_tokens": 597798,
+          "cached_tokens": 356462,
+          "candidates_tokens": 12975,
+          "thoughts_tokens": 6245,
+          "subagent_tokens": 0,
+          "main_tokens": 617018,
+          "total_tokens": 617018
+        },
+        "prompt_tokens": 597798,
+        "cached_tokens": 356462,
+        "candidates_tokens": 12975,
+        "thoughts_tokens": 6245,
+        "subagent_tokens": 0,
+        "main_tokens": 617018,
+        "total_tokens": 617018
+      },
+      {
+        "agent_id": "supreme-court-debate",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:13:53.366955+00:00",
+        "tokens": {
+          "prompt_tokens": 301472,
+          "cached_tokens": 191620,
+          "candidates_tokens": 5726,
+          "thoughts_tokens": 6887,
+          "subagent_tokens": 71334,
+          "main_tokens": 242751,
+          "total_tokens": 314085
+        },
+        "prompt_tokens": 301472,
+        "cached_tokens": 191620,
+        "candidates_tokens": 5726,
+        "thoughts_tokens": 6887,
+        "subagent_tokens": 71334,
+        "main_tokens": 242751,
+        "total_tokens": 314085
+      },
+      {
+        "agent_id": "mythbuster-router",
+        "conversation_count": 1,
+        "turn_count": 2,
+        "last_active_at": "2026-10-29T02:18:33.236805+00:00",
+        "tokens": {
+          "prompt_tokens": 285284,
+          "cached_tokens": 211056,
+          "candidates_tokens": 6044,
+          "thoughts_tokens": 2601,
+          "subagent_tokens": 0,
+          "main_tokens": 293929,
+          "total_tokens": 293929
+        },
+        "prompt_tokens": 285284,
+        "cached_tokens": 211056,
+        "candidates_tokens": 6044,
+        "thoughts_tokens": 2601,
+        "subagent_tokens": 0,
+        "main_tokens": 293929,
+        "total_tokens": 293929
+      },
+      {
+        "agent_id": "shark-tank-panel",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:12:00.618474+00:00",
+        "tokens": {
+          "prompt_tokens": 209211,
+          "cached_tokens": 137018,
+          "candidates_tokens": 8557,
+          "thoughts_tokens": 2665,
+          "subagent_tokens": 63107,
+          "main_tokens": 157326,
+          "total_tokens": 220433
+        },
+        "prompt_tokens": 209211,
+        "cached_tokens": 137018,
+        "candidates_tokens": 8557,
+        "thoughts_tokens": 2665,
+        "subagent_tokens": 63107,
+        "main_tokens": 157326,
+        "total_tokens": 220433
+      },
+      {
+        "agent_id": "foodie-hourglass-solver",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:22:31.810680+00:00",
+        "tokens": {
+          "prompt_tokens": 176083,
+          "cached_tokens": 134376,
+          "candidates_tokens": 9936,
+          "thoughts_tokens": 2466,
+          "subagent_tokens": 0,
+          "main_tokens": 188485,
+          "total_tokens": 188485
+        },
+        "prompt_tokens": 176083,
+        "cached_tokens": 134376,
+        "candidates_tokens": 9936,
+        "thoughts_tokens": 2466,
+        "subagent_tokens": 0,
+        "main_tokens": 188485,
+        "total_tokens": 188485
+      },
+      {
+        "agent_id": "six-degrees-detective",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:20:24.307923+00:00",
+        "tokens": {
+          "prompt_tokens": 147904,
+          "cached_tokens": 102958,
+          "candidates_tokens": 5014,
+          "thoughts_tokens": 3214,
+          "subagent_tokens": 0,
+          "main_tokens": 156132,
+          "total_tokens": 156132
+        },
+        "prompt_tokens": 147904,
+        "cached_tokens": 102958,
+        "candidates_tokens": 5014,
+        "thoughts_tokens": 3214,
+        "subagent_tokens": 0,
+        "main_tokens": 156132,
+        "total_tokens": 156132
+      },
+      {
+        "agent_id": "perfectionist-art-director",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:15:43.770524+00:00",
+        "tokens": {
+          "prompt_tokens": 108028,
+          "cached_tokens": 75606,
+          "candidates_tokens": 3176,
+          "thoughts_tokens": 2112,
+          "subagent_tokens": 0,
+          "main_tokens": 113316,
+          "total_tokens": 113316
+        },
+        "prompt_tokens": 108028,
+        "cached_tokens": 75606,
+        "candidates_tokens": 3176,
+        "thoughts_tokens": 2112,
+        "subagent_tokens": 0,
+        "main_tokens": 113316,
+        "total_tokens": 113316
+      },
+      {
+        "agent_id": "arcade-builder",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:09:50.832913+00:00",
+        "tokens": {
+          "prompt_tokens": 102615,
+          "cached_tokens": 68438,
+          "candidates_tokens": 6367,
+          "thoughts_tokens": 931,
+          "subagent_tokens": 0,
+          "main_tokens": 109913,
+          "total_tokens": 109913
+        },
+        "prompt_tokens": 102615,
+        "cached_tokens": 68438,
+        "candidates_tokens": 6367,
+        "thoughts_tokens": 931,
+        "subagent_tokens": 0,
+        "main_tokens": 109913,
+        "total_tokens": 109913
+      },
+      {
+        "agent_id": "trailer-director",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:08:46.416873+00:00",
+        "tokens": {
+          "prompt_tokens": 100967,
+          "cached_tokens": 63391,
+          "candidates_tokens": 2860,
+          "thoughts_tokens": 924,
+          "subagent_tokens": 0,
+          "main_tokens": 104751,
+          "total_tokens": 104751
+        },
+        "prompt_tokens": 100967,
+        "cached_tokens": 63391,
+        "candidates_tokens": 2860,
+        "thoughts_tokens": 924,
+        "subagent_tokens": 0,
+        "main_tokens": 104751,
+        "total_tokens": 104751
+      },
+      {
+        "agent_id": "bot-gladiator-arena",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:14:37.021539+00:00",
+        "tokens": {
+          "prompt_tokens": 74530,
+          "cached_tokens": 37351,
+          "candidates_tokens": 2580,
+          "thoughts_tokens": 1349,
+          "subagent_tokens": 0,
+          "main_tokens": 78459,
+          "total_tokens": 78459
+        },
+        "prompt_tokens": 74530,
+        "cached_tokens": 37351,
+        "candidates_tokens": 2580,
+        "thoughts_tokens": 1349,
+        "subagent_tokens": 0,
+        "main_tokens": 78459,
+        "total_tokens": 78459
+      },
+      {
+        "agent_id": "corporate-dnd-master",
+        "conversation_count": 1,
+        "turn_count": 1,
+        "last_active_at": "2026-10-29T02:23:09.923071+00:00",
+        "tokens": {
+          "prompt_tokens": 42159,
+          "cached_tokens": 22061,
+          "candidates_tokens": 887,
+          "thoughts_tokens": 819,
+          "subagent_tokens": 0,
+          "main_tokens": 43865,
+          "total_tokens": 43865
+        },
+        "prompt_tokens": 42159,
+        "cached_tokens": 22061,
+        "candidates_tokens": 887,
+        "thoughts_tokens": 819,
+        "subagent_tokens": 0,
+        "main_tokens": 43865,
+        "total_tokens": 43865
+      }
+    ],
+    "by_user": [
+      {
+        "user_id": "cbribiescas",
+        "conversation_count": 20,
+        "turn_count": 21,
+        "last_active_at": "2026-10-29T02:23:09.923071+00:00",
+        "tokens": {
+          "prompt_tokens": 2146051,
+          "cached_tokens": 1400337,
+          "candidates_tokens": 64122,
+          "thoughts_tokens": 30213,
+          "subagent_tokens": 134441,
+          "main_tokens": 2105945,
+          "total_tokens": 2240386
+        },
+        "prompt_tokens": 2146051,
+        "cached_tokens": 1400337,
+        "candidates_tokens": 64122,
+        "thoughts_tokens": 30213,
+        "subagent_tokens": 134441,
+        "main_tokens": 2105945,
+        "total_tokens": 2240386
+      }
+    ],
+    "by_conversation": [
+      {
+        "conversation_id": "b6055d35-c77f-4e76-9231-9e2db9c1367c",
+        "antigravity_conversation_id": "71d428fb9f6c57e692dc1b578ee71c1a",
+        "user_id": "cbribiescas",
+        "agent_id": "corporate-dnd-master",
+        "title": "AUTOMATED BENCHMARK ENCOUNTER (do NOT call `ask_question` \u2014 execute my move dire",
+        "turn_count": 1,
+        "prompt_tokens": 42159,
+        "cached_tokens": 22061,
+        "candidates_tokens": 887,
+        "thoughts_tokens": 819,
+        "subagent_tokens": 0,
+        "total_tokens": 43865,
+        "created_at": "2026-10-29T02:23:09.923071+00:00",
+        "updated_at": "2026-10-29T02:23:09.923071+00:00",
+        "tokens": {
+          "prompt_tokens": 42159,
+          "cached_tokens": 22061,
+          "candidates_tokens": 887,
+          "thoughts_tokens": 819,
+          "subagent_tokens": 0,
+          "main_tokens": 43865,
+          "total_tokens": 43865
+        }
+      },
+      {
+        "conversation_id": "b430a577-5612-48a2-a28e-83f276c2d191",
+        "antigravity_conversation_id": "7d0bc580b8b45ce8a166276c6fe81db3",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #10: **Corporate D&D Cryptographic State Machine** (`corp",
+        "turn_count": 1,
+        "prompt_tokens": 30507,
+        "cached_tokens": 10908,
+        "candidates_tokens": 1140,
+        "thoughts_tokens": 548,
+        "subagent_tokens": 0,
+        "total_tokens": 32195,
+        "created_at": "2026-10-29T02:22:42.497928+00:00",
+        "updated_at": "2026-10-29T02:22:42.497928+00:00",
+        "tokens": {
+          "prompt_tokens": 30507,
+          "cached_tokens": 10908,
+          "candidates_tokens": 1140,
+          "thoughts_tokens": 548,
+          "subagent_tokens": 0,
+          "main_tokens": 32195,
+          "total_tokens": 32195
+        }
+      },
+      {
+        "conversation_id": "ff2db7ef-1665-4f1e-9501-49ac6f809fa9",
+        "antigravity_conversation_id": "6f357a26b35a5b0891b62dae5be15ca4",
+        "user_id": "cbribiescas",
+        "agent_id": "foodie-hourglass-solver",
+        "title": "Plan an optimal 3-stop Singapore hawker crawl (**Starter + Main + Dessert**) aro",
+        "turn_count": 1,
+        "prompt_tokens": 176083,
+        "cached_tokens": 134376,
+        "candidates_tokens": 9936,
+        "thoughts_tokens": 2466,
+        "subagent_tokens": 0,
+        "total_tokens": 188485,
+        "created_at": "2026-10-29T02:22:31.810680+00:00",
+        "updated_at": "2026-10-29T02:22:31.810680+00:00",
+        "tokens": {
+          "prompt_tokens": 176083,
+          "cached_tokens": 134376,
+          "candidates_tokens": 9936,
+          "thoughts_tokens": 2466,
+          "subagent_tokens": 0,
+          "main_tokens": 188485,
+          "total_tokens": 188485
+        }
+      },
+      {
+        "conversation_id": "4bef69d2-6f77-4c5f-8271-5d1c3f5cf600",
+        "antigravity_conversation_id": "8c6d06e48ae05f3b84e6cc3f0e1d74d7",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #9: **Hourglass Hawker Foodie Optimizer** (`foodie-hourgl",
+        "turn_count": 1,
+        "prompt_tokens": 30488,
+        "cached_tokens": 0,
+        "candidates_tokens": 1027,
+        "thoughts_tokens": 540,
+        "subagent_tokens": 0,
+        "total_tokens": 32055,
+        "created_at": "2026-10-29T02:20:35.400770+00:00",
+        "updated_at": "2026-10-29T02:20:35.400770+00:00",
+        "tokens": {
+          "prompt_tokens": 30488,
+          "cached_tokens": 0,
+          "candidates_tokens": 1027,
+          "thoughts_tokens": 540,
+          "subagent_tokens": 0,
+          "main_tokens": 32055,
+          "total_tokens": 32055
+        }
+      },
+      {
+        "conversation_id": "126dd701-d7fe-4ef7-babc-377747e5d2c5",
+        "antigravity_conversation_id": "bae77711e6f5580fb79a55405972ce54",
+        "user_id": "cbribiescas",
+        "agent_id": "six-degrees-detective",
+        "title": "Connect **'Bubble Tea (invented in Taiwan in the 1980s)'** to the **'Apollo 11 M",
+        "turn_count": 1,
+        "prompt_tokens": 147904,
+        "cached_tokens": 102958,
+        "candidates_tokens": 5014,
+        "thoughts_tokens": 3214,
+        "subagent_tokens": 0,
+        "total_tokens": 156132,
+        "created_at": "2026-10-29T02:20:24.307923+00:00",
+        "updated_at": "2026-10-29T02:20:24.307923+00:00",
+        "tokens": {
+          "prompt_tokens": 147904,
+          "cached_tokens": 102958,
+          "candidates_tokens": 5014,
+          "thoughts_tokens": 3214,
+          "subagent_tokens": 0,
+          "main_tokens": 156132,
+          "total_tokens": 156132
+        }
+      },
+      {
+        "conversation_id": "7dc68065-127d-4317-9c95-eb2e319efe45",
+        "antigravity_conversation_id": "9d2716a820c557ed8cc901bf0d58a5d1",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #8: **Six-Degrees Tree Search & Prune Detective** (`six-d",
+        "turn_count": 1,
+        "prompt_tokens": 30207,
+        "cached_tokens": 12710,
+        "candidates_tokens": 1049,
+        "thoughts_tokens": 565,
+        "subagent_tokens": 0,
+        "total_tokens": 31821,
+        "created_at": "2026-10-29T02:18:46.373870+00:00",
+        "updated_at": "2026-10-29T02:18:46.373870+00:00",
+        "tokens": {
+          "prompt_tokens": 30207,
+          "cached_tokens": 12710,
+          "candidates_tokens": 1049,
+          "thoughts_tokens": 565,
+          "subagent_tokens": 0,
+          "main_tokens": 31821,
+          "total_tokens": 31821
+        }
+      },
+      {
+        "conversation_id": "bc929838-733b-43cf-bb8c-6a6973f6d8d5",
+        "antigravity_conversation_id": "62ab2e8a426c5982acf0af64e3a524b9",
+        "user_id": "cbribiescas",
+        "agent_id": "mythbuster-router",
+        "title": "Bar-bet claim: **'All 8.1 billion humans on Earth could be submerged inside Scot",
+        "turn_count": 2,
+        "prompt_tokens": 285284,
+        "cached_tokens": 211056,
+        "candidates_tokens": 6044,
+        "thoughts_tokens": 2601,
+        "subagent_tokens": 0,
+        "total_tokens": 293929,
+        "created_at": "2026-10-29T02:17:43.426732+00:00",
+        "updated_at": "2026-10-29T02:18:33.236805+00:00",
+        "tokens": {
+          "prompt_tokens": 285284,
+          "cached_tokens": 211056,
+          "candidates_tokens": 6044,
+          "thoughts_tokens": 2601,
+          "subagent_tokens": 0,
+          "main_tokens": 293929,
+          "total_tokens": 293929
+        }
+      },
+      {
+        "conversation_id": "2027bd5f-4f42-4907-8403-09b9c9f18053",
+        "antigravity_conversation_id": "b1a359c0cd075fd48861dec33489c934",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #7: **Conditional Router MythBuster Lab** (`mythbuster-ro",
+        "turn_count": 1,
+        "prompt_tokens": 329953,
+        "cached_tokens": 267412,
+        "candidates_tokens": 3418,
+        "thoughts_tokens": 2356,
+        "subagent_tokens": 0,
+        "total_tokens": 335727,
+        "created_at": "2026-10-29T02:16:44.240646+00:00",
+        "updated_at": "2026-10-29T02:16:44.240646+00:00",
+        "tokens": {
+          "prompt_tokens": 329953,
+          "cached_tokens": 267412,
+          "candidates_tokens": 3418,
+          "thoughts_tokens": 2356,
+          "subagent_tokens": 0,
+          "main_tokens": 335727,
+          "total_tokens": 335727
+        }
+      },
+      {
+        "conversation_id": "925f8ec5-10c5-48bd-9a2a-bec613e5236e",
+        "antigravity_conversation_id": "fe242f2bfa275141b7e8d1045fb9163d",
+        "user_id": "cbribiescas",
+        "agent_id": "perfectionist-art-director",
+        "title": "Create a 3-panel workplace comic strip about an engineer accidentally sharing th",
+        "turn_count": 1,
+        "prompt_tokens": 108028,
+        "cached_tokens": 75606,
+        "candidates_tokens": 3176,
+        "thoughts_tokens": 2112,
+        "subagent_tokens": 0,
+        "total_tokens": 113316,
+        "created_at": "2026-10-29T02:15:43.770524+00:00",
+        "updated_at": "2026-10-29T02:15:43.770524+00:00",
+        "tokens": {
+          "prompt_tokens": 108028,
+          "cached_tokens": 75606,
+          "candidates_tokens": 3176,
+          "thoughts_tokens": 2112,
+          "subagent_tokens": 0,
+          "main_tokens": 113316,
+          "total_tokens": 113316
+        }
+      },
+      {
+        "conversation_id": "471eeaed-9c53-4c00-9a58-e544a863b98c",
+        "antigravity_conversation_id": "cc7f6a1ba6225b8ab763443e83e6af3d",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #6: **Perfectionist Multimodal Art Director** (`perfectio",
+        "turn_count": 1,
+        "prompt_tokens": 28948,
+        "cached_tokens": 10869,
+        "candidates_tokens": 1019,
+        "thoughts_tokens": 0,
+        "subagent_tokens": 0,
+        "total_tokens": 29967,
+        "created_at": "2026-10-29T02:14:44.703889+00:00",
+        "updated_at": "2026-10-29T02:14:44.703889+00:00",
+        "tokens": {
+          "prompt_tokens": 28948,
+          "cached_tokens": 10869,
+          "candidates_tokens": 1019,
+          "thoughts_tokens": 0,
+          "subagent_tokens": 0,
+          "main_tokens": 29967,
+          "total_tokens": 29967
+        }
+      },
+      {
+        "conversation_id": "a5cf88b3-e3b6-40f9-a4a1-83097ca6f233",
+        "antigravity_conversation_id": "943e5e5b83735adfb299665e8b8662aa",
+        "user_id": "cbribiescas",
+        "agent_id": "bot-gladiator-arena",
+        "title": "Run the **AI Bot Gladiator Prisoner's Dilemma Championship**! Code the 3 Generat",
+        "turn_count": 1,
+        "prompt_tokens": 74530,
+        "cached_tokens": 37351,
+        "candidates_tokens": 2580,
+        "thoughts_tokens": 1349,
+        "subagent_tokens": 0,
+        "total_tokens": 78459,
+        "created_at": "2026-10-29T02:14:37.021539+00:00",
+        "updated_at": "2026-10-29T02:14:37.021539+00:00",
+        "tokens": {
+          "prompt_tokens": 74530,
+          "cached_tokens": 37351,
+          "candidates_tokens": 2580,
+          "thoughts_tokens": 1349,
+          "subagent_tokens": 0,
+          "main_tokens": 78459,
+          "total_tokens": 78459
+        }
+      },
+      {
+        "conversation_id": "2602f718-bc3d-4ea4-81b8-344a5fb649ac",
+        "antigravity_conversation_id": "1da30983ea085ed9a713f5f52155f391",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #5: **AI Bot Gladiator Tournament Arena** (`bot-gladiator",
+        "turn_count": 1,
+        "prompt_tokens": 29767,
+        "cached_tokens": 10925,
+        "candidates_tokens": 1018,
+        "thoughts_tokens": 495,
+        "subagent_tokens": 0,
+        "total_tokens": 31280,
+        "created_at": "2026-10-29T02:14:03.360864+00:00",
+        "updated_at": "2026-10-29T02:14:03.360864+00:00",
+        "tokens": {
+          "prompt_tokens": 29767,
+          "cached_tokens": 10925,
+          "candidates_tokens": 1018,
+          "thoughts_tokens": 495,
+          "subagent_tokens": 0,
+          "main_tokens": 31280,
+          "total_tokens": 31280
+        }
+      },
+      {
+        "conversation_id": "aec6c175-a078-4bf7-b33f-86f4da0c2951",
+        "antigravity_conversation_id": "29f1f928202e5f72916b7addf6012212",
+        "user_id": "cbribiescas",
+        "agent_id": "supreme-court-debate",
+        "title": "Docket No. 26-808: **'Is a hotdog legally and structurally a taco?'** Search rea",
+        "turn_count": 1,
+        "prompt_tokens": 301472,
+        "cached_tokens": 191620,
+        "candidates_tokens": 5726,
+        "thoughts_tokens": 6887,
+        "subagent_tokens": 71334,
+        "total_tokens": 314085,
+        "created_at": "2026-10-29T02:13:53.366955+00:00",
+        "updated_at": "2026-10-29T02:13:53.366955+00:00",
+        "tokens": {
+          "prompt_tokens": 301472,
+          "cached_tokens": 191620,
+          "candidates_tokens": 5726,
+          "thoughts_tokens": 6887,
+          "subagent_tokens": 71334,
+          "main_tokens": 242751,
+          "total_tokens": 314085
+        }
+      },
+      {
+        "conversation_id": "e10b888b-2793-4858-a925-258b75136524",
+        "antigravity_conversation_id": "ad7d560a4b735f86afb0458b7577be85",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #4: **Culinary Supreme Court Cross-Exam** (`supreme-court",
+        "turn_count": 1,
+        "prompt_tokens": 29397,
+        "cached_tokens": 10896,
+        "candidates_tokens": 1188,
+        "thoughts_tokens": 57,
+        "subagent_tokens": 0,
+        "total_tokens": 30642,
+        "created_at": "2026-10-29T02:12:09.392998+00:00",
+        "updated_at": "2026-10-29T02:12:09.392998+00:00",
+        "tokens": {
+          "prompt_tokens": 29397,
+          "cached_tokens": 10896,
+          "candidates_tokens": 1188,
+          "thoughts_tokens": 57,
+          "subagent_tokens": 0,
+          "main_tokens": 30642,
+          "total_tokens": 30642
+        }
+      },
+      {
+        "conversation_id": "ace8ec2a-9e59-4c71-8535-54e909369285",
+        "antigravity_conversation_id": "bdd0287f20f85643bfed4ea2040aa132",
+        "user_id": "cbribiescas",
+        "agent_id": "shark-tank-panel",
+        "title": "Pitch: **'Rent-a-Retriever'** \u2014 an on-demand B2B SaaS marketplace dispatching ce",
+        "turn_count": 1,
+        "prompt_tokens": 209211,
+        "cached_tokens": 137018,
+        "candidates_tokens": 8557,
+        "thoughts_tokens": 2665,
+        "subagent_tokens": 63107,
+        "total_tokens": 220433,
+        "created_at": "2026-10-29T02:12:00.618474+00:00",
+        "updated_at": "2026-10-29T02:12:00.618474+00:00",
+        "tokens": {
+          "prompt_tokens": 209211,
+          "cached_tokens": 137018,
+          "candidates_tokens": 8557,
+          "thoughts_tokens": 2665,
+          "subagent_tokens": 63107,
+          "main_tokens": 157326,
+          "total_tokens": 220433
+        }
+      },
+      {
+        "conversation_id": "8682fde4-62db-4b2f-bf6d-bc78c102e2a5",
+        "antigravity_conversation_id": "b02bc74cc6a357bc9e876a545042879e",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #3: **Shark Tank Parallel Pitch Panel** (`shark-tank-pane",
+        "turn_count": 1,
+        "prompt_tokens": 29255,
+        "cached_tokens": 10887,
+        "candidates_tokens": 1183,
+        "thoughts_tokens": 0,
+        "subagent_tokens": 0,
+        "total_tokens": 30438,
+        "created_at": "2026-10-29T02:10:00.171721+00:00",
+        "updated_at": "2026-10-29T02:10:00.171721+00:00",
+        "tokens": {
+          "prompt_tokens": 29255,
+          "cached_tokens": 10887,
+          "candidates_tokens": 1183,
+          "thoughts_tokens": 0,
+          "subagent_tokens": 0,
+          "main_tokens": 30438,
+          "total_tokens": 30438
+        }
+      },
+      {
+        "conversation_id": "35e627ad-9c57-4b4e-8100-420e75f4f283",
+        "antigravity_conversation_id": "19d75601210556b6ba47b696f106f131",
+        "user_id": "cbribiescas",
+        "agent_id": "arcade-builder",
+        "title": "Build a playable single-file retro HTML5 Canvas game at `/tmp/antigravity_harnes",
+        "turn_count": 1,
+        "prompt_tokens": 102615,
+        "cached_tokens": 68438,
+        "candidates_tokens": 6367,
+        "thoughts_tokens": 931,
+        "subagent_tokens": 0,
+        "total_tokens": 109913,
+        "created_at": "2026-10-29T02:09:50.832913+00:00",
+        "updated_at": "2026-10-29T02:09:50.832913+00:00",
+        "tokens": {
+          "prompt_tokens": 102615,
+          "cached_tokens": 68438,
+          "candidates_tokens": 6367,
+          "thoughts_tokens": 931,
+          "subagent_tokens": 0,
+          "main_tokens": 109913,
+          "total_tokens": 109913
+        }
+      },
+      {
+        "conversation_id": "5eed396a-de9c-429b-b111-303c371f088c",
+        "antigravity_conversation_id": "25bc22100552596ba2970c1dd983f9fb",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #2: **Self-Healing Retro Arcade Factory** (`arcade-builde",
+        "turn_count": 1,
+        "prompt_tokens": 29730,
+        "cached_tokens": 10931,
+        "candidates_tokens": 1009,
+        "thoughts_tokens": 866,
+        "subagent_tokens": 0,
+        "total_tokens": 31605,
+        "created_at": "2026-10-29T02:08:57.741627+00:00",
+        "updated_at": "2026-10-29T02:08:57.741627+00:00",
+        "tokens": {
+          "prompt_tokens": 29730,
+          "cached_tokens": 10931,
+          "candidates_tokens": 1009,
+          "thoughts_tokens": 866,
+          "subagent_tokens": 0,
+          "main_tokens": 31605,
+          "total_tokens": 31605
+        }
+      },
+      {
+        "conversation_id": "2c460c99-e7ec-4c9f-96de-ed45327c5bec",
+        "antigravity_conversation_id": "8c9af2ccc77e53a6b2d0293b3c21e64e",
+        "user_id": "cbribiescas",
+        "agent_id": "trailer-director",
+        "title": "Turn 'Searching for the unmuted person eating crunchy kettle chips during a tens",
+        "turn_count": 1,
+        "prompt_tokens": 100967,
+        "cached_tokens": 63391,
+        "candidates_tokens": 2860,
+        "thoughts_tokens": 924,
+        "subagent_tokens": 0,
+        "total_tokens": 104751,
+        "created_at": "2026-10-29T02:08:46.416873+00:00",
+        "updated_at": "2026-10-29T02:08:46.416873+00:00",
+        "tokens": {
+          "prompt_tokens": 100967,
+          "cached_tokens": 63391,
+          "candidates_tokens": 2860,
+          "thoughts_tokens": 924,
+          "subagent_tokens": 0,
+          "main_tokens": 104751,
+          "total_tokens": 104751
+        }
+      },
+      {
+        "conversation_id": "afb1b334-5c26-41a9-bd2a-095df8f70cc7",
+        "antigravity_conversation_id": "f9eb5818a04253f481117008ea4ac7a0",
+        "user_id": "cbribiescas",
+        "agent_id": "antigravity",
+        "title": "Build Custom DAG Agent #1: **The Hollywood Trailer Director** (`trailer-director",
+        "turn_count": 1,
+        "prompt_tokens": 29546,
+        "cached_tokens": 10924,
+        "candidates_tokens": 924,
+        "thoughts_tokens": 818,
+        "subagent_tokens": 0,
+        "total_tokens": 31288,
+        "created_at": "2026-10-29T02:07:35.912797+00:00",
+        "updated_at": "2026-10-29T02:07:35.912797+00:00",
+        "tokens": {
+          "prompt_tokens": 29546,
+          "cached_tokens": 10924,
+          "candidates_tokens": 924,
+          "thoughts_tokens": 818,
+          "subagent_tokens": 0,
+          "main_tokens": 31288,
+          "total_tokens": 31288
+        }
+      }
+    ]
+  }
+}

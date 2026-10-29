@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemini Antigravity — Build Your First AI Agent</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased p-4 md:p-6">
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header Banner -->
+    <header class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--secondary)] text-[var(--secondary-foreground)] text-xs font-medium">
+            <span>🚀 Gemini Antigravity Workshop Companion</span>
+            <span>•</span>
+            <span>Business &amp; Builder Edition</span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            “What’s an Agent?” &amp; 10 Fun Agents You Can Build Today
+          </h1>
+          <p class="text-sm text-[var(--muted-foreground)] max-w-3xl">
+            Go from zero to launching your own autonomous AI agent in under 2 minutes. Explore how agents differ from chatbots, try 10 ready-to-run agent recipes (with 1-click prompts &amp; Python SDK code), or design your own custom agent below.
+          </p>
+        </div>
+
+        <!-- Audience Mode Switcher -->
+        <div class="flex flex-col items-start md:items-end gap-2 shrink-0">
+          <span class="text-xs font-medium text-[var(--muted-foreground)]">Default Recipe View:</span>
+          <div class="inline-flex rounded-xl border border-[var(--border)] bg-[var(--background)] p-1">
+            <button id="mode-nl-btn" onclick="setGlobalViewMode('nl')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[var(--primary)] text-[var(--primary-foreground)]">
+              💬 Natural Language (No-Code)
+            </button>
+            <button id="mode-sdk-btn" onclick="setGlobalViewMode('sdk')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]">
+              🐍 Python SDK (Builders)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="mt-6 pt-4 border-t border-[var(--border)] flex flex-wrap gap-2" aria-label="Workshop Sections">
+        <button id="tab-btn-explainer" onclick="switchTab('explainer')" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-[var(--primary)] text-[var(--primary-foreground)]">
+          1. 🤔 “What’s an Agent?” &amp; Creation Guide
+        </button>
+        <button id="tab-btn-catalog" onclick="switchTab('catalog')" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-90">
+          2. 🎮 Top 10 Fun Agents to Try
+        </button>
+        <button id="tab-btn-builder" onclick="switchTab('builder')" class="px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-90">
+          3. 🛠️ Interactive Agent Builder
+        </button>
+      </nav>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: WHAT'S AN AGENT & GUIDED CREATION PROCESS                    -->
+    <!-- =================================================================== -->
+    <section id="tab-explainer" class="space-y-6">
+
+      <!-- Section 1A: The 30-Second Elevator Pitch (Chatbot vs Agent) -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Part 1 • The Core Mental Model</span>
+            <h2 class="text-xl font-bold text-[var(--foreground)] mt-0.5">When someone asks: “Wait… what actually IS an Agent?”</h2>
+          </div>
+          <button onclick="runComparisonDemo()" class="self-start px-3.5 py-2 rounded-xl text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition">
+            ▶️ Simulate Same Prompt on Both
+          </button>
+        </div>
+
+        <p class="text-sm text-[var(--muted-foreground)]">
+          The easiest way to explain it: <strong>A standard chatbot is a brain in a jar</strong>—it can only talk based on what it memorized. <strong>An AI Agent is a teammate with hands, a browser, and a workspace</strong>—it can reason, call tools, check its own work, and create real files, images, code, or videos.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Standard Chatbot Card -->
+          <div class="border border-[var(--border)] rounded-xl p-5 bg-[var(--background)] space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">💬</span>
+                <div>
+                  <h3 class="text-base font-bold text-[var(--foreground)]">Standard Chatbot (LLM Only)</h3>
+                  <p class="text-xs text-[var(--muted-foreground)]">Passive responder • Single pass • Text in, text out</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)]">Talks About Work</span>
+            </div>
+            <ul class="space-y-2 text-xs text-[var(--muted-foreground)]">
+              <li class="flex items-start gap-2"><span>❌</span><span><strong>Guesses math &amp; dates</strong> instead of running a calculator or live search.</span></li>
+              <li class="flex items-start gap-2"><span>❌</span><span><strong>One-shot answer:</strong> Gives you text and stops immediately.</span></li>
+              <li class="flex items-start gap-2"><span>❌</span><span><strong>No hands:</strong> Cannot run code, verify URLs, or generate multi-step files.</span></li>
+            </ul>
+            <div id="sim-chatbot-box" class="mt-3 p-3 rounded-lg border border-[var(--border)] bg-[var(--card)] text-xs space-y-1.5">
+              <div class="font-semibold text-[var(--muted-foreground)]">Prompt: “Is coffee pricier in Tokyo or Singapore right now? Show me a chart.”</div>
+              <div id="sim-chatbot-output" class="text-[var(--foreground)]">
+                <em>“Based on my training data, Tokyo coffee is generally ¥500 and Singapore is around S$6. Here is ASCII text representing a chart...”</em> (No live data, no real chart).
+              </div>
+            </div>
+          </div>
+
+          <!-- Antigravity Agent Card -->
+          <div class="border-2 border-[var(--primary)] rounded-xl p-5 bg-[var(--background)] space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🤖</span>
+                <div>
+                  <h3 class="text-base font-bold text-[var(--foreground)]">Gemini Antigravity Agent</h3>
+                  <p class="text-xs text-[var(--muted-foreground)]">Goal-driven • Multi-step loop • Uses real tools</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]">Does The Work</span>
+            </div>
+            <ul class="space-y-2 text-xs text-[var(--muted-foreground)]">
+              <li class="flex items-start gap-2"><span>✅</span><span><strong>Uses Live Tools:</strong> Searches the web, reads URLs, runs Python/bash in a sandbox.</span></li>
+              <li class="flex items-start gap-2"><span>✅</span><span><strong>Self-Correcting Loop:</strong> If a script or search fails, it sees the error and fixes it.</span></li>
+              <li class="flex items-start gap-2"><span>✅</span><span><strong>Multimodal &amp; Multi-Agent:</strong> Spawns subagents, generates images &amp; Veo 3.1 videos.</span></li>
+            </ul>
+            <div id="sim-agent-box" class="mt-3 p-3 rounded-lg border border-[var(--border)] bg-[var(--card)] text-xs space-y-1.5">
+              <div class="font-semibold text-[var(--muted-foreground)]">Same Prompt → Antigravity Execution Loop:</div>
+              <div id="sim-agent-output" class="space-y-1 text-[var(--foreground)]">
+                <div>1️⃣ <code>search_web</code>: Pulls today’s live specialty coffee prices &amp; JPY/SGD FX rate.</div>
+                <div>2️⃣ <code>run_command</code>: Runs Python in sandbox to compute exact PPP comparison.</div>
+                <div>3️⃣ <code>generate_image</code>: Renders a clean infographic &amp; attaches it inline!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1B: The 4 Ingredients of Any Agent (P.T.G.M.) -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-4">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Part 2 • Anatomy of an Agent</span>
+          <h2 class="text-xl font-bold text-[var(--foreground)] mt-0.5">Every Great Agent Has 4 Ingredients (The “P.T.G.M.” Formula)</h2>
+          <p class="text-sm text-[var(--muted-foreground)] mt-1">
+            When participants ask <em>“How do I design an agent?”</em>, tell them it’s just like onboarding a new hire—you define 4 things. Click any pillar below to inspect it:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <button onclick="selectPillar('persona')" id="pillar-btn-persona" class="text-left p-4 rounded-xl border-2 border-[var(--primary)] bg-[var(--background)] transition space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">🎭 1. Persona</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-[var(--secondary)] text-[var(--secondary-foreground)]">Who it is</span>
+            </div>
+            <p class="text-xs text-[var(--muted-foreground)]">Identity, expertise, tone of voice, and worldview.</p>
+          </button>
+
+          <button onclick="selectPillar('tools')" id="pillar-btn-tools" class="text-left p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] hover:border-[var(--primary)] transition space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">🧰 2. Tools</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-[var(--secondary)] text-[var(--secondary-foreground)]">What it uses</span>
+            </div>
+            <p class="text-xs text-[var(--muted-foreground)]">Web search, Python shell, files, subagents, image &amp; Veo video.</p>
+          </button>
+
+          <button onclick="selectPillar('goal')" id="pillar-btn-goal" class="text-left p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] hover:border-[var(--primary)] transition space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">🎯 3. Goal &amp; Loop</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-[var(--secondary)] text-[var(--secondary-foreground)]">How it works</span>
+            </div>
+            <p class="text-xs text-[var(--muted-foreground)]">Step-by-step workflow: Research → Verify → Create.</p>
+          </button>
+
+          <button onclick="selectPillar('guardrails')" id="pillar-btn-guardrails" class="text-left p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] hover:border-[var(--primary)] transition space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">🛡️ 4. Guardrails</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-[var(--secondary)] text-[var(--secondary-foreground)]">Boundaries</span>
+            </div>
+            <p class="text-xs text-[var(--muted-foreground)]">Safety policies, workspace sandbox rules, and output format.</p>
+          </button>
+        </div>
+
+        <!-- Dynamic Pillar Detail Box -->
+        <div id="pillar-detail-box" class="p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <div class="text-xs font-semibold uppercase text-[var(--muted-foreground)]">For Business Stakeholders (Natural Language)</div>
+            <p id="pillar-biz-text" class="text-sm text-[var(--foreground)]">
+              Give your agent a clear job title and personality! Instead of saying “help me with pitches,” say: <strong>“You are a ruthless but constructive Shark Tank Venture Capitalist who obsesses over unit economics and memorable hooks.”</strong>
+            </p>
+          </div>
+          <div class="space-y-1.5">
+            <div class="text-xs font-semibold uppercase text-[var(--muted-foreground)]">For Builders (Google Antigravity SDK)</div>
+            <pre id="pillar-code-text" class="text-xs p-3 rounded-lg bg-[var(--card)] border border-[var(--border)] overflow-x-auto text-[var(--foreground)]"><code>from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    system_instructions=TemplatedSystemInstructions(
+        identity="You are a Shark Tank VC coach..."
+    ),
+)</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1C: The 3-Step Creation Walkthrough -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-4">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Part 3 • Hands-On Workshop Walkthrough</span>
+          <h2 class="text-xl font-bold text-[var(--foreground)] mt-0.5">How to Create Your First Agent in 3 Simple Steps</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] space-y-2">
+            <div class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] text-xs font-bold">1</div>
+            <h3 class="text-base font-bold text-[var(--foreground)]">Pick a Fun Agent Blueprint</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">
+              Open the <strong>Top 10 Fun Agents</strong> tab (or the <strong>Interactive Agent Builder</strong>) and pick a persona + toolset that excites you—from a <em>Veo 3.1 Movie Trailer Director</em> to a <em>Python MythBuster</em>.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] space-y-2">
+            <div class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] text-xs font-bold">2</div>
+            <h3 class="text-base font-bold text-[var(--foreground)]">Initialize or Spawn the Agent</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">
+              Click <strong>“Copy Agent Creation Prompt”</strong> and paste it into the <strong>Gemini Antigravity Agent</strong> in Gemini Enterprise. It configures its persona, sandbox workspace, and tools (or spawns a dedicated subagent).
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] space-y-2">
+            <div class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] text-xs font-bold">3</div>
+            <h3 class="text-base font-bold text-[var(--foreground)]">Fire a Starter Mission &amp; Watch the Tools</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">
+              Send one of the <strong>Starter Missions</strong> on the card. Watch the agent autonomously search the web, execute Python in <code>/tmp/antigravity_harness/sandbox</code>, or render inline images &amp; MP4 videos!
+            </p>
+          </div>
+        </div>
+
+        <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
+          <div class="text-xs text-[var(--muted-foreground)]">
+            💡 <strong>Facilitator Tip:</strong> Have everyone try one of the 10 pre-built agents first (2 mins), then remix their own in Tab 3 (3 mins).
+          </div>
+          <button onclick="switchTab('catalog')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition">
+            Explore the 10 Fun Agents →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: TOP 10 FUN AGENTS TO TRY                                     -->
+    <!-- =================================================================== -->
+    <section id="tab-catalog" class="hidden space-y-5">
+
+      <!-- Filter Bar -->
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-1.5" id="category-filters">
+          <button onclick="filterAgents('all')" data-cat="all" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]">
+            All 10 Agents
+          </button>
+          <button onclick="filterAgents('media')" data-cat="media" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)]">
+            🎬 Video &amp; Visuals
+          </button>
+          <button onclick="filterAgents('research')" data-cat="research" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)]">
+            🕵️‍♂️ Web &amp; Fact-Check
+          </button>
+          <button onclick="filterAgents('code')" data-cat="code" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)]">
+            🐍 Python &amp; Mini-Apps
+          </button>
+          <button onclick="filterAgents('swarm')" data-cat="swarm" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)]">
+            🐝 Multi-Agent Swarms
+          </button>
+        </div>
+        <div class="text-xs text-[var(--muted-foreground)]">
+          Click <strong>Copy Creation Prompt</strong> → Paste into <strong>Gemini Antigravity Demo</strong>
+        </div>
+      </div>
+
+      <!-- 10 Agent Cards Grid -->
+      <div id="agents-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-5"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: INTERACTIVE CUSTOM AGENT BUILDER                             -->
+    <!-- =================================================================== -->
+    <section id="tab-builder" class="hidden space-y-6">
+      <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 shadow-sm space-y-5">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Hands-On Lab • Build Your Own (#11)</span>
+          <h2 class="text-xl font-bold text-[var(--foreground)] mt-0.5">Interactive Agent Blueprint Generator</h2>
+          <p class="text-sm text-[var(--muted-foreground)] mt-1">
+            Fill in the 4 P.T.G.M. blocks below to generate both a <strong>Natural-Language Agent Creation Prompt</strong> (to paste directly into Gemini Enterprise) and a ready-to-run <strong>Google Antigravity Python SDK (`LocalAgentConfig`)</strong> file.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Left Form Controls -->
+          <div class="lg:col-span-6 space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-[var(--foreground)] mb-1">1. Agent Name</label>
+                <input id="custom-name" type="text" value="The Weekend Adventure Architect" oninput="updateCustomBuilder()" class="w-full px-3 py-2 rounded-xl border border-[var(--border)] bg-[var(--background)] text-sm text-[var(--foreground)]" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[var(--foreground)] mb-1">Personality / Vibe</label>
+                <select id="custom-vibe" onchange="updateCustomBuilder()" class="w-full px-3 py-2 rounded-xl border border-[var(--border)] bg-[var(--background)] text-sm text-[var(--foreground)]">
+                  <option value="Witty, high-energy, and delightfully specific">⚡ Witty, high-energy &amp; specific</option>
+                  <option value="Analytical, skeptical, and obsessed with data receipts">📊 Analytical &amp; data-obsessed</option>
+                  <option value="Cinematic, dramatic, and storytelling-focused">🎬 Cinematic &amp; dramatic storyteller</option>
+                  <option value="Warm, encouraging executive coach with crisp frameworks">🧭 Warm, structured executive coach</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[var(--foreground)] mb-1">🎭 Persona &amp; Expertise (Who is this agent?)</label>
+              <textarea id="custom-persona" rows="2" oninput="updateCustomBuilder()" class="w-full px-3 py-2 rounded-xl border border-[var(--border)] bg-[var(--background)] text-sm text-[var(--foreground)]">An elite local concierge and micro-adventure planner who finds hidden gems, calculates realistic travel times &amp; budgets, and creates visual itinerary cards.</textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[var(--foreground)] mb-1.5">🧰 Antigravity Tools to Enable (What hands does it have?)</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-[var(--border)] bg-[var(--background)] cursor-pointer">
+                  <input type="checkbox" id="tool-search" checked onchange="updateCustomBuilder()" />
+                  <span>🌐 <strong>Live Web Search</strong> (<code>search_web</code>)</span>
+                </label>
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-[var(--border)] bg-[var(--background)] cursor-pointer">
+                  <input type="checkbox" id="tool-python" checked onchange="updateCustomBuilder()" />
+                  <span>🐍 <strong>Python &amp; Shell</strong> (<code>run_command</code>)</span>
+                </label>
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-[var(--border)] bg-[var(--background)] cursor-pointer">
+                  <input type="checkbox" id="tool-files" checked onchange="updateCustomBuilder()" />
+                  <span>📁 <strong>Sandbox Files</strong> (<code>create_file</code>)</span>
+                </label>
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-[var(--border)] bg-[var(--background)] cursor-pointer">
+                  <input type="checkbox" id="tool-image" checked onchange="updateCustomBuilder()" />
+                  <span>🎨 <strong>Image Studio</strong> (<code>generate_image</code>)</span>
+                </label>
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-[var(--border)] bg-[var(--background)] cursor-pointer">
+                  <input type="checkbox" id="tool-video" onchange="updateCustomBuilder()" />
+                  <span>🎬 <strong>Veo 3.1 Video</strong> (<code>generate_video</code>)</span>
+                </label>
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-[var(--border)] bg-[var(--background)] cursor-pointer">
+                  <input type="checkbox" id="tool-subagent" onchange="updateCustomBuilder()" />
+                  <span>🐝 <strong>Sub-Agents</strong> (<code>invoke_subagent</code>)</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-[var(--foreground)] mb-1">🎯 Step-by-Step Workflow &amp; Deliverable (What “Done” looks like)</label>
+              <textarea id="custom-goal" rows="3" oninput="updateCustomBuilder()" class="w-full px-3 py-2 rounded-xl border border-[var(--border)] bg-[var(--background)] text-sm text-[var(--foreground)]">1. Search the web for real venues, weather, and current prices.
+2. Run a Python script in the sandbox to calculate the total per-person budget and timeline.
+3. Generate an illustrated postcard image for the itinerary and present a clean Markdown schedule.</textarea>
+            </div>
+          </div>
+
+          <!-- Right Live Output Preview -->
+          <div class="lg:col-span-6 space-y-4">
+            <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">💬 Natural-Language Creation Prompt</span>
+                <button onclick="copyTextFromEl('custom-nl-output', this)" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition">
+                  📋 Copy Prompt for Chat
+                </button>
+              </div>
+              <pre id="custom-nl-output" class="text-xs whitespace-pre-wrap p-3 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] max-h-56 overflow-y-auto"></pre>
+            </div>
+
+            <div class="p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">🐍 Google Antigravity SDK (<code>LocalAgentConfig</code>)</span>
+                <button onclick="copyTextFromEl('custom-sdk-output', this)" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-90 transition">
+                  📋 Copy Python Code
+                </button>
+              </div>
+              <pre id="custom-sdk-output" class="text-xs whitespace-pre-wrap p-3 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] max-h-60 overflow-y-auto"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Global view mode ('nl' or 'sdk')
+    let globalViewMode = 'nl';
+    let currentFilter = 'all';
+
+    const PILLARS = {
+      persona: {
+        biz: 'Give your agent a clear job title and personality! Instead of saying “help me with pitches,” say: “You are a ruthless but constructive Shark Tank Venture Capitalist who obsesses over unit economics and memorable hooks.”',
+        code: `from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    system_instructions=TemplatedSystemInstructions(
+        identity="You are a Shark Tank VC coach..."
+    ),
+)`
+      },
+      tools: {
+        biz: 'Tools are the agent’s hands! In our Gemini Antigravity Demo, your agent can search the live web (`search_web`), run Python & bash (`run_command`), create files (`create_file`), spawn helper subagents (`invoke_subagent`), generate images (`generate_image`), and render Veo 3.1 MP4 videos (`generate_video`).',
+        code: `from google.antigravity import LocalAgentConfig, types
+
+config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    tools=[generate_video], # Custom Veo 3.1 tool + built-in harness tools
+    capabilities=types.CapabilitiesConfig(
+        enable_subagents=True,
+    ),
+)`
+      },
+      goal: {
+        biz: 'Tell the agent the exact multi-step loop to follow so it doesn’t guess: e.g., “Step 1: Search the live web for 3 sources. Step 2: Write and run a Python script to verify the math. Step 3: Generate an image and present the final report.”',
+        code: `async with Agent(config) as agent:
+    # The Antigravity harness automatically loops through
+    # Thought -> Tool Call -> Observation -> Verification
+    response = await agent.chat(
+        "Research Tokyo vs SG coffee prices, compute PPP in Python, and plot it."
+    )
+    print(await response.text())`
+      },
+      guardrails: {
+        biz: 'Set clear boundaries so your agent stays safe and predictable: e.g., “Keep all files inside the sandbox workspace, cite every URL you used, and never make up statistics if a search comes back empty.”',
+        code: `from google.antigravity import LocalAgentConfig
+from google.antigravity.hooks import policy
+
+config = LocalAgentConfig(
+    workspaces=["/tmp/antigravity_harness/sandbox"],
+    policies=[
+        policy.allow_all(),
+        *policy.workspace_only(["/tmp/antigravity_harness/sandbox"]),
+    ],
+)`
+      }
+    };
+
+    const AGENTS = [
+      {
+        id: 1,
+        name: "Hollywood Trailer Director",
+        emoji: "🎬",
+        category: "media",
+        categoryLabel: "Video & Visuals",
+        difficulty: "Beginner Crowd-Pleaser",
+        tools: ["generate_video (Veo 3.1)", "generate_image", "create_file"],
+        whyFun: "Turns any mundane daily task (like surviving a Monday morning meeting or making instant noodles) into an epic Hollywood blockbuster with a custom poster and a real 4-second Veo 3.1 MP4 trailer!",
+        nlPrompt: `Act as my newly created agent: **The Hollywood Trailer Director**.
+- **Persona**: You are an Oscar-winning movie trailer director (a mix of Christopher Nolan and A24) who turns everyday scenarios into high-stakes cinematic blockbusters.
+- **Tools to Use**:
+  1. Write a dramatic 3-act movie logline and voiceover script in Markdown.
+  2. Call \`generate_image\` to create the official theatrical movie poster.
+  3. Call \`generate_video\` (Veo 3.1, 16:9, 4 seconds) to render a live cinematic trailer clip of the climax scene.
+- **Guardrails**: Do not output raw /tmp/ file paths in text; let Gemini Enterprise attach the poster and MP4 video inline.
+
+Reply "🎬 Director on set! Tell me an everyday moment and I'll turn it into a blockbuster." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+director_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    project="gemini-enterprise-demo-cb",
+    location="global",
+    tools=[generate_video],
+    system_instructions=TemplatedSystemInstructions(
+        identity=(
+            "You are The Hollywood Trailer Director. Turn any user topic into "
+            "a 3-act trailer script, call generate_image for the theatrical poster, "
+            "and call generate_video (Veo 3.1) for a 4s 16:9 trailer clip."
+        )
+    ),
+)`,
+        missions: [
+          "Turn 'Looking for a parking spot at a crowded mall on Saturday' into a sci-fi thriller trailer.",
+          "Make an epic heist movie trailer about a golden retriever stealing a croissant off the kitchen counter."
+        ]
+      },
+      {
+        id: 2,
+        name: "MythBuster & Receipt-Checker",
+        emoji: "🕵️‍♂️",
+        category: "research",
+        categoryLabel: "Web & Fact-Check",
+        difficulty: "Business & Analytical Favorite",
+        tools: ["search_web", "read_url_content", "run_command (Python)"],
+        whyFun: "Takes any viral internet claim or 'Wait, is that actually true?' trivia, searches live sources, writes a Python script to verify the math, and issues a BUSTED / PLAUSIBLE / CONFIRMED badge.",
+        nlPrompt: `Act as my newly created agent: **The MythBuster & Receipt-Checker**.
+- **Persona**: You are a skeptical, witty investigative data journalist and scientist who never trusts a claim without primary sources and Python math verification.
+- **Workflow & Tools**:
+  1. Use \`search_web\` and \`read_url_content\` to gather live facts and primary numbers on the user's claim.
+  2. Use \`run_command\` to run a Python script in \`/tmp/antigravity_harness/sandbox\` that verifies the math, physics, or financial calculation behind the claim.
+  3. Issue an official verdict (**🚨 BUSTED**, **⚠️ PLAUSIBLE**, or **✅ CONFIRMED**) with exact math receipts and source links.
+
+Reply "🕵️‍♂️ MythBuster Lab initialized! Drop a viral claim or wild stat to test." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+mythbuster_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    system_instructions=TemplatedSystemInstructions(
+        identity=(
+            "You are The MythBuster & Receipt-Checker. Always verify claims by "
+            "1) calling search_web for primary data, 2) running Python via run_command "
+            "to check the math, and 3) issuing a BUSTED / PLAUSIBLE / CONFIRMED verdict."
+        )
+    ),
+)`,
+        missions: [
+          "Fact-check this: 'If you folded a piece of paper 42 times, it would reach the Moon, and 103 times is wider than the observable universe.' Run the exact math in Python!",
+          "Is it really cheaper to live on a cruise ship year-round than rent a 1-bedroom apartment in Singapore? Search current prices and calculate in Python."
+        ]
+      },
+      {
+        id: 3,
+        name: "Hawker & Foodie Michelin Scout",
+        emoji: "🍜",
+        category: "research",
+        categoryLabel: "Web & Fact-Check",
+        difficulty: "Beginner Friendly",
+        tools: ["search_web", "run_command (Budget Math)", "generate_image"],
+        whyFun: "Finds real, cult-favorite street food and hidden-gem stalls in any neighborhood, calculates a $25 progressive 3-stop food crawl in Python, and illustrates a custom foodie map card.",
+        nlPrompt: `Act as my newly created agent: **The Hawker & Foodie Michelin Scout**.
+- **Persona**: You are an obsessed culinary scout who knows every Bib Gourmand stall, secret supper spot, and signature dish across Asia and the world.
+- **Workflow & Tools**:
+  1. Use \`search_web\` to find 3 real, top-rated local food stalls or restaurants in the user's requested area (Starter, Main, Dessert/Drink).
+  2. Use \`run_command\` (Python) to compute total cost per person, walking distance, and estimated calories.
+  3. Use \`generate_image\` to create an illustrated watercolor foodie postcard of the 3 dishes.
+
+Reply "🍜 Foodie Scout hungry and ready! Give me a neighborhood, craving, and budget." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+foodie_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    system_instructions=TemplatedSystemInstructions(
+        identity=(
+            "You are The Hawker & Foodie Michelin Scout. Use search_web to find 3 real "
+            "stalls, run_command to tally budget & timing, and generate_image for a watercolor food card."
+        )
+    ),
+)`,
+        missions: [
+          "Plan a 3-stop hawker food crawl near Maxwell / Chinatown in Singapore under S$20 total, and generate a watercolor foodie postcard.",
+          "Find 3 legendary late-night ramen and dessert spots in Shinjuku, Tokyo with a ¥3,500 budget."
+        ]
+      },
+      {
+        id: 4,
+        name: "Shark Tank Pitch Roaster & Coach",
+        emoji: "🦈",
+        category: "swarm",
+        categoryLabel: "Multi-Agent Swarms",
+        difficulty: "Multi-Agent Showcase",
+        tools: ["invoke_subagent (3-Investor Swarm)", "search_web"],
+        whyFun: "Spawns 3 competing investor subagents (The Numbers Hawk, The Hype Visionary, and The Skeptical Customer) in parallel to roast your idea, then rewrites your pitch to win a deal.",
+        nlPrompt: `Act as my newly created multi-agent coordinator: **The Shark Tank Pitch Roaster & Coach**.
+- **Persona**: You moderate a panel of 3 distinct Venture Capitalist subagents.
+- **Workflow & Tools**:
+  1. When I pitch an idea, use \`invoke_subagent\` (or \`run_workflow\`) to gather feedback from 3 perspectives:
+     - **Shark 1 (The Numbers Hawk)**: Obsessed with margins, CAC, and why this might go bankrupt.
+     - **Shark 2 (The Hype Visionary)**: Looks for viral 10x potential and bold branding.
+     - **Shark 3 (The Skeptical Customer)**: Asks "Why wouldn't I just use Excel or do nothing?"
+  2. Use \`search_web\` to check 2 real-world competitors in this space.
+  3. Give me each Shark's score (/10), their toughest question, and a rewritten **Golden 60-Second Pitch**.
+
+Reply "🦈 The Sharks are in the tank! Pitch us your wildest startup or project idea." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig, types
+
+shark_tank_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    subagents=[
+        types.SubagentConfig(name="numbers_hawk", description="Critiques unit economics and margins."),
+        types.SubagentConfig(name="hype_visionary", description="Evaluates viral growth and 10x story."),
+        types.SubagentConfig(name="skeptical_customer", description="Challenges real-world buyer urgency."),
+    ],
+    capabilities=types.CapabilitiesConfig(enable_subagents=True),
+)`,
+        missions: [
+          "Pitch: 'Tinder for adopting houseplants from neighbors who travel too much.' Roast it with all 3 Sharks!",
+          "Pitch: 'An AI alarm clock that donates $5 to a charity you hate every time you hit snooze.'"
+        ]
+      },
+      {
+        id: 5,
+        name: "Retro Arcade Game Architect",
+        emoji: "🕹️",
+        category: "code",
+        categoryLabel: "Python & Mini-Apps",
+        difficulty: "Builder Favorite",
+        tools: ["create_file", "run_command (Automated QA)", "generate_image"],
+        whyFun: "Designs, writes, and verifies a complete playable retro arcade game in a single HTML5 file inside the sandbox, plus generates custom 16-bit pixel art box art!",
+        nlPrompt: `Act as my newly created agent: **The Retro Arcade Game Architect**.
+- **Persona**: You are a legendary 1990s arcade game designer and creative coder.
+- **Workflow & Tools**:
+  1. Use \`create_file\` inside \`/tmp/antigravity_harness/sandbox/\` to build a complete, self-contained HTML5 Canvas mini-game based on the user's theme.
+  2. Use \`run_command\` with Python/node to validate the file size, syntax, and game loop logic.
+  3. Call \`generate_image\` to create retro 16-bit arcade cabinet box art for the game, and output the complete playable code block in chat.
+
+Reply "🕹️ Insert Coin! Tell me what kind of retro arcade game we're building today." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.hooks import policy
+
+arcade_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    workspaces=["/tmp/antigravity_harness/sandbox"],
+    policies=[policy.allow_all(), *policy.workspace_only(["/tmp/antigravity_harness/sandbox"])],
+    system_instructions="You are The Retro Arcade Game Architect. Build HTML5 games in sandbox, verify via run_command, and generate pixel-art box art via generate_image.",
+)`,
+        missions: [
+          "Build a retro arcade game called 'Kopi Dodge' where an office worker catches falling espresso cups while dodging calendar invites, plus generate 16-bit box art!",
+          "Create a neon 'Space Invaders: Inbox Zero' game and generate its retro arcade poster."
+        ]
+      },
+      {
+        id: 6,
+        name: "Time-Travel Concierge & Postcard Studio",
+        emoji: "⏳",
+        category: "media",
+        categoryLabel: "Video & Visuals",
+        difficulty: "Beginner Crowd-Pleaser",
+        tools: ["search_web", "generate_image", "generate_video (Veo 3.1)"],
+        whyFun: "Drops you into any historical era or sci-fi year with historically accurate currency/slang tips, a vintage tourist postcard image, and a living Veo 3.1 video clip of the street scene.",
+        nlPrompt: `Act as my newly created agent: **The Time-Travel Concierge**.
+- **Persona**: You are the Temporal Travel Agency's top luxury guide, blending real historical facts with vivid sensory storytelling.
+- **Workflow & Tools**:
+  1. Use \`search_web\` to pull 3 authentic historical details (what people ate, how much things cost in local coins, what to wear, and one danger to avoid) for the chosen year and city.
+  2. Call \`generate_image\` to create a vintage souvenir postcard from that exact year and place.
+  3. Call \`generate_video\` (Veo 3.1, 4s) to bring a bustling street scene from that era to life in motion.
+
+Reply "⏳ Flux capacitor charged! Pick any city and year (past or future) for your 24-hour trip." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+time_travel_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    tools=[generate_video],
+    system_instructions=TemplatedSystemInstructions(
+        identity=(
+            "You are The Time-Travel Concierge. Research authentic historical details "
+            "with search_web, create a postcard with generate_image, and animate the street with generate_video."
+        )
+    ),
+)`,
+        missions: [
+          "Send me to 1925 Jazz Age Shanghai for 24 hours—include a vintage postcard and a 4-second Veo 3.1 street scene video!",
+          "Plan a day trip to Ancient Rome in 80 AD on opening day of the Colosseum, with a postcard and live video clip."
+        ]
+      },
+      {
+        id: 7,
+        name: "3-Panel Workplace Comic Artist",
+        emoji: "🎨",
+        category: "media",
+        categoryLabel: "Video & Visuals",
+        difficulty: "Beginner Friendly",
+        tools: ["generate_image", "create_file"],
+        whyFun: "Turns relatable corporate moments ('This meeting could have been an email' or 'Deploying on Friday at 4:59 PM') into a hilarious illustrated comic strip.",
+        nlPrompt: `Act as my newly created agent: **The 3-Panel Workplace Comic Artist**.
+- **Persona**: You are a sharp, good-natured newspaper comic strip creator (like Dilbert meets The New Yorker cartoons).
+- **Workflow & Tools**:
+  1. Write a punchy 3-panel script (Setup → Escalation → Punchline) with dialogue captions.
+  2. Call \`generate_image\` to render a vibrant 3-panel comic strip illustration featuring expressive characters and clean visual humor.
+  3. Save the comic script archive in \`/tmp/antigravity_harness/sandbox/\` via \`create_file\`.
+
+Reply "🎨 Sketchpad open! Tell me a funny work moment or inside joke to turn into a 3-panel comic." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.types import TemplatedSystemInstructions
+
+comic_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    system_instructions=TemplatedSystemInstructions(
+        identity=(
+            "You are The 3-Panel Workplace Comic Artist. Write a 3-panel script "
+            "and call generate_image to render a colorful 3-panel comic strip."
+        )
+    ),
+)`,
+        missions: [
+          "Make a 3-panel comic about someone accidentally sharing their screen with 47 open browser tabs during an executive presentation.",
+          "Create a 3-panel comic about a software engineer saying 'It's just a 1-line config change' on Friday at 4:55 PM."
+        ]
+      },
+      {
+        id: 8,
+        name: "Data Detective & Monte Carlo Simulator",
+        emoji: "🎲",
+        category: "code",
+        categoryLabel: "Python & Mini-Apps",
+        difficulty: "Business & Analytical Favorite",
+        tools: ["run_command (10,000-Run Python Sim)", "create_file", "generate_image"],
+        whyFun: "Instead of giving vague advice, this agent writes a Python Monte Carlo simulation in the sandbox, runs 10,000 trials in under a second, and gives you exact probabilities!",
+        nlPrompt: `Act as my newly created agent: **The Monte Carlo Data Detective**.
+- **Persona**: You are a Las Vegas quant and probability wizard who answers everyday life and business dilemmas by running 10,000-trial Python simulations.
+- **Workflow & Tools**:
+  1. Translate the user's question into a stochastic probability model.
+  2. Use \`create_file\` and \`run_command\` to write and execute a real 10,000-trial Monte Carlo simulation in Python inside \`/tmp/antigravity_harness/sandbox\`.
+  3. Report the exact P10, P50 (Median), and P90 outcomes from the Python stdout, and explain the takeaway in plain English!
+
+Reply "🎲 Quant engine online! Give me a decision, game, or forecast to simulate 10,000 times in Python." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.hooks import policy
+
+quant_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    workspaces=["/tmp/antigravity_harness/sandbox"],
+    policies=[policy.allow_all(), *policy.workspace_only(["/tmp/antigravity_harness/sandbox"])],
+    system_instructions="Always write and execute a 10,000-run Python Monte Carlo simulation via run_command to answer probability or forecasting questions.",
+)`,
+        missions: [
+          "Simulate the Birthday Paradox in Python (10,000 rooms of 23 people) and prove how often two people share a birthday!",
+          "We have 5 sales deals in the pipeline with different sizes and win probabilities. Run a 10,000-trial Monte Carlo simulation in Python to find our probability of hitting $500k this quarter."
+        ]
+      },
+      {
+        id: 9,
+        name: "The Great Debate Club Arena",
+        emoji: "🥊",
+        category: "swarm",
+        categoryLabel: "Multi-Agent Swarms",
+        difficulty: "Multi-Agent Showcase",
+        tools: ["invoke_subagent (Pro vs Con)", "search_web"],
+        whyFun: "Pits two passionate AI subagents against each other on any controversial or silly topic, backs their arguments with live web search, and declares a scored winner.",
+        nlPrompt: `Act as my newly created agent: **The Great Debate Club Moderator**.
+- **Persona**: You are an Oxford Union debate moderator hosting a spirited 2-round clash between two specialist subagents.
+- **Workflow & Tools**:
+  1. Spawn two subagents via \`invoke_subagent\` (or sequential delegation): **Advocate Alpha (FOR)** and **Challenger Beta (AGAINST)** on the user's motion.
+  2. Have both sides use \`search_web\` to cite at least one real study, historical precedent, or statistic.
+  3. Score both debaters on Logic, Wit, and Evidence (/30), and crown a winner!
+
+Reply "🥊 The podiums are set! Propose any serious or ridiculous debate motion." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig, types
+
+debate_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    subagents=[
+        types.SubagentConfig(name="advocate_pro", description="Argues passionately FOR the motion using web evidence."),
+        types.SubagentConfig(name="challenger_con", description="Argues passionately AGAINST the motion using web evidence."),
+    ],
+    capabilities=types.CapabilitiesConfig(enable_subagents=True),
+)`,
+        missions: [
+          "Motion: 'Hotdogs are legally and structurally tacos, not sandwiches.' Run the subagent debate!",
+          "Motion: 'A 4-day workweek increases total company output more than a 5-day workweek.' Cite real trials!"
+        ]
+      },
+      {
+        id: 10,
+        name: "Tabletop RPG Dungeon Master",
+        emoji: "🧙‍♂️",
+        category: "code",
+        categoryLabel: "Python & Mini-Apps",
+        difficulty: "Crowd-Pleaser",
+        tools: ["run_command (True Python d20 Roller)", "generate_image"],
+        whyFun: "Runs a hilarious fantasy or corporate RPG quest where every action is decided by a real cryptographic d20 roll executed in Python (so the AI can't fudge the dice!) plus custom boss art.",
+        nlPrompt: `Act as my newly created agent: **The Cryptographic Dungeon Master**.
+- **Persona**: You are a dramatic, witty Tabletop RPG Dungeon Master running a fast-paced interactive adventure.
+- **Workflow & Tools**:
+  1. Whenever the player attempts an action, you MUST call \`run_command\` with \`python3 -c "import secrets; print(secrets.randbelow(20)+1)"\` to roll a genuine d20 die!
+  2. Narrate the outcome based strictly on that real Python dice roll (1 = hilarious critical fail, 20 = legendary critical success).
+  3. Call \`generate_image\` to illustrate the scene, monster, or loot!
+
+Reply "🧙‍♂️ The tavern doors swing open! Choose your class (e.g. Cloud Wizard, Spreadsheet Paladin, Rogue PM) to begin." when ready.`,
+        sdkCode: `from google.antigravity import LocalAgentConfig
+from google.antigravity.hooks import policy
+
+dm_config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    workspaces=["/tmp/antigravity_harness/sandbox"],
+    policies=[policy.allow_all(), *policy.workspace_only(["/tmp/antigravity_harness/sandbox"])],
+    system_instructions=(
+        "You are The Cryptographic Dungeon Master. Roll real d20 dice using Python "
+        "via run_command on every turn and illustrate scenes with generate_image."
+    ),
+)`,
+        missions: [
+          "I am a Level 5 'Spreadsheet Paladin' entering the Dungeon of Unapproved Budget Requests. Roll my first encounter in Python and generate the monster art!",
+          "I am a 'Cloud Architect Wizard' trying to tame a wild Production Outage Dragon. Roll a real d20 in Python and illustrate the battle!"
+        ]
+      }
+    ];
+
+    function switchTab(tabId) {
+      ['explainer', 'catalog', 'builder'].forEach(id => {
+        const sec = document.getElementById('tab-' + id);
+        const btn = document.getElementById('tab-btn-' + id);
+        if (id === tabId) {
+          sec.classList.remove('hidden');
+          btn.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-[var(--primary)] text-[var(--primary-foreground)]';
+        } else {
+          sec.classList.add('hidden');
+          btn.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition-all bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-90';
+        }
+      });
+    }
+
+    function selectPillar(key) {
+      const data = PILLARS[key];
+      if (!data) return;
+      document.getElementById('pillar-biz-text').innerHTML = data.biz;
+      document.getElementById('pillar-code-text').textContent = data.code;
+      ['persona', 'tools', 'goal', 'guardrails'].forEach(k => {
+        const btn = document.getElementById('pillar-btn-' + k);
+        if (k === key) {
+          btn.className = 'text-left p-4 rounded-xl border-2 border-[var(--primary)] bg-[var(--background)] transition space-y-1.5';
+        } else {
+          btn.className = 'text-left p-4 rounded-xl border border-[var(--border)] bg-[var(--background)] hover:border-[var(--primary)] transition space-y-1.5';
+        }
+      });
+    }
+
+    let simStep = 0;
+    function runComparisonDemo() {
+      const examples = [
+        {
+          prompt: 'Prompt: “Create a 4-second video trailer for our new product launch and calculate our 3-year ROI.”',
+          chatbot: '<em>“I cannot generate video files or execute live financial models, but here is a text description of what a trailer could look like...”</em>',
+          agent: `<div>1️⃣ <code>run_command</code>: Runs Python DCF &amp; ROI model in sandbox (312% 3-yr ROI verified).</div>
+                  <div>2️⃣ <code>generate_image</code>: Creates keyframe storyboard poster.</div>
+                  <div>3️⃣ <code>generate_video</code>: Calls Vertex AI Veo 3.1 to attach a playable MP4 trailer!</div>`
+        },
+        {
+          prompt: 'Prompt: “Is coffee pricier in Tokyo or Singapore right now? Show me a chart.”',
+          chatbot: '<em>“Based on my training cutoff, Tokyo coffee is generally ¥500 and Singapore is around S$6. Here is ASCII text representing a chart...”</em>',
+          agent: `<div>1️⃣ <code>search_web</code>: Pulls today’s live specialty coffee prices &amp; JPY/SGD FX rate.</div>
+                  <div>2️⃣ <code>run_command</code>: Runs Python in sandbox to compute exact PPP comparison.</div>
+                  <div>3️⃣ <code>generate_image</code>: Renders a clean infographic &amp; attaches it inline!</div>`
+        }
+      ];
+      simStep = (simStep + 1) % examples.length;
+      const ex = examples[simStep];
+      document.querySelector('#sim-chatbot-box > div:first-child').textContent = ex.prompt;
+      document.getElementById('sim-chatbot-output').innerHTML = ex.chatbot;
+      document.getElementById('sim-agent-output').innerHTML = ex.agent;
+    }
+
+    function setGlobalViewMode(mode) {
+      globalViewMode = mode;
+      const nlBtn = document.getElementById('mode-nl-btn');
+      const sdkBtn = document.getElementById('mode-sdk-btn');
+      if (mode === 'nl') {
+        nlBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[var(--primary)] text-[var(--primary-foreground)]';
+        sdkBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]';
+      } else {
+        sdkBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-[var(--primary)] text-[var(--primary-foreground)]';
+        nlBtn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]';
+      }
+      renderAgents();
+    }
+
+    function filterAgents(category) {
+      currentFilter = category;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === category) {
+          btn.className = 'cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
+        } else {
+          btn.className = 'cat-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)]';
+        }
+      });
+      renderAgents();
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function copyRawText(text, btnEl) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btnEl.innerHTML;
+        btnEl.innerHTML = '✅ Copied!';
+        setTimeout(() => { btnEl.innerHTML = orig; }, 1600);
+      });
+    }
+
+    function copyTextFromEl(elId, btnEl) {
+      const text = document.getElementById(elId).textContent;
+      copyRawText(text, btnEl);
+    }
+
+    function renderAgents() {
+      const grid = document.getElementById('agents-grid');
+      const filtered = currentFilter === 'all'
+        ? AGENTS
+        : AGENTS.filter(a => a.category === currentFilter);
+
+      grid.innerHTML = filtered.map(agent => {
+        const isNl = globalViewMode === 'nl';
+        const codeContent = isNl ? agent.nlPrompt : agent.sdkCode;
+        const codeLabel = isNl
+          ? '💬 Step 1: Copy Agent Creation Prompt (Paste into Chat)'
+          : '🐍 Step 1: Google Antigravity Python SDK Config';
+
+        const toolBadges = agent.tools.map(t =>
+          `<span class="px-2 py-0.5 rounded-md text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)]">🧰 ${escapeHtml(t)}</span>`
+        ).join('');
+
+        const missionButtons = agent.missions.map((m, idx) =>
+          `<div class="flex items-start justify-between gap-2 p-2.5 rounded-lg border border-[var(--border)] bg-[var(--card)]">
+            <span class="text-xs text-[var(--foreground)]"><strong>Mission ${idx + 1}:</strong> “${escapeHtml(m)}”</span>
+            <button onclick="copyRawText(${ JSON.stringify(m).replace(/"/g, '&quot;') }, this)" class="shrink-0 px-2.5 py-1 rounded-md text-xs font-semibold bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:opacity-90">
+              Copy
+            </button>
+          </div>`
+        ).join('');
+
+        return `
+          <article class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <!-- Card Header -->
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-2xl">${agent.emoji}</span>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)]">Agent #${agent.id}</span>
+                      <span class="px-2 py-0.5 rounded text-xs font-medium bg-[var(--secondary)] text-[var(--secondary-foreground)]">${escapeHtml(agent.difficulty)}</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--foreground)]">${escapeHtml(agent.name)}</h3>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                ${escapeHtml(agent.whyFun)}
+              </p>
+
+              <!-- Tools Used -->
+              <div class="flex flex-wrap gap-1.5">
+                ${toolBadges}
+              </div>
+
+              <!-- Creation Prompt / SDK Box -->
+              <div class="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--background)] space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-xs font-semibold text-[var(--foreground)]">${codeLabel}</span>
+                  <button onclick="copyRawText(${ JSON.stringify(codeContent).replace(/"/g, '&quot;') }, this)" class="px-3 py-1 rounded-lg text-xs font-semibold bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition">
+                    📋 Copy ${isNl ? 'Creation Prompt' : 'SDK Code'}
+                  </button>
+                </div>
+                <pre class="text-xs whitespace-pre-wrap text-[var(--muted-foreground)] max-h-40 overflow-y-auto font-mono">${escapeHtml(codeContent)}</pre>
+              </div>
+            </div>
+
+            <!-- Starter Missions -->
+            <div class="space-y-2 pt-2 border-t border-[var(--border)]">
+              <div class="text-xs font-semibold text-[var(--muted-foreground)]">🚀 Step 2: Try a Fun Starter Mission</div>
+              <div class="space-y-1.5">
+                ${missionButtons}
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function updateCustomBuilder() {
+      const name = document.getElementById('custom-name').value.trim() || 'Custom Antigravity Agent';
+      const vibe = document.getElementById('custom-vibe').value;
+      const persona = document.getElementById('custom-persona').value.trim();
+      const goal = document.getElementById('custom-goal').value.trim();
+
+      const tools = [];
+      const sdkTools = [];
+      if (document.getElementById('tool-search').checked) {
+        tools.push('`search_web` & `read_url_content` (Live Web Research)');
+      }
+      if (document.getElementById('tool-python').checked) {
+        tools.push('`run_command` (Python & Bash Execution in Sandbox)');
+      }
+      if (document.getElementById('tool-files').checked) {
+        tools.push('`create_file` / `edit_file` (Sandbox File Creation)');
+      }
+      if (document.getElementById('tool-image').checked) {
+        tools.push('`generate_image` (Visual Asset Studio)');
+      }
+      if (document.getElementById('tool-video').checked) {
+        tools.push('`generate_video` (Vertex AI Veo 3.1 MP4 Video)');
+        sdkTools.push('generate_video');
+      }
+      if (document.getElementById('tool-subagent').checked) {
+        tools.push('`invoke_subagent` (Multi-Agent Delegation)');
+      }
+
+      const toolsListMd = tools.length
+        ? tools.map(t => `  - ${t}`).join('\n')
+        : '  - Standard reasoning and conversation';
+
+      const nlPrompt = `Act as my newly created agent: **${name}**.
+- **Persona & Expertise**: ${persona}
+- **Tone & Style**: ${vibe}
+- **Antigravity Tools to Use**:
+${toolsListMd}
+- **Step-by-Step Workflow**:
+${goal}
+- **Guardrails**: Keep all file operations inside \`/tmp/antigravity_harness/sandbox\` and verify all outputs before finishing.
+
+Reply "✅ ${name} initialized and ready! What is our first mission?" when ready.`;
+
+      const sdkToolsLine = sdkTools.length ? `\n    tools=[${sdkTools.join(', ')}],` : '';
+      const subagentCap = document.getElementById('tool-subagent').checked
+        ? `\n    capabilities=types.CapabilitiesConfig(enable_subagents=True),`
+        : '';
+
+      const sdkCode = `from google.antigravity import Agent, LocalAgentConfig, types
+from google.antigravity.hooks import policy
+from google.antigravity.types import TemplatedSystemInstructions
+
+config = LocalAgentConfig(
+    model="gemini-3.7-flash",
+    vertex=True,
+    project="gemini-enterprise-demo-cb",
+    location="global",${sdkToolsLine}${subagentCap}
+    workspaces=["/tmp/antigravity_harness/sandbox"],
+    policies=[
+        policy.allow_all(),
+        *policy.workspace_only(["/tmp/antigravity_harness/sandbox"]),
+    ],
+    system_instructions=TemplatedSystemInstructions(
+        identity="""You are ${name}.
+Persona: ${persona}
+Tone: ${vibe}
+Workflow:
+${goal}"""
+    ),
+)`;
+
+      document.getElementById('custom-nl-output').textContent = nlPrompt;
+      document.getElementById('custom-sdk-output').textContent = sdkCode;
+    }
+
+    // Initialize on load
+    renderAgents();
+    updateCustomBuilder();
+  </script>
+</body>
+</html>

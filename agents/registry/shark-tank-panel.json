@@ -1,0 +1,118 @@
+{
+  "agent_id": "shark-tank-panel",
+  "display_name": "Shark Tank Parallel Pitch Panel",
+  "description": "Fans out startup pitches across 3 specialized Shark investor subagents in parallel (Numbers Hawk, Hype Visionary, Skeptical Customer), grounds market comps via web search, and reduces their verdicts into a unified Term Sheet.",
+  "dag_topology": "parallel_map_reduce",
+  "dag_nodes": [
+    {
+      "id": "pitch_intake",
+      "label": "1. Pitch Intake & Comps",
+      "kind": "step",
+      "type": "step"
+    },
+    {
+      "id": "shark_numbers",
+      "label": "2a. Numbers Hawk Subagent",
+      "kind": "subagent",
+      "type": "subagent"
+    },
+    {
+      "id": "shark_vision",
+      "label": "2b. Hype Visionary Subagent",
+      "kind": "subagent",
+      "type": "subagent"
+    },
+    {
+      "id": "shark_skeptic",
+      "label": "2c. Skeptical Customer Subagent",
+      "kind": "subagent",
+      "type": "subagent"
+    },
+    {
+      "id": "term_sheet_reducer",
+      "label": "3. Term Sheet & 60s Pitch Reducer",
+      "kind": "output",
+      "type": "output"
+    }
+  ],
+  "dag_edges": [
+    {
+      "from": "pitch_intake",
+      "to": "shark_numbers",
+      "label": "fan_out",
+      "source": "pitch_intake",
+      "target": "shark_numbers"
+    },
+    {
+      "from": "pitch_intake",
+      "to": "shark_vision",
+      "label": "fan_out",
+      "source": "pitch_intake",
+      "target": "shark_vision"
+    },
+    {
+      "from": "pitch_intake",
+      "to": "shark_skeptic",
+      "label": "fan_out",
+      "source": "pitch_intake",
+      "target": "shark_skeptic"
+    },
+    {
+      "from": "shark_numbers",
+      "to": "term_sheet_reducer",
+      "label": "reduce",
+      "source": "shark_numbers",
+      "target": "term_sheet_reducer"
+    },
+    {
+      "from": "shark_vision",
+      "to": "term_sheet_reducer",
+      "label": "reduce",
+      "source": "shark_vision",
+      "target": "term_sheet_reducer"
+    },
+    {
+      "from": "shark_skeptic",
+      "to": "term_sheet_reducer",
+      "label": "reduce",
+      "source": "shark_skeptic",
+      "target": "term_sheet_reducer"
+    }
+  ],
+  "system_instructions": "You are **Shark Tank Parallel Pitch Panel**, a **Parallel Map-Reduce Fan-Out DAG** orchestrator.\nWhen given a startup pitch:\n1. Node `pitch_intake`: Call `search_web` once to find 2 real-world competitors or market benchmarks in the pitched startup's category, and emit `emit_dag_step(node_id='pitch_intake', node_label='Pitch Intake & Market Comps', status='completed')`.\n2. Map Fan-Out: Invoke all 3 Shark subagents (`numbers_hawk`, `hype_visionary`, and `skeptical_customer`) via `start_subagent` (ask each subagent for a sharp 120-word roast, unit-economics/buyer verdict, score `/10`, and investment offer or 'I am OUT').\n3. Node `term_sheet_reducer`: Synthesize all 3 Shark verdicts + real competitors into `/tmp/antigravity_harness/sandbox/shark_term_sheet.md` via `create_file`, emit `emit_dag_step(node_id='term_sheet_reducer', node_label='Term Sheet Reducer', status='completed')`, and present the full Shark scorecard table, winning Term Sheet, and rewritten Golden 60-Second Pitch!",
+  "tool_names": [
+    "emit_dag_step",
+    "search_web",
+    "create_file",
+    "start_subagent"
+  ],
+  "tool_count": 4,
+  "enable_subagents": true,
+  "subagent_specs": [
+    {
+      "name": "numbers_hawk",
+      "description": "Ruthless CFO/unit-economics Shark analyzing CAC, LTV, utilization, insurance liability, and gross margins. Returns concise critique + score /10 + offer.",
+      "system_instructions": "Ruthless CFO/unit-economics Shark analyzing CAC, LTV, utilization, insurance liability, and gross margins. Returns concise critique + score /10 + offer.",
+      "tools": [],
+      "allowed_subagents": []
+    },
+    {
+      "name": "hype_visionary",
+      "description": "Brand & viral growth Shark evaluating category creation, enterprise stickiness, PR moat, and TAM expansion. Returns concise critique + score /10 + offer.",
+      "system_instructions": "Brand & viral growth Shark evaluating category creation, enterprise stickiness, PR moat, and TAM expansion. Returns concise critique + score /10 + offer.",
+      "tools": [],
+      "allowed_subagents": []
+    },
+    {
+      "name": "skeptical_customer",
+      "description": "Pragmatic HR/Facilities buyer Shark questioning allergies, dog fatigue, procurement red tape, and churn. Returns concise critique + score /10 + offer.",
+      "system_instructions": "Pragmatic HR/Facilities buyer Shark questioning allergies, dog fatigue, procurement red tape, and churn. Returns concise critique + score /10 + offer.",
+      "tools": [],
+      "allowed_subagents": []
+    }
+  ],
+  "md_path": "/usr/local/google/home/cbribiescas/workspace/gemini-enterprise-demo/gemini-antigravity-demo/agents/shark-tank-panel.md",
+  "is_builder": false,
+  "created_at": "2026-10-29T02:09:56.419744+00:00",
+  "updated_at": "2026-10-29T02:09:56.419744+00:00"
+}
