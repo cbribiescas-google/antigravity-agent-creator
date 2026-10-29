@@ -313,6 +313,78 @@ else
   echo "[5/8] Preserving existing registered agents in ${ENGINE_ID} (PURGE_OTHER_AGENTS=false)..."
 fi
 
+# Ensure built-in 1P Google agents ('Deep Research' & 'Idea Generation') exist so
+# the Gemini Enterprise left sidebar fallback & 'Made by Google' gallery are populated.
+echo "  -> Verifying built-in 1P Google agents (deep_research & default_idea_generation)..."
+TOKEN="$(gcloud auth print-access-token --quiet)"
+python3 -c '
+import json, sys, urllib.request, urllib.error
+
+api_base, app_id, project_id, token = sys.argv[1:5]
+base = f"{api_base}/{app_id}/assistants/default_assistant"
+headers = {
+    "Authorization": f"Bearer {token}",
+    "X-Goog-User-Project": project_id,
+    "Content-Type": "application/json",
+}
+
+dr_desc = (
+    "This agent is a specialized agent that gathers, analyzes, and understands "
+    "information from internal and external sources. It generates a plan, an "
+    "in-depth report, and a summary."
+)
+ig_desc = (
+    "This agent is a specialized agent that helps with innovation and "
+    "problem-solving for enterprise users by combining advanced AI with a "
+    "unique tournament-style competition framework to generate and rank ideas"
+)
+
+builtin_specs = [
+    ("deep_research", {
+        "displayName": "Deep Research",
+        "description": dr_desc,
+        "managedAgentDefinition": {
+            "toolSettings": {"toolDescription": dr_desc},
+            "researchAssistantAgentConfig": {"supportLroQueries": True},
+        },
+        "longRunningOperationsEnabled": True,
+        "sharingConfig": {"scope": "ALL_USERS"},
+        "observabilityConfig": {"observabilityEnabled": True},
+    }),
+    ("default_idea_generation", {
+        "displayName": "Idea Generation",
+        "description": ig_desc,
+        "managedAgentDefinition": {
+            "toolSettings": {"toolDescription": ig_desc},
+            "ideaGenerationAgentConfig": {},
+        },
+        "sharingConfig": {"scope": "ALL_USERS"},
+    }),
+]
+
+for agent_id, payload in builtin_specs:
+    get_req = urllib.request.Request(f"{base}/agents/{agent_id}", headers=headers, method="GET")
+    try:
+        with urllib.request.urlopen(get_req, timeout=10):
+            print(f"     [OK] Built-in 1P agent {agent_id} exists.")
+            continue
+    except urllib.error.HTTPError as e:
+        if e.code != 404:
+            continue
+    create_req = urllib.request.Request(
+        f"{base}/agents?agentId={agent_id}",
+        data=json.dumps(payload).encode("utf-8"),
+        headers=headers,
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(create_req, timeout=15):
+            disp = payload["displayName"]
+            print(f"     [RESTORED] Built-in 1P agent {agent_id} ({disp}).")
+    except urllib.error.HTTPError as e:
+        print(f"     [WARN] Could not create {agent_id}: HTTP {e.code}")
+' "${DE_API_BASE}" "${GEMINI_ENTERPRISE_APP_ID}" "${PROJECT_ID}" "${TOKEN}"
+
 # 7. Install dependencies & deploy ADK >2.0 Agent Fleet concurrently to Vertex AI Agent Runtime
 echo "[6/8] Deploying ${#FLEET_SPECS[@]} Agent(s) concurrently to Vertex AI Agent Runtime (${RUNTIME_REGION})..."
 cd "${DEMO_DIR}"
